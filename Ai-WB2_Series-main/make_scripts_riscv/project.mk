@@ -15,7 +15,8 @@
 MAKECMDGOALS ?= all
 all: all_binaries
 
-FLASH_TOOL_TYPE:= ./bflb_iot_tool-ubuntu
+FLASH_TOOL_TYPE:= ./bflb_iot_tool-macos
+PORT := $(shell ls /dev/cu.usbserial-* 2>/dev/null | head -n 1)
 # see below for recipe of 'all' target
 #
 # # other components will add dependencies to 'all_binaries'. The
