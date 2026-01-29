@@ -1,0 +1,31 @@
+src/aos_freertos.o: \
+ D\:/Ai-WB2_Series-main/components/stage/yloop/src/aos_freertos.c \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/semphr.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/queue.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/stage/yloop/include/aos/kernel.h
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/semphr.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/queue.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/stage/yloop/include/aos/kernel.h:
+/d/Ai-WB2_Series-main/components/stage/yloop/src/aos_freertos.c:

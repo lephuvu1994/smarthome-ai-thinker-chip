@@ -1,0 +1,7 @@
+src/utils_notifier.o: \
+ D\:/Ai-WB2_Series-main/components/utils/src/utils_notifier.c \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_notifier.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_list.h
+D\:/Ai-WB2_Series-main/components/utils/include/utils_notifier.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_list.h:
+/d/Ai-WB2_Series-main/components/utils/src/utils_notifier.c:

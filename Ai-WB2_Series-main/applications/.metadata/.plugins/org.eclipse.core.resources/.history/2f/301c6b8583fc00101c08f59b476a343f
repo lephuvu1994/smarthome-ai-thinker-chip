@@ -1,0 +1,9 @@
+src/easyflash.o: \
+ D\:/Ai-WB2_Series-main/components/stage/easyflash4/src/easyflash.c \
+ D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/easyflash.h \
+ D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/ef_cfg.h \
+ D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/ef_def.h
+D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/easyflash.h:
+D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/ef_cfg.h:
+D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/ef_def.h:
+/d/Ai-WB2_Series-main/components/stage/easyflash4/src/easyflash.c:

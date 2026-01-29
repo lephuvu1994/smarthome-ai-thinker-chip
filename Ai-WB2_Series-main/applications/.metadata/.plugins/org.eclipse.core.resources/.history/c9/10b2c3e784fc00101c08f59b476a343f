@@ -1,0 +1,46 @@
+#
+# Makefile Project: Smarthome V1 (Fix Header Path)
+#
+
+PROJECT_NAME := smarthome-v1-ble-wifi
+PROJECT_PATH := $(abspath .)
+PROJECT_BOARD := evb
+export PROJECT_PATH PROJECT_BOARD
+
+-include ./proj_config.mk
+
+# --- TÌM ĐƯỜNG DẪN SDK ---
+ifeq ($(origin BL60X_SDK_PATH), undefined)
+BL60X_SDK_PATH_GUESS ?= $(shell pwd)
+# Lùi 2 cấp thư mục để về gốc SDK
+BL60X_SDK_PATH ?= $(BL60X_SDK_PATH_GUESS)/../../..
+endif
+
+# --- COMPONENTS ---
+COMPONENTS_BLSYS   := bltime blfdt blmtd bloop loopadc looprt loopset
+COMPONENTS_VFS     := romfs
+
+# 1. Các thư viện cơ bản
+INCLUDE_COMPONENTS += freertos_riscv_ram bl602 bl602_std newlibc hosal mbedtls_lts lwip vfs yloop utils cli blog blog_testc coredump
+
+# 2. Wifi Driver & Bluetooth (BẮT BUỘC)
+INCLUDE_COMPONENTS += lmac154 ble1m wifi wifi_hosal wifi_manager bl60x_wifi_driver
+
+# 3. Lưu trữ & Phần cứng
+INCLUDE_COMPONENTS += easyflash4 hal_drv rfparam_adapter_tmp
+
+INCLUDE_COMPONENTS += $(COMPONENTS_NETWORK)
+INCLUDE_COMPONENTS += $(COMPONENTS_BLSYS)
+INCLUDE_COMPONENTS += $(COMPONENTS_VFS)
+INCLUDE_COMPONENTS += $(PROJECT_NAME)
+
+# --- 4. INCLUDE DỰ PHÒNG ---
+COMMON_INCLUDE_DIRS += $(BL60X_SDK_PATH)/components/network/wifi/include
+COMMON_INCLUDE_DIRS += $(BL60X_SDK_PATH)/components/network/wifi
+COMMON_INCLUDE_DIRS += $(BL60X_SDK_PATH)/components/network/wifi_hosal/include
+COMMON_INCLUDE_DIRS += $(BL60X_SDK_PATH)/components/network/wifi_manager/bl60x_wifi_driver/include
+COMMON_INCLUDE_DIRS += $(BL60X_SDK_PATH)/components/network/wifi_manager/bl60x_wifi_driver
+COMMON_INCLUDE_DIRS += $(BL60X_SDK_PATH)/components/hal_drv/bl602_hal
+COMMON_INCLUDE_DIRS += $(BL60X_SDK_PATH)/components/network/ble/ble1m/include
+
+include $(BL60X_SDK_PATH)/make_scripts_riscv/project.mk

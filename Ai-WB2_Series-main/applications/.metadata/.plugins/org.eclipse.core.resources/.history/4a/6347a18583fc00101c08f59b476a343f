@@ -1,0 +1,5 @@
+src/utils_tlv_bl.o: \
+ D\:/Ai-WB2_Series-main/components/utils/src/utils_tlv_bl.c \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_tlv_bl.h
+D\:/Ai-WB2_Series-main/components/utils/include/utils_tlv_bl.h:
+/d/Ai-WB2_Series-main/components/utils/src/utils_tlv_bl.c:

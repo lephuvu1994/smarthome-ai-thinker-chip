@@ -1,0 +1,35 @@
+bl602_hal/bl_gpio_cli.o: \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_gpio_cli.c \
+ D\:/Ai-WB2_Series-main/components/stage/cli/cli/include/cli.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_gpio.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_log.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog_type.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog_cfg.h
+D\:/Ai-WB2_Series-main/components/stage/cli/cli/include/cli.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_gpio.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_log.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog_type.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog_cfg.h:
+/d/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_gpio_cli.c:

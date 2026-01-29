@@ -1,0 +1,39 @@
+bl_coredump.o: \
+ D\:/Ai-WB2_Series-main/components/stage/coredump/bl_coredump.c \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h \
+ D\:/Ai-WB2_Series-main/components/stage/cli/cli/include/cli.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/uart.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_uart.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_dma.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_base64.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_crc.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_hex.h \
+ D\:/Ai-WB2_Series-main/components/stage/coredump/inc/bl_coredump.h
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h:
+D\:/Ai-WB2_Series-main/components/stage/cli/cli/include/cli.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/uart.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_uart.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_dma.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_base64.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_crc.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_hex.h:
+D\:/Ai-WB2_Series-main/components/stage/coredump/inc/bl_coredump.h:
+/d/Ai-WB2_Series-main/components/stage/coredump/./bl_coredump.c:

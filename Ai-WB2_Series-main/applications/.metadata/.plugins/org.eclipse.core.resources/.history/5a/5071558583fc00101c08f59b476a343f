@@ -1,0 +1,169 @@
+bfl_main.o: \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602/bfl_main.c \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/timers.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/stage/yloop/include/aos/kernel.h \
+ D\:/Ai-WB2_Series-main/components/stage/yloop/include/aos/yloop.h \
+ D\:/Ai-WB2_Series-main/components/stage/yloop/include/event_type_code.h \
+ D\:/Ai-WB2_Series-main/components/stage/yloop/include/event_device.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_uart.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_uart.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/uart_reg.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/bl602.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Device/Bouffalo/BL602/Startup/system_bl602.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/cmsis_compatible_gcc.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/clic.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/riscv_encoding.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_common.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/bl602.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/platform_print/bflb_platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_chip.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_wifi.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_sec.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/semphr.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/queue.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/bignum.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_cks.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_irq.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_sys.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_dma.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_list.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_uart.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_dma.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_sys.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_boot2.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_board.h \
+ D\:/Ai-WB2_Series-main/components/sys/bltime/include/bl_sys_time.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_rtc.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_hbn.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/hbn_reg.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_aon.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/aon_reg.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/glb_reg.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/pds_reg.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_ef_ctrl.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/ef_ctrl_reg.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_sflash.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_sf_ctrl.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/sf_ctrl_reg.h \
+ D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/fdt.h \
+ D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt_env.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_dir.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_inode.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_conf.h \
+ D\:/Ai-WB2_Series-main/components/stage/cli/cli/include/cli.h \
+ D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt.h \
+ D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt_env.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/device/vfs_uart.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_inode.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_log.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog_type.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog_cfg.h \
+ D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/easyflash.h \
+ D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/ef_cfg.h \
+ D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/ef_def.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_glb.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_gpio.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_l1c.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/l1c_reg.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_hbn.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_sf_cfg.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_pds.h
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/timers.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/stage/yloop/include/aos/kernel.h:
+D\:/Ai-WB2_Series-main/components/stage/yloop/include/aos/yloop.h:
+D\:/Ai-WB2_Series-main/components/stage/yloop/include/event_type_code.h:
+D\:/Ai-WB2_Series-main/components/stage/yloop/include/event_device.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_uart.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_uart.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/uart_reg.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/bl602.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Device/Bouffalo/BL602/Startup/system_bl602.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/cmsis_compatible_gcc.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/clic.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/riscv_encoding.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_common.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/bl602.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/platform_print/bflb_platform.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_chip.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_wifi.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_sec.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/semphr.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/queue.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/bignum.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_cks.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_irq.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_sys.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_dma.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_list.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_uart.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_dma.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_sys.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_boot2.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_board.h:
+D\:/Ai-WB2_Series-main/components/sys/bltime/include/bl_sys_time.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_rtc.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_hbn.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/hbn_reg.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_aon.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/aon_reg.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/glb_reg.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/pds_reg.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_ef_ctrl.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/ef_ctrl_reg.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_sflash.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_sf_ctrl.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/sf_ctrl_reg.h:
+D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/fdt.h:
+D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt_env.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_dir.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_inode.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_conf.h:
+D\:/Ai-WB2_Series-main/components/stage/cli/cli/include/cli.h:
+D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt.h:
+D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt_env.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/device/vfs_uart.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_inode.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_log.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog_type.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog_cfg.h:
+D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/easyflash.h:
+D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/ef_cfg.h:
+D\:/Ai-WB2_Series-main/components/stage/easyflash4/inc/ef_def.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_glb.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_gpio.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_l1c.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/l1c_reg.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_hbn.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_sf_cfg.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_pds.h:
+/d/Ai-WB2_Series-main/components/platform/soc/bl602/bl602/./bfl_main.c:

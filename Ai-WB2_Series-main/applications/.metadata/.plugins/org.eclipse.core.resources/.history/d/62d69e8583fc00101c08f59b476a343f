@@ -1,0 +1,5 @@
+src/utils_getopt.o: \
+ D\:/Ai-WB2_Series-main/components/utils/src/utils_getopt.c \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_getopt.h
+D\:/Ai-WB2_Series-main/components/utils/include/utils_getopt.h:
+/d/Ai-WB2_Series-main/components/utils/src/utils_getopt.c:

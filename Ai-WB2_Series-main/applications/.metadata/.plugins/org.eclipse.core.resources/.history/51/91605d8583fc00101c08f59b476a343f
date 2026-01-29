@@ -1,0 +1,5 @@
+bl602_std/Common/xz/xz_port.o: \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/xz/xz_port.c \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/platform_print/bflb_platform.h
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/platform_print/bflb_platform.h:
+/d/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/xz/xz_port.c:

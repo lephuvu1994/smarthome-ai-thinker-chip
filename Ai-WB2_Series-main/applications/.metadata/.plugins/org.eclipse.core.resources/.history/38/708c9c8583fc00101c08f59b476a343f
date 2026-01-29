@@ -1,0 +1,7 @@
+# Automatically generated build file. Do not edit.
+COMPONENT_INCLUDES += $(PROJECT_PATH)/smarthome-v1-ble-wifi $(PROJECT_PATH)/smarthome-v1-ble-wifi/include
+COMPONENT_LDFLAGS +=  -L$(BUILD_DIR_BASE)/smarthome-v1-ble-wifi -lsmarthome-v1-ble-wifi 
+COMPONENT_LINKER_DEPS += 
+COMPONENT_SUBMODULES += 
+COMPONENT_LIBRARIES += smarthome-v1-ble-wifi
+component-smarthome-v1-ble-wifi-build: 

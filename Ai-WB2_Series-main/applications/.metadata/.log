@@ -1,0 +1,802 @@
+!SESSION 2026-01-29 00:40:14.117 -----------------------------------------------
+eclipse.buildId=4.27.0.20230309-1200
+java.version=20.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.embedcpp.product
+Command-line arguments:  -data D:\Ai-WB2_Series-main\applications -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.embedcpp.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2026-01-29 00:40:23.576
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\leeph'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2026-01-29 00:40:31.186
+!MESSAGE Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.gatherApplicableAnnotations(SetupUIPlugin.java:603)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleProblemAnnotations(SetupUIPlugin.java:486)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleBrandingNotificationURI(SetupUIPlugin.java:353)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:1038)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:279)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2026-01-29 00:40:31.189
+!MESSAGE Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.gatherApplicableAnnotations(SetupUIPlugin.java:603)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleNotificationAnnotations(SetupUIPlugin.java:499)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleBrandingNotificationURI(SetupUIPlugin.java:362)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:1038)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:279)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.cdt.managedbuilder.core 4 0 2026-01-29 00:40:38.069
+!MESSAGE Exception in toolchain [MinGW GCC], id=cdt.managedbuild.toolchain.gnu.mingw.base
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "o" is null
+	at java.base/java.util.ImmutableCollections$Set12.contains(ImmutableCollections.java:810)
+	at org.eclipse.cdt.internal.core.MinGW.findMinGWRoot(MinGW.java:99)
+	at org.eclipse.cdt.internal.core.MinGW.getMinGWHome(MinGW.java:309)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwEnvironmentVariableSupplier.getVariable(MingwEnvironmentVariableSupplier.java:46)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain$ToolChainCdtVariableSupplier.getVariable(EnvironmentVariableManagerToolChain.java:156)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableManager.getVariable(SupplierBasedCdtVariableManager.java:35)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:274)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:234)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToString(CdtVariableResolver.java:127)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToStringList(CdtVariableResolver.java:236)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:316)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager$EnvVarVariableSubstitutor.resolveVariable(EnvironmentVariableManager.java:88)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:405)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:394)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.getVariable(EnvironmentVariableManager.java:196)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain.getVariable(EnvironmentVariableManagerToolChain.java:205)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwIsToolChainSupported.isSupported(MingwIsToolChainSupported.java:33)
+	at org.eclipse.cdt.managedbuilder.internal.core.ToolChain.isSupported(ToolChain.java:1759)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcMap(NewMakeProjFromExistingPage.java:319)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcWidget(NewMakeProjFromExistingPage.java:294)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.addToolchainSelector(NewMakeProjFromExistingPage.java:284)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.createControl(NewMakeProjFromExistingPage.java:91)
+	at org.eclipse.jface.wizard.Wizard.createPageControls(Wizard.java:178)
+	at org.eclipse.jface.wizard.WizardDialog.createPageControls(WizardDialog.java:744)
+	at org.eclipse.jface.wizard.WizardDialog.createContents(WizardDialog.java:636)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1094)
+	at org.eclipse.ui.internal.navigator.wizards.WizardShortcutAction.run(WizardShortcutAction.java:99)
+	at org.eclipse.ui.internal.views.helpers.EmptyWorkspaceHelper$1.linkActivated(EmptyWorkspaceHelper.java:281)
+	at org.eclipse.ui.forms.widgets.AbstractHyperlink.handleActivate(AbstractHyperlink.java:215)
+	at org.eclipse.ui.forms.widgets.AbstractHyperlink.handleMouseUp(AbstractHyperlink.java:309)
+	at org.eclipse.ui.forms.widgets.AbstractHyperlink.lambda$3(AbstractHyperlink.java:117)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4256)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4054)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-01-29 00:40:52.056
+!MESSAGE Indexed 'blink' (0 sources, 0 headers) in 0.055 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.managedbuilder.core 4 0 2026-01-29 00:41:00.665
+!MESSAGE Exception in toolchain [MinGW GCC], id=cdt.managedbuild.toolchain.gnu.mingw.base
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "o" is null
+	at java.base/java.util.ImmutableCollections$Set12.contains(ImmutableCollections.java:810)
+	at org.eclipse.cdt.internal.core.MinGW.findMinGWRoot(MinGW.java:99)
+	at org.eclipse.cdt.internal.core.MinGW.getMinGWHome(MinGW.java:309)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwEnvironmentVariableSupplier.getVariable(MingwEnvironmentVariableSupplier.java:46)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain$ToolChainCdtVariableSupplier.getVariable(EnvironmentVariableManagerToolChain.java:156)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableManager.getVariable(SupplierBasedCdtVariableManager.java:35)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:274)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:234)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToString(CdtVariableResolver.java:127)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToStringList(CdtVariableResolver.java:236)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:316)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager$EnvVarVariableSubstitutor.resolveVariable(EnvironmentVariableManager.java:88)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:405)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:394)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.getVariable(EnvironmentVariableManager.java:196)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain.getVariable(EnvironmentVariableManagerToolChain.java:205)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwIsToolChainSupported.isSupported(MingwIsToolChainSupported.java:33)
+	at org.eclipse.cdt.managedbuilder.internal.core.ToolChain.isSupported(ToolChain.java:1759)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcMap(NewMakeProjFromExistingPage.java:319)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcWidget(NewMakeProjFromExistingPage.java:294)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.addToolchainSelector(NewMakeProjFromExistingPage.java:284)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.createControl(NewMakeProjFromExistingPage.java:91)
+	at org.eclipse.jface.wizard.Wizard.createPageControls(Wizard.java:178)
+	at org.eclipse.jface.wizard.WizardDialog.createPageControls(WizardDialog.java:744)
+	at org.eclipse.jface.wizard.WizardDialog.createContents(WizardDialog.java:636)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1094)
+	at org.eclipse.ui.internal.actions.NewWizardShortcutAction.run(NewWizardShortcutAction.java:119)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:580)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:414)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4256)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4054)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-01-29 00:41:23.131
+!MESSAGE Indexed 'wifi' (0 sources, 0 headers) in 0.036 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.managedbuilder.core 4 0 2026-01-29 00:41:44.463
+!MESSAGE Exception in toolchain [MinGW GCC], id=cdt.managedbuild.toolchain.gnu.mingw.base
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "o" is null
+	at java.base/java.util.ImmutableCollections$Set12.contains(ImmutableCollections.java:810)
+	at org.eclipse.cdt.internal.core.MinGW.findMinGWRoot(MinGW.java:99)
+	at org.eclipse.cdt.internal.core.MinGW.getMinGWHome(MinGW.java:309)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwEnvironmentVariableSupplier.getVariable(MingwEnvironmentVariableSupplier.java:46)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain$ToolChainCdtVariableSupplier.getVariable(EnvironmentVariableManagerToolChain.java:156)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableManager.getVariable(SupplierBasedCdtVariableManager.java:35)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:274)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:234)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToString(CdtVariableResolver.java:127)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToStringList(CdtVariableResolver.java:236)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:316)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager$EnvVarVariableSubstitutor.resolveVariable(EnvironmentVariableManager.java:88)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:405)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:394)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.getVariable(EnvironmentVariableManager.java:196)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain.getVariable(EnvironmentVariableManagerToolChain.java:205)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwIsToolChainSupported.isSupported(MingwIsToolChainSupported.java:33)
+	at org.eclipse.cdt.managedbuilder.internal.core.ToolChain.isSupported(ToolChain.java:1759)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcMap(NewMakeProjFromExistingPage.java:319)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcWidget(NewMakeProjFromExistingPage.java:294)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.addToolchainSelector(NewMakeProjFromExistingPage.java:284)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.createControl(NewMakeProjFromExistingPage.java:91)
+	at org.eclipse.jface.wizard.Wizard.createPageControls(Wizard.java:178)
+	at org.eclipse.jface.wizard.WizardDialog.createPageControls(WizardDialog.java:744)
+	at org.eclipse.jface.wizard.WizardDialog.createContents(WizardDialog.java:636)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1094)
+	at org.eclipse.ui.internal.actions.NewWizardShortcutAction.run(NewWizardShortcutAction.java:119)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:580)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:414)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4256)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4054)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-01-29 00:41:59.603
+!MESSAGE Indexed 'smarthome' (0 sources, 0 headers) in 0 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.managedbuilder.core 4 0 2026-01-29 00:43:09.275
+!MESSAGE Exception in toolchain [MinGW GCC], id=cdt.managedbuild.toolchain.gnu.mingw.base
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "o" is null
+	at java.base/java.util.ImmutableCollections$Set12.contains(ImmutableCollections.java:810)
+	at org.eclipse.cdt.internal.core.MinGW.findMinGWRoot(MinGW.java:99)
+	at org.eclipse.cdt.internal.core.MinGW.getMinGWHome(MinGW.java:309)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwEnvironmentVariableSupplier.getVariable(MingwEnvironmentVariableSupplier.java:46)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain$ToolChainCdtVariableSupplier.getVariable(EnvironmentVariableManagerToolChain.java:156)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableManager.getVariable(SupplierBasedCdtVariableManager.java:35)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:274)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:234)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToString(CdtVariableResolver.java:127)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToStringList(CdtVariableResolver.java:236)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:316)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager$EnvVarVariableSubstitutor.resolveVariable(EnvironmentVariableManager.java:88)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:405)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:394)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.getVariable(EnvironmentVariableManager.java:196)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain.getVariable(EnvironmentVariableManagerToolChain.java:205)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwIsToolChainSupported.isSupported(MingwIsToolChainSupported.java:33)
+	at org.eclipse.cdt.managedbuilder.internal.core.ToolChain.isSupported(ToolChain.java:1759)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcMap(NewMakeProjFromExistingPage.java:319)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcWidget(NewMakeProjFromExistingPage.java:294)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.addToolchainSelector(NewMakeProjFromExistingPage.java:284)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.createControl(NewMakeProjFromExistingPage.java:91)
+	at org.eclipse.jface.wizard.Wizard.createPageControls(Wizard.java:178)
+	at org.eclipse.jface.wizard.WizardDialog.createPageControls(WizardDialog.java:744)
+	at org.eclipse.jface.wizard.WizardDialog.createContents(WizardDialog.java:636)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1094)
+	at org.eclipse.ui.internal.actions.NewWizardShortcutAction.run(NewWizardShortcutAction.java:119)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:580)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:414)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4256)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4054)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-01-29 00:43:22.677
+!MESSAGE Indexed 'smarthome-v1-ble-wifi' (0 sources, 0 headers) in 0.001 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.core 4 0 2026-01-29 00:45:27.101
+!MESSAGE Error: Empty command
+!STACK 0
+java.lang.IllegalArgumentException: Empty command
+	at org.eclipse.cdt.utils.spawner.ProcessFactory$Builder.<init>(ProcessFactory.java:168)
+	at org.eclipse.cdt.utils.spawner.ProcessFactory.exec(ProcessFactory.java:366)
+	at org.eclipse.cdt.core.CommandLauncher.execute(CommandLauncher.java:189)
+	at org.eclipse.cdt.core.CommandLauncherManager$CommandLauncherWrapper.execute(CommandLauncherManager.java:146)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.build(BuildRunnerHelper.java:274)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeExternalBuild(ExternalBuildRunner.java:140)
+	at org.eclipse.cdt.managedbuilder.core.ExternalBuildRunner.invokeBuild(ExternalBuildRunner.java:73)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:774)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:524)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:466)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:1020)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:247)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:392)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:395)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:506)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:454)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:536)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:524)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:420)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:291)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:43)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.cdt.managedbuilder.core 4 0 2026-01-29 01:53:22.706
+!MESSAGE Exception in toolchain [MinGW GCC], id=cdt.managedbuild.toolchain.gnu.mingw.base
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "o" is null
+	at java.base/java.util.ImmutableCollections$Set12.contains(ImmutableCollections.java:810)
+	at org.eclipse.cdt.internal.core.MinGW.findMinGWRoot(MinGW.java:99)
+	at org.eclipse.cdt.internal.core.MinGW.getMinGWHome(MinGW.java:309)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwEnvironmentVariableSupplier.getVariable(MingwEnvironmentVariableSupplier.java:46)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain$ToolChainCdtVariableSupplier.getVariable(EnvironmentVariableManagerToolChain.java:156)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableManager.getVariable(SupplierBasedCdtVariableManager.java:35)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:274)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:234)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToString(CdtVariableResolver.java:127)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToStringList(CdtVariableResolver.java:236)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:316)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager$EnvVarVariableSubstitutor.resolveVariable(EnvironmentVariableManager.java:88)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:405)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:394)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.getVariable(EnvironmentVariableManager.java:196)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain.getVariable(EnvironmentVariableManagerToolChain.java:205)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwIsToolChainSupported.isSupported(MingwIsToolChainSupported.java:33)
+	at org.eclipse.cdt.managedbuilder.internal.core.ToolChain.isSupported(ToolChain.java:1759)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcMap(NewMakeProjFromExistingPage.java:319)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcWidget(NewMakeProjFromExistingPage.java:294)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.addToolchainSelector(NewMakeProjFromExistingPage.java:284)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.createControl(NewMakeProjFromExistingPage.java:91)
+	at org.eclipse.jface.wizard.Wizard.createPageControls(Wizard.java:178)
+	at org.eclipse.jface.wizard.WizardDialog.createPageControls(WizardDialog.java:744)
+	at org.eclipse.jface.wizard.WizardDialog.createContents(WizardDialog.java:636)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1094)
+	at org.eclipse.ui.internal.actions.NewWizardShortcutAction.run(NewWizardShortcutAction.java:119)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:580)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:414)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4256)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4054)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+
+!ENTRY org.eclipse.cdt.managedbuilder.core 4 0 2026-01-29 01:54:15.028
+!MESSAGE Exception in toolchain [MinGW GCC], id=cdt.managedbuild.toolchain.gnu.mingw.base
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "o" is null
+	at java.base/java.util.ImmutableCollections$Set12.contains(ImmutableCollections.java:810)
+	at org.eclipse.cdt.internal.core.MinGW.findMinGWRoot(MinGW.java:99)
+	at org.eclipse.cdt.internal.core.MinGW.getMinGWHome(MinGW.java:309)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwEnvironmentVariableSupplier.getVariable(MingwEnvironmentVariableSupplier.java:46)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain$ToolChainCdtVariableSupplier.getVariable(EnvironmentVariableManagerToolChain.java:156)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableManager.getVariable(SupplierBasedCdtVariableManager.java:35)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:274)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:234)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToString(CdtVariableResolver.java:127)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToStringList(CdtVariableResolver.java:236)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:316)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager$EnvVarVariableSubstitutor.resolveVariable(EnvironmentVariableManager.java:88)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:405)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:394)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.getVariable(EnvironmentVariableManager.java:196)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain.getVariable(EnvironmentVariableManagerToolChain.java:205)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwIsToolChainSupported.isSupported(MingwIsToolChainSupported.java:33)
+	at org.eclipse.cdt.managedbuilder.internal.core.ToolChain.isSupported(ToolChain.java:1759)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcMap(NewMakeProjFromExistingPage.java:319)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcWidget(NewMakeProjFromExistingPage.java:294)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.addToolchainSelector(NewMakeProjFromExistingPage.java:284)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.createControl(NewMakeProjFromExistingPage.java:91)
+	at org.eclipse.jface.wizard.Wizard.createPageControls(Wizard.java:178)
+	at org.eclipse.jface.wizard.WizardDialog.createPageControls(WizardDialog.java:744)
+	at org.eclipse.jface.wizard.WizardDialog.createContents(WizardDialog.java:636)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1094)
+	at org.eclipse.ui.internal.actions.NewWizardShortcutAction.run(NewWizardShortcutAction.java:119)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:580)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:414)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4256)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4054)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-01-29 01:54:23.180
+!MESSAGE Indexed 'blink' (0 sources, 0 headers) in 0 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.managedbuilder.core 4 0 2026-01-29 01:55:52.006
+!MESSAGE Exception in toolchain [MinGW GCC], id=cdt.managedbuild.toolchain.gnu.mingw.base
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "o" is null
+	at java.base/java.util.ImmutableCollections$Set12.contains(ImmutableCollections.java:810)
+	at org.eclipse.cdt.internal.core.MinGW.findMinGWRoot(MinGW.java:99)
+	at org.eclipse.cdt.internal.core.MinGW.getMinGWHome(MinGW.java:309)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwEnvironmentVariableSupplier.getVariable(MingwEnvironmentVariableSupplier.java:46)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain$ToolChainCdtVariableSupplier.getVariable(EnvironmentVariableManagerToolChain.java:156)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableManager.getVariable(SupplierBasedCdtVariableManager.java:35)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:274)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:234)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToString(CdtVariableResolver.java:127)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToStringList(CdtVariableResolver.java:236)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:316)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager$EnvVarVariableSubstitutor.resolveVariable(EnvironmentVariableManager.java:88)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:405)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:394)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.getVariable(EnvironmentVariableManager.java:196)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain.getVariable(EnvironmentVariableManagerToolChain.java:205)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwIsToolChainSupported.isSupported(MingwIsToolChainSupported.java:33)
+	at org.eclipse.cdt.managedbuilder.internal.core.ToolChain.isSupported(ToolChain.java:1759)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcMap(NewMakeProjFromExistingPage.java:319)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcWidget(NewMakeProjFromExistingPage.java:294)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.addToolchainSelector(NewMakeProjFromExistingPage.java:284)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.createControl(NewMakeProjFromExistingPage.java:91)
+	at org.eclipse.jface.wizard.Wizard.createPageControls(Wizard.java:178)
+	at org.eclipse.jface.wizard.WizardDialog.createPageControls(WizardDialog.java:744)
+	at org.eclipse.jface.wizard.WizardDialog.createContents(WizardDialog.java:636)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1094)
+	at org.eclipse.ui.internal.actions.NewWizardShortcutAction.run(NewWizardShortcutAction.java:119)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:580)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:414)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4256)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4054)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-01-29 01:56:05.127
+!MESSAGE Indexed 'blink' (0 sources, 0 headers) in 0 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+!SESSION 2026-01-29 02:00:23.413 -----------------------------------------------
+eclipse.buildId=4.27.0.20230309-1200
+java.version=20.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.embedcpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.embedcpp.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2026-01-29 02:00:30.034
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\leeph'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2026-01-29 02:00:37.677
+!MESSAGE Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.gatherApplicableAnnotations(SetupUIPlugin.java:603)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleProblemAnnotations(SetupUIPlugin.java:486)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleBrandingNotificationURI(SetupUIPlugin.java:353)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:1038)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:279)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2026-01-29 02:00:37.679
+!MESSAGE Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.gatherApplicableAnnotations(SetupUIPlugin.java:603)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleNotificationAnnotations(SetupUIPlugin.java:499)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleBrandingNotificationURI(SetupUIPlugin.java:362)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:1038)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:279)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2026-01-29 02:04:14.462 -----------------------------------------------
+eclipse.buildId=4.27.0.20230309-1200
+java.version=20.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.embedcpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.embedcpp.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2026-01-29 02:04:20.229
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\leeph'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2026-01-29 02:04:27.674
+!MESSAGE Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.gatherApplicableAnnotations(SetupUIPlugin.java:603)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleProblemAnnotations(SetupUIPlugin.java:486)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleBrandingNotificationURI(SetupUIPlugin.java:353)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:1038)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:279)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2026-01-29 02:04:27.676
+!MESSAGE Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.gatherApplicableAnnotations(SetupUIPlugin.java:603)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleNotificationAnnotations(SetupUIPlugin.java:499)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleBrandingNotificationURI(SetupUIPlugin.java:362)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:1038)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:279)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.cdt.managedbuilder.core 4 0 2026-01-29 02:47:22.699
+!MESSAGE Exception in toolchain [MinGW GCC], id=cdt.managedbuild.toolchain.gnu.mingw.base
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "o" is null
+	at java.base/java.util.ImmutableCollections$Set12.contains(ImmutableCollections.java:810)
+	at org.eclipse.cdt.internal.core.MinGW.findMinGWRoot(MinGW.java:99)
+	at org.eclipse.cdt.internal.core.MinGW.getMinGWHome(MinGW.java:309)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwEnvironmentVariableSupplier.getVariable(MingwEnvironmentVariableSupplier.java:46)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain$ToolChainCdtVariableSupplier.getVariable(EnvironmentVariableManagerToolChain.java:156)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableManager.getVariable(SupplierBasedCdtVariableManager.java:35)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:274)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:234)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToString(CdtVariableResolver.java:127)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToStringList(CdtVariableResolver.java:236)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:316)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager$EnvVarVariableSubstitutor.resolveVariable(EnvironmentVariableManager.java:88)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:405)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:394)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.getVariable(EnvironmentVariableManager.java:196)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain.getVariable(EnvironmentVariableManagerToolChain.java:205)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwIsToolChainSupported.isSupported(MingwIsToolChainSupported.java:33)
+	at org.eclipse.cdt.managedbuilder.internal.core.ToolChain.isSupported(ToolChain.java:1759)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcMap(NewMakeProjFromExistingPage.java:319)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcWidget(NewMakeProjFromExistingPage.java:294)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.addToolchainSelector(NewMakeProjFromExistingPage.java:284)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.createControl(NewMakeProjFromExistingPage.java:91)
+	at org.eclipse.jface.wizard.Wizard.createPageControls(Wizard.java:178)
+	at org.eclipse.jface.wizard.WizardDialog.createPageControls(WizardDialog.java:744)
+	at org.eclipse.jface.wizard.WizardDialog.createContents(WizardDialog.java:636)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1094)
+	at org.eclipse.ui.internal.actions.NewWizardShortcutAction.run(NewWizardShortcutAction.java:119)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:580)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:414)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4256)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4054)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-01-29 02:48:16.461
+!MESSAGE Indexed 'blink' (0 sources, 0 headers) in 0.017 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.managedbuilder.core 4 0 2026-01-29 02:52:42.324
+!MESSAGE Exception in toolchain [MinGW GCC], id=cdt.managedbuild.toolchain.gnu.mingw.base
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "o" is null
+	at java.base/java.util.ImmutableCollections$Set12.contains(ImmutableCollections.java:810)
+	at org.eclipse.cdt.internal.core.MinGW.findMinGWRoot(MinGW.java:99)
+	at org.eclipse.cdt.internal.core.MinGW.getMinGWHome(MinGW.java:309)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwEnvironmentVariableSupplier.getVariable(MingwEnvironmentVariableSupplier.java:46)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain$ToolChainCdtVariableSupplier.getVariable(EnvironmentVariableManagerToolChain.java:156)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableManager.getVariable(SupplierBasedCdtVariableManager.java:35)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:274)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:234)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToString(CdtVariableResolver.java:127)
+	at org.eclipse.cdt.utils.cdtvariables.CdtVariableResolver.resolveToStringList(CdtVariableResolver.java:236)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:316)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveMacro(SupplierBasedCdtVariableSubstitutor.java:265)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.getResolvedMacro(SupplierBasedCdtVariableSubstitutor.java:250)
+	at org.eclipse.cdt.utils.cdtvariables.SupplierBasedCdtVariableSubstitutor.resolveToString(SupplierBasedCdtVariableSubstitutor.java:218)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager$EnvVarVariableSubstitutor.resolveVariable(EnvironmentVariableManager.java:88)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:405)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.calculateResolvedVariable(EnvironmentVariableManager.java:394)
+	at org.eclipse.cdt.internal.core.envvar.EnvironmentVariableManager.getVariable(EnvironmentVariableManager.java:196)
+	at org.eclipse.cdt.managedbuilder.internal.envvar.EnvironmentVariableManagerToolChain.getVariable(EnvironmentVariableManagerToolChain.java:205)
+	at org.eclipse.cdt.managedbuilder.gnu.mingw.MingwIsToolChainSupported.isSupported(MingwIsToolChainSupported.java:33)
+	at org.eclipse.cdt.managedbuilder.internal.core.ToolChain.isSupported(ToolChain.java:1759)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcMap(NewMakeProjFromExistingPage.java:319)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.updateTcWidget(NewMakeProjFromExistingPage.java:294)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.addToolchainSelector(NewMakeProjFromExistingPage.java:284)
+	at org.eclipse.cdt.managedbuilder.ui.wizards.NewMakeProjFromExistingPage.createControl(NewMakeProjFromExistingPage.java:91)
+	at org.eclipse.jface.wizard.Wizard.createPageControls(Wizard.java:178)
+	at org.eclipse.jface.wizard.WizardDialog.createPageControls(WizardDialog.java:744)
+	at org.eclipse.jface.wizard.WizardDialog.createContents(WizardDialog.java:636)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1094)
+	at org.eclipse.ui.internal.actions.NewWizardShortcutAction.run(NewWizardShortcutAction.java:119)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:580)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:414)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4256)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4054)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:643)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:550)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:171)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-01-29 02:53:06.315
+!MESSAGE Indexed 'smarthome-v1-ble-wifi' (0 sources, 0 headers) in 0.01 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+!SESSION 2026-01-29 03:22:16.511 -----------------------------------------------
+eclipse.buildId=4.27.0.20230309-1200
+java.version=20.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.embedcpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.embedcpp.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2026-01-29 03:22:23.370
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\leeph'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2026-01-29 03:22:31.419
+!MESSAGE Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.gatherApplicableAnnotations(SetupUIPlugin.java:603)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleProblemAnnotations(SetupUIPlugin.java:486)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleBrandingNotificationURI(SetupUIPlugin.java:353)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:1038)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:279)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2026-01-29 03:22:31.422
+!MESSAGE Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.equinox.p2.query.IQueryable.query(org.eclipse.equinox.p2.query.IQuery, org.eclipse.core.runtime.IProgressMonitor)" because "queriable" is null
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.gatherApplicableAnnotations(SetupUIPlugin.java:603)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleNotificationAnnotations(SetupUIPlugin.java:499)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.handleBrandingNotificationURI(SetupUIPlugin.java:362)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:1038)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:279)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

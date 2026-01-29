@@ -1,0 +1,4 @@
+src/utils_dns.o: D\:/Ai-WB2_Series-main/components/utils/src/utils_dns.c \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_dns.h
+D\:/Ai-WB2_Series-main/components/utils/include/utils_dns.h:
+/d/Ai-WB2_Series-main/components/utils/src/utils_dns.c:

@@ -1,0 +1,5 @@
+bl602_hal/bl_chip.o: \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_chip.c \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_chip.h
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_chip.h:
+/d/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_chip.c:

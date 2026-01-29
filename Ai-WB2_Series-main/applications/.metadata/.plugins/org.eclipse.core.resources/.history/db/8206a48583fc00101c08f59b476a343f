@@ -1,0 +1,30 @@
+src/vfs_file.o: D\:/Ai-WB2_Series-main/components/fs/vfs/src/vfs_file.c \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_conf.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_err.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_inode.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_dir.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_rbtree.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_file.h
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_conf.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_err.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_inode.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_dir.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_rbtree.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_file.h:
+/d/Ai-WB2_Series-main/components/fs/vfs/src/vfs_file.c:

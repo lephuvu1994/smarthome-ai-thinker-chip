@@ -1,0 +1,129 @@
+port/net_sockets.o: \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/port/net_sockets.c \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/platform.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/port/mbedtls_port_platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/net_sockets.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ssl.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/bignum.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecp.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ssl_ciphersuites.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/pk.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/md.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/rsa.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecdsa.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/cipher.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/platform_util.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/x509_crt.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/x509.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/asn1.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/x509_crl.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/dhm.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecdh.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/netdb.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/opt.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/config/lwipopts.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/debug.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/arch.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cc.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cpu.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/inet.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/def.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/ip_addr.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/ip4_addr.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/ip6_addr.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/def.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/sockets.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/netif.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/err.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/pbuf.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/stats.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/mem.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/memp.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/priv/memp_std.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/priv/memp_priv.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/priv/mem_priv.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/errno.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/tcpip.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/timeouts.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/sys.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/sys_arch.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/queue.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/semphr.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/queue.h
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/platform.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/port/mbedtls_port_platform.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/net_sockets.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ssl.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/bignum.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecp.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ssl_ciphersuites.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/pk.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/md.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/rsa.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecdsa.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/cipher.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/platform_util.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/x509_crt.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/x509.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/asn1.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/x509_crl.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/dhm.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecdh.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/netdb.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/opt.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/config/lwipopts.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/debug.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/arch.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cc.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cpu.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/inet.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/def.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/ip_addr.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/ip4_addr.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/ip6_addr.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/def.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/sockets.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/netif.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/err.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/pbuf.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/stats.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/mem.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/memp.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/priv/memp_std.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/priv/memp_priv.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/priv/mem_priv.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/errno.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/tcpip.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/timeouts.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/sys.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/sys_arch.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/queue.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/semphr.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/queue.h:
+/d/Ai-WB2_Series-main/components/security/mbedtls_lts/port/net_sockets.c:

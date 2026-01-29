@@ -1,0 +1,15 @@
+mbedtls/library/ecdh.o: \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/library/ecdh.c \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecdh.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecp.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/bignum.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/platform_util.h
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecdh.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecp.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/bignum.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/platform_util.h:
+/d/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/library/ecdh.c:

@@ -1,0 +1,17 @@
+src/apps/altcp_tls/altcp_tls_mbedtls_mem.o: \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/apps/altcp_tls/altcp_tls_mbedtls_mem.c \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/opt.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/config/lwipopts.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/debug.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/arch.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cc.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cpu.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/apps/altcp_tls_mbedtls_opts.h
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/opt.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/config/lwipopts.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/debug.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/arch.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cc.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cpu.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/apps/altcp_tls_mbedtls_opts.h:
+/d/Ai-WB2_Series-main/components/network/lwip/src/apps/altcp_tls/altcp_tls_mbedtls_mem.c:

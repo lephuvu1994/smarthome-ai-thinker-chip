@@ -1,0 +1,12 @@
+src/fdt.o: D\:/Ai-WB2_Series-main/components/stage/blfdt/src/fdt.c \
+ D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt_env.h \
+ D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/fdt.h \
+ D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt_env.h \
+ D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt.h \
+ D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt_internal.h
+D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt_env.h:
+D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/fdt.h:
+D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt_env.h:
+D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt.h:
+D\:/Ai-WB2_Series-main/components/stage/blfdt/inc/libfdt_internal.h:
+/d/Ai-WB2_Series-main/components/stage/blfdt/src/fdt.c:

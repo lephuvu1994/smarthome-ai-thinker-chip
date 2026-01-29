@@ -1,0 +1,31 @@
+mbedtls/library/pk.o: \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/library/pk.c \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/pk.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/md.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/rsa.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/bignum.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecp.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecdsa.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/pk_internal.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/pk.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/platform_util.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/rsa.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecp.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecdsa.h
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/pk.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/md.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/rsa.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/bignum.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecp.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecdsa.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/pk_internal.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/pk.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/platform_util.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/rsa.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecp.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/ecdsa.h:
+/d/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/library/pk.c:

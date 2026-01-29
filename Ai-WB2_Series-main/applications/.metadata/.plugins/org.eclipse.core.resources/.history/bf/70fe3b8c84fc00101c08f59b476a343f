@@ -1,0 +1,180 @@
+#include <FreeRTOS.h>
+#include <task.h>
+#include <stdio.h>
+#include <string.h>
+#include <hal_sys.h>
+#include <bl_gpio.h>
+#include <easyflash.h>
+#include <wifi_mgmr_ext.h>
+
+// BLE Headers
+#include <host/ble_hs.h>
+#include <host/util/util.h>
+#include <services/gap/ble_svc_gap.h>
+
+// --- CẤU HÌNH ---
+#define LED_PIN  14         // Đèn Đỏ báo trạng thái
+#define DEVICE_NAME "Ai-WB2-Setup"
+
+// Struct lưu thông tin Wifi
+typedef struct {
+    char ssid[32];
+    char pass[64];
+    uint8_t is_configured;
+} app_config_t;
+
+app_config_t g_cfg;
+static uint8_t ble_addr_type;
+
+// ---------------------------------------------------------
+// 1. XỬ LÝ LƯU TRỮ (EASYFLASH)
+// ---------------------------------------------------------
+void config_load() {
+    easyflash_init();
+    size_t len = sizeof(g_cfg);
+    size_t read_len = ef_get_env_blob("app_cfg", &g_cfg, len, NULL);
+
+    if (read_len != len) {
+        printf("[STORAGE] Config not found or corrupted.\r\n");
+        memset(&g_cfg, 0, sizeof(g_cfg));
+        g_cfg.is_configured = 0;
+    } else {
+        printf("[STORAGE] Loaded SSID: %s\r\n", g_cfg.ssid);
+    }
+}
+
+void config_save_and_reboot(char *ssid, char *pass) {
+    memset(&g_cfg, 0, sizeof(g_cfg));
+    strncpy(g_cfg.ssid, ssid, 31);
+    strncpy(g_cfg.pass, pass, 63);
+    g_cfg.is_configured = 1;
+
+    ef_set_env_blob("app_cfg", &g_cfg, sizeof(g_cfg));
+    printf("[STORAGE] Saved! Rebooting...\r\n");
+    vTaskDelay(1000);
+    hal_reboot();
+}
+
+// ---------------------------------------------------------
+// 2. XỬ LÝ BLE (NHẬN WIFI TỪ ĐIỆN THOẠI)
+// ---------------------------------------------------------
+static int ble_chr_write_cb(uint16_t conn_handle, uint16_t attr_handle,
+                            struct ble_gatt_access_ctxt *ctxt, void *arg)
+{
+    // Chỉ xử lý lệnh GHI
+    if (ctxt->op == BLE_GATT_ACCESS_OP_WRITE_CHR) {
+        char buf[100];
+        uint16_t len = ctxt->om->om_len;
+        if(len >= sizeof(buf)) len = sizeof(buf) - 1;
+
+        os_mbuf_copydata(ctxt->om, 0, len, buf);
+        buf[len] = '\0';
+
+        printf("[BLE] Recv: %s\r\n", buf);
+
+        // Tách chuỗi "SSID,PASS"
+        char *comma = strchr(buf, ',');
+        if (comma) {
+            *comma = '\0';
+            printf("Parsed -> SSID: %s | PASS: %s\r\n", buf, comma + 1);
+            config_save_and_reboot(buf, comma + 1);
+        }
+        return 0;
+    }
+    return BLE_ATT_ERR_UNLIKELY;
+}
+
+static const struct ble_gatt_svc_def gatt_svcs[] = {
+    {
+        .type = BLE_GATT_SVC_TYPE_PRIMARY,
+        .uuid = BLE_UUID16_DECLARE(0x00FF), // Service UUID
+        .characteristics = (struct ble_gatt_chr_def[]) { {
+            .uuid = BLE_UUID16_DECLARE(0xFF01), // Char UUID
+            .flags = BLE_GATT_CHR_F_WRITE,
+            .access_cb = ble_chr_write_cb,
+        }, { 0 } },
+    },
+    { 0 },
+};
+
+static void ble_advertise(void) {
+    struct ble_gap_adv_params adv_params;
+    struct ble_hs_adv_fields fields;
+
+    memset(&fields, 0, sizeof fields);
+    fields.flags = BLE_HS_ADV_F_DISC_GEN | BLE_HS_ADV_F_BREDR_UNSUP;
+    fields.name = (uint8_t *)DEVICE_NAME;
+    fields.name_len = strlen(DEVICE_NAME);
+    fields.name_is_complete = 1;
+    ble_gap_adv_set_fields(&fields);
+
+    memset(&adv_params, 0, sizeof adv_params);
+    adv_params.conn_mode = BLE_GAP_CONN_MODE_UND;
+    adv_params.disc_mode = BLE_GAP_DISC_MODE_GEN;
+
+    ble_gap_adv_start(ble_addr_type, NULL, BLE_HS_FOREVER, &adv_params, NULL, NULL);
+    printf("[BLE] Advertising: %s\r\n", DEVICE_NAME);
+}
+
+static void ble_on_sync(void) {
+    ble_hs_util_ensure_addr(0);
+    ble_hs_id_infer_auto(0, &ble_addr_type);
+    ble_gatts_count_cfg(gatt_svcs);
+    ble_gatts_add_svcs(gatt_svcs);
+    ble_advertise();
+}
+
+void ble_host_task(void *param) {
+    nimble_port_run();
+    nimble_port_freertos_deinit();
+}
+
+// ---------------------------------------------------------
+// 3. XỬ LÝ WIFI (KHI ĐÃ CÓ PASS)
+// ---------------------------------------------------------
+void wifi_connect_task(void *param) {
+    wifi_mgmr_start_background(NULL);
+    vTaskDelay(1000);
+
+    printf("[WIFI] Connecting to %s...\r\n", g_cfg.ssid);
+    wifi_mgmr_sta_connect(g_cfg.ssid, g_cfg.pass, NULL, NULL);
+
+    // Check IP Loop (Thực tế sẽ dùng callback)
+    while(1) {
+        vTaskDelay(5000);
+        // Có thể thêm check ip ở đây
+    }
+}
+
+// ---------------------------------------------------------
+// MAIN
+// ---------------------------------------------------------
+void main(void) {
+    // 1. Init UART & GPIO
+    bl_uart_init(0, 16, 7, 255, 255, 2 * 1000 * 1000);
+    printf("\r\n--- STEP 1: BLE & WIFI DEMO ---\r\n");
+
+    bl_gpio_enable_output(LED_PIN, 0, 0);
+    bl_gpio_output_set(LED_PIN, 0);
+
+    // 2. Check Flash
+    config_load();
+
+    if (g_cfg.is_configured == 1) {
+        // --- MODE A: WIFI CONNECT ---
+        printf(">>> Mode: CONNECT WIFI <<<\r\n");
+        bl_gpio_output_set(LED_PIN, 1); // Đèn sáng báo có config
+        xTaskCreate(wifi_connect_task, "wifi", 2048, NULL, 15, NULL);
+
+    } else {
+        // --- MODE B: BLE SETUP ---
+        printf(">>> Mode: BLE PROVISIONING <<<\r\n");
+
+        // Init BLE Stack
+        ble_controller_init(configMAX_PRIORITIES - 1);
+        hci_driver_init();
+        nimble_port_init();
+        ble_hs_cfg.sync_cb = ble_on_sync;
+        nimble_port_freertos_init(ble_host_task);
+    }
+}

@@ -1,0 +1,69 @@
+bl602_hal/bl_sec.o: \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_sec.c \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/sec_eng_reg.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/bl602.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Device/Bouffalo/BL602/Startup/system_bl602.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/cmsis_compatible_gcc.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/clic.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/riscv_encoding.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_sec_eng.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_common.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/bl602.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/platform_print/bflb_platform.h \
+ D\:/Ai-WB2_Series-main/components/stage/yloop/include/aos/kernel.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_sec.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/semphr.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/queue.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/bignum.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_irq.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_log.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog_type.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog_cfg.h
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/sec_eng_reg.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/bl602.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Device/Bouffalo/BL602/Startup/system_bl602.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/cmsis_compatible_gcc.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/clic.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include/riscv_encoding.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_sec_eng.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc/bl602_common.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/bl602.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/platform_print/bflb_platform.h:
+D\:/Ai-WB2_Series-main/components/stage/yloop/include/aos/kernel.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_sec.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/semphr.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/queue.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/bignum.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_irq.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_log.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog_type.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog_cfg.h:
+/d/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_sec.c:

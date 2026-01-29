@@ -1,0 +1,13 @@
+misaligned/misaligned_ldst.o: \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/misaligned_ldst.c \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/emulation.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/encoding.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/bits.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/fp_emulation.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/unprivileged_memory.h
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/emulation.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/encoding.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/bits.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/fp_emulation.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/unprivileged_memory.h:
+/d/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/misaligned/misaligned_ldst.c:

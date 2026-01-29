@@ -1,0 +1,87 @@
+03:43:16 **** Clean-only build of configuration Default for project smarthome-v1-ble-wifi ****
+make -j 
+Your configuration chipname is Ai-Thinker Ai-WB2 Wi-Fi&BLE Module
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/blestack/src/bl_hci_wrapper/bl_hci_wrapper.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/blestack/src/host/hci_core.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/blestack/src/cli_cmds/ble_cli_cmds.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/blestack/src/cli_cmds/pts_cli_cmds.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/blestack/src/host/bl_host_assist.o
+In file included from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/port/include/bl_port.h:6,
+                 from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/port/include/zephyr.h:9,
+                 from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/host/hci_core.c:10:
+D:/Ai-WB2_Series-main/components/network/ble/blestack/src/port/include/config.h:598: warning: "CONFIG_BT_GAP_PERIPHERAL_PREF_PARAMS" redefined
+  598 | #define CONFIG_BT_GAP_PERIPHERAL_PREF_PARAMS
+      | 
+<command-line>: note: this is the location of the previous definition
+In file included from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/port/include/bl_port.h:6,
+                 from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/port/include/zephyr.h:9,
+                 from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/common/log.h:18,
+                 from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/bl_hci_wrapper/bl_hci_wrapper.c:14:
+D:/Ai-WB2_Series-main/components/network/ble/blestack/src/port/include/config.h:598: warning: "CONFIG_BT_GAP_PERIPHERAL_PREF_PARAMS" redefined
+  598 | #define CONFIG_BT_GAP_PERIPHERAL_PREF_PARAMS
+      | 
+<command-line>: note: this is the location of the previous definition
+D:/Ai-WB2_Series-main/components/network/ble/blestack/src/host/bl_host_assist.c:1:10: fatal error: ble_lib_api.h: No such file or directory
+    1 | #include "ble_lib_api.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make[1]: *** [/d/Ai-WB2_Series-main/make_scripts_riscv/component_wrapper.mk:313: src/host/bl_host_assist.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+In file included from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/port/include/bl_port.h:6,
+                 from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/port/include/zephyr.h:9,
+                 from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/common/include/misc/printk.h:15,
+                 from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/include/bluetooth/bluetooth.h:22,
+                 from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/include/bluetooth/conn.h:21,
+                 from D:/Ai-WB2_Series-main/components/network/ble/blestack/src/cli_cmds/ble_cli_cmds.c:2:
+D:/Ai-WB2_Series-main/components/network/ble/blestack/src/port/include/config.h:598: warning: "CONFIG_BT_GAP_PERIPHERAL_PREF_PARAMS" redefined
+  598 | #define CONFIG_BT_GAP_PERIPHERAL_PREF_PARAMS
+      | 
+<command-line>: note: this is the location of the previous definition
+D:/Ai-WB2_Series-main/components/network/ble/blestack/src/bl_hci_wrapper/bl_hci_wrapper.c:20:10: fatal error: hci_onchip.h: No such file or directory
+   20 | #include "hci_onchip.h"
+      |          ^~~~~~~~~~~~~~
+compilation terminated.
+make[1]: *** [/d/Ai-WB2_Series-main/make_scripts_riscv/component_wrapper.mk:313: src/bl_hci_wrapper/bl_hci_wrapper.o] Error 1
+D:/Ai-WB2_Series-main/components/network/ble/blestack/src/host/hci_core.c:48:10: fatal error: ble_lib_api.h: No such file or directory
+   48 | #include "ble_lib_api.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make[1]: *** [/d/Ai-WB2_Series-main/make_scripts_riscv/component_wrapper.mk:313: src/host/hci_core.o] Error 1
+D:/Ai-WB2_Series-main/components/network/ble/blestack/src/cli_cmds/ble_cli_cmds.c:11:10: fatal error: ble_lib_api.h: No such file or directory
+   11 | #include "ble_lib_api.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make[1]: *** [/d/Ai-WB2_Series-main/make_scripts_riscv/component_wrapper.mk:312: src/cli_cmds/ble_cli_cmds.o] Error 1
+make: *** [/d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/../../../make_scripts_riscv/project.mk:577: component-blestack-build] Error 2
+make: *** Waiting for unfinished jobs....
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hal_board.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hal_hbn.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hal_hbnram.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hosal_rtc.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hosal_gpio.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hosal_adc.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hosal_spi.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hal_hwtimer.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hal_wifi.o
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hosal_wdg.o
+CXX /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/platform_hal/platform_hal_device.o
+In file included from D:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_board.c:23:
+D:/Ai-WB2_Series-main/components/network/wifi/include/bl60x_fw_api.h:6:10: fatal error: bl_os_private.h: No such file or directory
+    6 | #include "bl_os_private.h"
+      |          ^~~~~~~~~~~~~~~~~
+compilation terminated.
+CC /d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/build_out/hosal/bl602_hal/hosal_uart.o
+make[1]: *** [/d/Ai-WB2_Series-main/make_scripts_riscv/component_wrapper.mk:312: bl602_hal/hal_board.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+In file included from D:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_wifi.c:11:
+D:/Ai-WB2_Series-main/components/network/wifi/include/bl60x_fw_api.h:6:10: fatal error: bl_os_private.h: No such file or directory
+    6 | #include "bl_os_private.h"
+      |          ^~~~~~~~~~~~~~~~~
+compilation terminated.
+make[1]: *** [/d/Ai-WB2_Series-main/make_scripts_riscv/component_wrapper.mk:313: bl602_hal/hal_wifi.o] Error 1
+D:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hosal_uart.c: In function 'gpio_init_only_tx':
+D:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hosal_uart.c:57:38: warning: variable 'rx_sigfun' set but not used [-Wunused-but-set-variable]
+   57 |     GLB_UART_SIG_FUN_Type tx_sigfun, rx_sigfun;
+      |                                      ^~~~~~~~~
+make: *** [/d/Ai-WB2_Series-main/applications/smarthome/smarthome-v1-ble-wifi/../../../make_scripts_riscv/project.mk:577: component-hosal-build] Error 2
+"make -j" terminated with exit code 2. Build might be incomplete.

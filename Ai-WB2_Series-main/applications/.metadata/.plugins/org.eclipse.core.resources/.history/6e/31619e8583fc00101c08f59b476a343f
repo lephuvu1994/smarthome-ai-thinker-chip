@@ -1,0 +1,4 @@
+src/utils_crc.o: D\:/Ai-WB2_Series-main/components/utils/src/utils_crc.c \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_crc.h
+D\:/Ai-WB2_Series-main/components/utils/include/utils_crc.h:
+/d/Ai-WB2_Series-main/components/utils/src/utils_crc.c:

@@ -1,0 +1,253 @@
+02:51:06 **** Build of configuration Default for project blink ****
+make -j flash p=COM3 
+****** Please SET BL60X_SDK_PATH ******
+****** Trying SDK PATH [/d/Ai-WB2_Series-main/applications/get-started/blink/../../..]
+Your configuration chipname is Ai-Thinker Ai-WB2 Wi-Fi&BLE Module
+Building Finish. To flash build output. run 'make flash' or:
+c Windows_NT ...
+cd /d/Ai-WB2_Series-main/tools/flash_tool && env SDK_APP_BIN=/d/Ai-WB2_Series-main/applications/get-started/blink/build_out/blink.bin SDK_BOARD=evb SDK_NAME=blink SDK_MEDIA_BIN= SDK_ROMFS_DIR= SDK_DTS= SDK_XTAL= BL_FLASH_TOOL_INPUT_PATH_cfg2_bin_input=/d/Ai-WB2_Series-main/applications/get-started/blink/build_out/blink.bin ./bflb_iot_tool.exe --chipname=BL602 --baudrate=921600 --port=/dev/ttyUSB0 --pt=/d/Ai-WB2_Series-main/applications/get-started/blink/img_conf/partition_cfg_2M.toml --dts=/d/Ai-WB2_Series-main/applications/get-started/blink/img_conf/bl_factory_params_IoTKitA_40M.dts --firmware=/d/Ai-WB2_Series-main/applications/get-started/blink/build_out/blink.bin
+['D:\\Ai-WB2_Series-main\\tools\\flash_tool\\bflb_iot_tool.exe', '--chipname=BL602', '--baudrate=921600', '--port=COM3', '--pt=D:/Ai-WB2_Series-main/tools/flash_tool/chips/bl602/partition/partition_cfg_2M.toml', '--dts=D:/Ai-WB2_Series-main/tools/flash_tool/chips/bl602/device_tree/04-bl_factory_params_IoTKitA_40M-20220625.dts', '--boot2=D:/Ai-WB2_Series-main/tools/flash_tool/chips/bl602/builtin_imgs/boot2_isp_bl602_v6.5.1/boot2_iap_release.bin', '--firmware=D:/Ai-WB2_Series-main/applications/get-started/blink/build_out/blink.bin']
+[02:51:49.068] - ==================================================
+[02:51:49.068] - Chip name is BL602
+[02:51:49.068] - Serial port is COM3
+[02:51:49.068] - Baudrate is 921600
+[02:51:49.068] - Firmware is D:/Ai-WB2_Series-main/applications/get-started/blink/build_out/blink.bin
+[02:51:49.068] - Partition Table is D:/Ai-WB2_Series-main/tools/flash_tool/chips/bl602/partition/partition_cfg_2M.toml
+[02:51:49.068] - Device Tree is D:/Ai-WB2_Series-main/tools/flash_tool/chips/bl602/device_tree/04-bl_factory_params_IoTKitA_40M-20220625.dts
+[02:51:49.068] - Boot2 is D:/Ai-WB2_Series-main/tools/flash_tool/chips/bl602/builtin_imgs/boot2_isp_bl602_v6.5.1/boot2_iap_release.bin
+[02:51:49.069] - MFG is None
+[02:51:49.069] - Media is None
+[02:51:49.069] - Romfs Dir is None
+[02:51:49.069] - ==================================================
+[02:51:49.082] - ========= Interface is Uart =========
+[02:51:49.120] - eflash loader bin is eflash_loader_40m.bin
+[02:51:49.122] - ========= chip flash id: ef4015 =========
+[02:51:49.156] - create partition.bin, pt_new is True
+[02:51:49.187] - fw_boot_head_gen xtal: 40M
+[02:51:49.189] - Create bootheader using D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\img_create_iot/efuse_bootheader_cfg.ini
+[02:51:49.190] - Updating data according to <D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\img_create_iot/efuse_bootheader_cfg.ini[BOOTHEADER_CFG]>
+[02:51:49.191] - Created file len:176
+[02:51:49.194] - Create efuse using D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\img_create_iot/efuse_bootheader_cfg.ini
+[02:51:49.196] - Updating data according to <D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\img_create_iot/efuse_bootheader_cfg.ini[EFUSE_CFG]>
+[02:51:49.197] - Created file len:128
+[02:51:49.216] - ========= sp image create =========
+[02:51:49.227] - Image hash is b'f85f723fcc03c184d3b0c4c39d769b24a48c6ba2e1d02eea005cdeb9372e78c8'
+[02:51:49.227] - Hash ignored
+[02:51:49.227] - Header crc ignored
+[02:51:49.227] - Write flash img
+[02:51:49.236] - fw_boot_head_gen xtal: 40M
+[02:51:49.238] - Create bootheader using D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\img_create_iot/efuse_bootheader_cfg.ini
+[02:51:49.238] - Updating data according to <D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\img_create_iot/efuse_bootheader_cfg.ini[BOOTHEADER_CFG]>
+[02:51:49.240] - Created file len:176
+[02:51:49.242] - Create efuse using D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\img_create_iot/efuse_bootheader_cfg.ini
+[02:51:49.243] - Updating data according to <D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\img_create_iot/efuse_bootheader_cfg.ini[EFUSE_CFG]>
+[02:51:49.245] - Created file len:128
+[02:51:49.258] - ========= sp image create =========
+[02:51:49.268] - Image hash is b'581ae7e31b903b6749cedd328bd8ba4f68f4dba8daa4797a854dd607c2e68559'
+[02:51:49.268] - Header crc: b'ae4b16e0'
+[02:51:49.268] - Write flash img
+[02:51:49.277] - FW Header is 176, 3920 still needed
+[02:51:49.277] - FW OTA bin header is Done. Len is 4096
+[02:51:49.291] - BL60X_OTA_Ver1.0
+[02:51:49.302] - FW OTA bin is Done. Len is 72832
+[02:51:49.345] - OTA XZ file len = 39424
+[02:51:49.345] - Partiton len = 557056
+[02:51:49.345] - BL60X_OTA_Ver1.0
+[02:51:49.350] - FW OTA xz is Done
+[02:51:49.350] - ========= eflash loader config =========
+[02:51:49.359] - =========D:/Ai-WB2_Series-main/tools/flash_tool/chips/bl602/device_tree/04-bl_factory_params_IoTKitA_40M-20220625.dts ��> D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602/device_tree/ro_params.dtb=========
+[02:51:49.547] - Version: eflash_loader_v2.4.2
+[02:51:49.547] - Program Start
+[02:51:49.547] - ========= eflash loader cmd arguments =========
+[02:51:49.547] - D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\eflash_loader/eflash_loader_cfg.ini
+[02:51:49.548] - Config file: D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\eflash_loader/eflash_loader_cfg.ini
+[02:51:49.548] - serial port is COM3
+[02:51:49.548] - cpu_reset=False
+[02:51:49.548] - chiptype: bl602
+[02:51:49.548] - ========= Interface is uart =========
+[02:51:49.549] - com speed: 921600
+[02:51:49.549] - Eflash load helper file: D:\Ai-WB2_Series-main\tools\flash_tool\chips\bl602\eflash_loader/eflash_loader_40m.bin
+[02:51:49.549] - ========= load eflash_loader.bin =========
+[02:51:49.549] - Load eflash_loader.bin via uart
+[02:51:49.549] - ========= image load =========
+[02:51:49.583] - Please Press Reset Key!
+[02:51:57.012] - default set DTR high
+[02:51:57.113] - clean buf
+[02:51:57.123] - send sync
+[02:51:57.337] - ack is b'4f4b'
+[02:51:57.372] - shake hand success
+[02:51:57.382] - get_boot_info
+[02:51:57.384] - data read is b'010000000000000003000300cba47a29d8ac1800'
+[02:51:57.384] - ========= ChipID: acd8297aa4cb =========
+[02:51:57.384] - last boot info: None
+[02:51:57.384] - sign is 0 encrypt is 0
+[02:51:57.394] - segcnt is 1
+[02:51:57.400] - segdata_len is 37152
+[02:51:57.450] - 4080/37152
+[02:51:57.500] - 8160/37152
+[02:51:57.551] - 12240/37152
+[02:51:57.601] - 16320/37152
+[02:51:57.651] - 20400/37152
+[02:51:57.702] - 24480/37152
+[02:51:57.752] - 28560/37152
+[02:51:57.802] - 32640/37152
+[02:51:57.852] - 36720/37152
+[02:51:57.859] - 37152/37152
+[02:51:57.860] - Run img
+[02:51:57.963] - Load helper bin time cost(ms): 8414.4169921875
+[02:51:58.064] - flash set para
+[02:51:58.064] - ========= flash read jedec ID =========
+[02:51:58.064] - Flash load shake hand
+[02:51:58.073] - default set DTR high
+[02:51:58.175] - clean buf
+[02:51:58.185] - send sync
+[02:51:58.404] - ack is b'4f4b'
+[02:51:58.441] - Read flash jedec ID
+[02:51:58.441] - readdata:
+[02:51:58.441] - b'5e401680'
+[02:51:58.441] - Finished
+[02:51:58.467] - Program operation
+[02:51:58.468] - Dealing Index 0
+[02:51:58.468] - ========= programming chips\bl602\img_create_iot\whole_img_boot2.bin
+[02:51:58.474] - ========= flash load =========
+[02:51:58.474] - ========= flash erase =========
+[02:51:58.474] - Erase flash from 0x0 to 0xc36f
+[02:51:58.480] - erase pending
+[02:51:58.588] - erase pending
+[02:51:58.649] - erase pending
+[02:51:58.707] - erase pending
+[02:51:58.769] - erase pending
+[02:51:58.829] - erase pending
+[02:51:58.919] - Erase time cost(ms): 445.429443359375
+[02:51:58.947] - decompress flash load 26336
+[02:51:58.975] - Load 2048/26336 {"progress":7}
+[02:51:59.001] - Load 4096/26336 {"progress":15}
+[02:51:59.027] - Load 6144/26336 {"progress":23}
+[02:51:59.054] - Load 8192/26336 {"progress":31}
+[02:51:59.080] - Load 10240/26336 {"progress":38}
+[02:51:59.106] - Load 12288/26336 {"progress":46}
+[02:51:59.132] - Load 14336/26336 {"progress":54}
+[02:51:59.159] - Load 16384/26336 {"progress":62}
+[02:51:59.185] - Load 18432/26336 {"progress":69}
+[02:51:59.212] - Load 20480/26336 {"progress":77}
+[02:51:59.238] - Load 22528/26336 {"progress":85}
+[02:51:59.264] - Load 24576/26336 {"progress":93}
+[02:51:59.287] - Load 26336/26336 {"progress":100}
+[02:51:59.287] - Load 26336/26336 {"progress":100}
+[02:51:59.287] - Write check
+[02:51:59.309] - Flash load time cost(ms): 385.000732421875
+[02:51:59.309] - Finished
+[02:51:59.309] - Sha caled by host: 74116ced68064190009cc13d1a47bfd0d5dfda7c3ffc581428defc069a9de786
+[02:51:59.309] - xip mode Verify
+[02:51:59.326] - Read Sha256/50032
+[02:51:59.328] - Flash xip readsha time cost(ms): 16.65283203125
+[02:51:59.328] - Finished
+[02:51:59.329] - Sha caled by dev: 74116ced68064190009cc13d1a47bfd0d5dfda7c3ffc581428defc069a9de786
+[02:51:59.329] - Verify success
+[02:51:59.334] - Dealing Index 1
+[02:51:59.334] - ========= programming chips\bl602\partition\partition.bin
+[02:51:59.336] - ========= flash load =========
+[02:51:59.336] - ========= flash erase =========
+[02:51:59.336] - Erase flash from 0xe000 to 0xe10f
+[02:51:59.342] - erase pending
+[02:51:59.428] - Erase time cost(ms): 91.154052734375
+[02:51:59.437] - Load 272/272 {"progress":100}
+[02:51:59.437] - Load 272/272 {"progress":100}
+[02:51:59.437] - Write check
+[02:51:59.443] - Flash load time cost(ms): 11.43212890625
+[02:51:59.443] - Finished
+[02:51:59.443] - Sha caled by host: fd6af18fc4aaf2807277cac767ca19d12af7b55f5ecbb8902ef28bc2430524aa
+[02:51:59.443] - xip mode Verify
+[02:51:59.448] - Read Sha256/272
+[02:51:59.448] - Flash xip readsha time cost(ms): 2.211669921875
+[02:51:59.448] - Finished
+[02:51:59.449] - Sha caled by dev: fd6af18fc4aaf2807277cac767ca19d12af7b55f5ecbb8902ef28bc2430524aa
+[02:51:59.449] - Verify success
+[02:51:59.454] - Dealing Index 2
+[02:51:59.455] - ========= programming chips\bl602\partition\partition.bin
+[02:51:59.457] - ========= flash load =========
+[02:51:59.457] - ========= flash erase =========
+[02:51:59.457] - Erase flash from 0xf000 to 0xf10f
+[02:51:59.464] - erase pending
+[02:51:59.552] - Erase time cost(ms): 94.95068359375
+[02:51:59.561] - Load 272/272 {"progress":100}
+[02:51:59.561] - Load 272/272 {"progress":100}
+[02:51:59.561] - Write check
+[02:51:59.567] - Flash load time cost(ms): 10.25390625
+[02:51:59.567] - Finished
+[02:51:59.567] - Sha caled by host: fd6af18fc4aaf2807277cac767ca19d12af7b55f5ecbb8902ef28bc2430524aa
+[02:51:59.567] - xip mode Verify
+[02:51:59.571] - Read Sha256/272
+[02:51:59.571] - Flash xip readsha time cost(ms): 2.46533203125
+[02:51:59.571] - Finished
+[02:51:59.573] - Sha caled by dev: fd6af18fc4aaf2807277cac767ca19d12af7b55f5ecbb8902ef28bc2430524aa
+[02:51:59.573] - Verify success
+[02:51:59.578] - Dealing Index 3
+[02:51:59.578] - ========= programming chips\bl602\img_create_iot\whole_img.bin
+[02:51:59.580] - ========= flash load =========
+[02:51:59.580] - ========= flash erase =========
+[02:51:59.580] - Erase flash from 0x10000 to 0x21c7f
+[02:51:59.588] - erase pending
+[02:51:59.817] - erase pending
+[02:51:59.878] - erase pending
+[02:51:59.967] - Erase time cost(ms): 386.7666015625
+[02:52:00.003] - decompress flash load 39424
+[02:52:00.030] - Load 2048/39424 {"progress":5}
+[02:52:00.056] - Load 4096/39424 {"progress":10}
+[02:52:00.082] - Load 6144/39424 {"progress":15}
+[02:52:00.108] - Load 8192/39424 {"progress":20}
+[02:52:00.135] - Load 10240/39424 {"progress":25}
+[02:52:00.161] - Load 12288/39424 {"progress":31}
+[02:52:00.188] - Load 14336/39424 {"progress":36}
+[02:52:00.214] - Load 16384/39424 {"progress":41}
+[02:52:00.240] - Load 18432/39424 {"progress":46}
+[02:52:00.267] - Load 20480/39424 {"progress":51}
+[02:52:00.293] - Load 22528/39424 {"progress":57}
+[02:52:00.319] - Load 24576/39424 {"progress":62}
+[02:52:00.345] - Load 26624/39424 {"progress":67}
+[02:52:00.372] - Load 28672/39424 {"progress":72}
+[02:52:00.398] - Load 30720/39424 {"progress":77}
+[02:52:00.425] - Load 32768/39424 {"progress":83}
+[02:52:00.451] - Load 34816/39424 {"progress":88}
+[02:52:00.477] - Load 36864/39424 {"progress":93}
+[02:52:00.504] - Load 38912/39424 {"progress":98}
+[02:52:00.519] - Load 39424/39424 {"progress":100}
+[02:52:00.519] - Load 39424/39424 {"progress":100}
+[02:52:00.519] - Write check
+[02:52:00.534] - Flash load time cost(ms): 562.00537109375
+[02:52:00.534] - Finished
+[02:52:00.535] - Sha caled by host: 4b91c47d5fac8607473bd3a16ef5ac7ef740eb9203c00e74e4f25cb8046e9590
+[02:52:00.535] - xip mode Verify
+[02:52:00.558] - Read Sha256/72832
+[02:52:00.559] - Flash xip readsha time cost(ms): 22.91650390625
+[02:52:00.559] - Finished
+[02:52:00.560] - Sha caled by dev: 4b91c47d5fac8607473bd3a16ef5ac7ef740eb9203c00e74e4f25cb8046e9590
+[02:52:00.560] - Verify success
+[02:52:00.565] - Dealing Index 4
+[02:52:00.565] - ========= programming chips\bl602\device_tree\ro_params.dtb
+[02:52:00.567] - ========= flash load =========
+[02:52:00.567] - ========= flash erase =========
+[02:52:00.567] - Erase flash from 0x1f8000 to 0x1f965d
+[02:52:00.574] - erase pending
+[02:52:00.600] - erase pending
+[02:52:00.653] - Erase time cost(ms): 85.8017578125
+[02:52:00.668] - decompress flash load 1508
+[02:52:00.688] - Load 1508/1508 {"progress":100}
+[02:52:00.688] - Load 1508/1508 {"progress":100}
+[02:52:00.688] - Write check
+[02:52:00.712] - Flash load time cost(ms): 54.3642578125
+[02:52:00.713] - Finished
+[02:52:00.713] - Sha caled by host: 465321030a14218284175e8fc4c6ed55a6486e784c584338a3a1ac785be11255
+[02:52:00.713] - xip mode Verify
+[02:52:00.719] - Read Sha256/5726
+[02:52:00.719] - Flash xip readsha time cost(ms): 3.740234375
+[02:52:00.719] - Finished
+[02:52:00.721] - Sha caled by dev: 465321030a14218284175e8fc4c6ed55a6486e784c584338a3a1ac785be11255
+[02:52:00.721] - Verify success
+[02:52:00.725] - Program Finished
+[02:52:00.725] - All time cost(ms): 11178.82763671875
+[02:52:00.828] - close interface
+[02:52:00.828] - [All Success]
+
+02:52:00 Build Finished. 0 errors, 0 warnings. (took 54s.262ms)
+

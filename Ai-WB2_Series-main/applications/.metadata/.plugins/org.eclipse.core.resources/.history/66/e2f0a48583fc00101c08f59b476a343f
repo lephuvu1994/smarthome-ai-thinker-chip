@@ -1,0 +1,3 @@
+bl60x_wifi_driver/bl_msg_rx.o: \
+ D\:/Ai-WB2_Series-main/components/network/wifi_manager/bl60x_wifi_driver/bl_msg_rx.c
+/d/Ai-WB2_Series-main/components/network/wifi_manager/bl60x_wifi_driver/bl_msg_rx.c:

@@ -1,0 +1,5 @@
+blog_testc.o: \
+ D\:/Ai-WB2_Series-main/components/stage/blog_testc/blog_testc.c \
+ D\:/Ai-WB2_Series-main/components/stage/blog_testc/blog_testc.h
+D\:/Ai-WB2_Series-main/components/stage/blog_testc/blog_testc.h:
+/d/Ai-WB2_Series-main/components/stage/blog_testc/.//blog_testc.c:

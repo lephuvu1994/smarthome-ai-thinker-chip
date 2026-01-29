@@ -1,0 +1,43 @@
+src/loopset_pwm.o: \
+ D\:/Ai-WB2_Series-main/components/sys/bloop/loopset/src/loopset_pwm.c \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_debug.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_log.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog_type.h \
+ D\:/Ai-WB2_Series-main/components/stage/blog/blog_cfg.h \
+ D\:/Ai-WB2_Series-main/components/sys/bloop/looprt/include/looprt.h \
+ D\:/Ai-WB2_Series-main/components/sys/bloop/bloop/include/bloop.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_list.h \
+ D\:/Ai-WB2_Series-main/components/sys/bloop/loopset/include/loopset.h \
+ D\:/Ai-WB2_Series-main/components/sys/bloop/loopset/include/loopset_pwm.h
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_debug.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_log.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog_type.h:
+D\:/Ai-WB2_Series-main/components/stage/blog/blog_cfg.h:
+D\:/Ai-WB2_Series-main/components/sys/bloop/looprt/include/looprt.h:
+D\:/Ai-WB2_Series-main/components/sys/bloop/bloop/include/bloop.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_list.h:
+D\:/Ai-WB2_Series-main/components/sys/bloop/loopset/include/loopset.h:
+D\:/Ai-WB2_Series-main/components/sys/bloop/loopset/include/loopset_pwm.h:
+/d/Ai-WB2_Series-main/components/sys/bloop/loopset/src/loopset_pwm.c:

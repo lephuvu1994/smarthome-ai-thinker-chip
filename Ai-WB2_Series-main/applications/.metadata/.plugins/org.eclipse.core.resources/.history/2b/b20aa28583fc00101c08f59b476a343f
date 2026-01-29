@@ -1,0 +1,75 @@
+device/vfs_pwm.o: \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/device/vfs_pwm.c \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/device/vfs_pwm.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_inode.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_conf.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_dir.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/soc.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/adc.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/flash.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/gpio.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/i2c.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/nand.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/nor.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/pwm.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/qspi.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/rng.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/rtc.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/sd.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/spi.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/timer.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/uart.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_uart.h \
+ D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_dma.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/wdg.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/interpt.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/dac.h \
+ D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_err.h \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_log.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/device/vfs_pwm.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_inode.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_conf.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_dir.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/soc.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/adc.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/flash.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/gpio.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/i2c.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/nand.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/nor.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/pwm.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/qspi.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/rng.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/rtc.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/sd.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/spi.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/timer.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/uart.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_uart.h:
+D\:/Ai-WB2_Series-main/components/platform/hosal/include/hosal_dma.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/wdg.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/interpt.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/hal/soc/dac.h:
+D\:/Ai-WB2_Series-main/components/fs/vfs/include/vfs_err.h:
+D\:/Ai-WB2_Series-main/components/utils/include/utils_log.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOS.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/FreeRTOSConfig.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/platform.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/projdefs.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/portable.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/deprecated_definitions.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/mpu_wrappers.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/list.h:
+/d/Ai-WB2_Series-main/components/fs/vfs/device/vfs_pwm.c:

@@ -1,0 +1,5 @@
+bl602_std/Common/xz/xz_decompress.o: \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/xz/xz_decompress.c \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/xz/xz.h
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/xz/xz.h:
+/d/Ai-WB2_Series-main/components/platform/soc/bl602/bl602_std/bl602_std/Common/xz/xz_decompress.c:

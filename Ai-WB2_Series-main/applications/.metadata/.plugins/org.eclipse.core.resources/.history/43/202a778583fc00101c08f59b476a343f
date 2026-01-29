@@ -1,0 +1,1397 @@
+	.file	"hal_board.c"
+	.option nopic
+	.attribute arch, "rv32i2p0_m2p0_f2p0_c2p0"
+	.attribute unaligned_access, 0
+	.attribute stack_align, 16
+	.text
+.Ltext0:
+	.cfi_sections	.debug_frame
+	.section	.text.hal_board_get_factory_addr,"ax",@progbits
+	.align	1
+	.globl	hal_board_get_factory_addr
+	.type	hal_board_get_factory_addr, @function
+hal_board_get_factory_addr:
+.LFB39:
+	.file 1 "D:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_board.c"
+	.loc 1 1265 1
+	.cfi_startproc
+	.loc 1 1266 5
+	.loc 1 1267 1 is_stmt 0
+	lui	a5,%hi(.LANCHOR0)
+	lw	a0,%lo(.LANCHOR0)(a5)
+	ret
+	.cfi_endproc
+.LFE39:
+	.size	hal_board_get_factory_addr, .-hal_board_get_factory_addr
+	.section	.rodata.hal_board_cfg.str1.4,"aMS",@progbits,1
+	.align	2
+.LC0:
+	.string	"factory"
+	.align	2
+.LC1:
+	.string	"hal_board.c"
+	.align	2
+.LC2:
+	.string	"\033[32mINFO"
+	.align	2
+.LC3:
+	.string	"%s (%d)[%s:%4d] [MAIN] [BOARD] [FLASH] addr from partition is %08x, ret is %d\033[0m\r\n"
+	.align	2
+.LC4:
+	.string	"\033[31mERROR"
+	.align	2
+.LC5:
+	.string	"%s (%d)[%s:%4d] [MAIN] [BOARD] [FLASH] Dead loop. Reason: NO valid Param Parition found\033[0m\r\n"
+	.align	2
+.LC6:
+	.string	"%s (%d)[%s:%4d] [MAIN] [BOARD] [XIP] addr from partition is %08x, ret is %d\033[0m\r\n"
+	.align	2
+.LC7:
+	.string	"%s (%d)[%s:%4d] [MAIN] [BOARD] [XIP] Dead loop. Reason: NO valid Param Parition found\033[0m\r\n"
+	.section	.text.hal_board_cfg,"ax",@progbits
+	.align	1
+	.globl	hal_board_cfg
+	.type	hal_board_cfg, @function
+hal_board_cfg:
+.LFB40:
+	.loc 1 1270 1 is_stmt 1
+	.cfi_startproc
+.LVL0:
+	.loc 1 1274 5
+	.loc 1 1275 5
+	.loc 1 1277 5
+	.loc 1 1278 5
+	.loc 1 1270 1 is_stmt 0
+	addi	sp,sp,-48
+	.cfi_def_cfa_offset 48
+	sw	s1,36(sp)
+	sw	s4,24(sp)
+	.cfi_offset 9, -12
+	.cfi_offset 20, -24
+	.loc 1 1278 11
+	lui	s1,%hi(.LANCHOR0)
+	lui	s4,%hi(.LC0)
+	addi	a2,sp,12
+	addi	a1,s1,%lo(.LANCHOR0)
+	addi	a0,s4,%lo(.LC0)
+.LVL1:
+	.loc 1 1270 1
+	sw	s0,40(sp)
+	sw	s2,32(sp)
+	sw	ra,44(sp)
+	sw	s3,28(sp)
+	.cfi_offset 8, -8
+	.cfi_offset 18, -16
+	.cfi_offset 1, -4
+	.cfi_offset 19, -20
+	.loc 1 1279 69
+	lui	s0,%hi(_fsymc_level_hosal)
+	.loc 1 1278 11
+	call	hal_boot2_partition_addr_active
+.LVL2:
+	.loc 1 1279 5 is_stmt 1
+	.loc 1 1279 43
+	.loc 1 1279 48
+	.loc 1 1279 51 is_stmt 0
+	lw	a4,%lo(_fsymc_level_hosal)(s0)
+	li	a5,2
+	addi	s2,s1,%lo(.LANCHOR0)
+	bgtu	a4,a5,.L3
+	.loc 1 1279 112 discriminator 3
+	lui	a4,%hi(_fsymf_level_hosalhal_board)
+	.loc 1 1279 92 discriminator 3
+	lw	a4,%lo(_fsymf_level_hosalhal_board)(a4)
+	bgtu	a4,a5,.L3
+	mv	s3,a0
+	.loc 1 1279 147 is_stmt 1 discriminator 5
+	.loc 1 1279 274 is_stmt 0 discriminator 5
+	call	xPortIsInsideInterrupt
+.LVL3:
+	.loc 1 1279 147 discriminator 5
+	beq	a0,zero,.L4
+	.loc 1 1279 303 discriminator 7
+	call	xTaskGetTickCountFromISR
+.LVL4:
+.L20:
+	.loc 1 1279 147 discriminator 8
+	lw	a5,0(s2)
+	.loc 1 1279 334 discriminator 8
+	mv	a2,a0
+	.loc 1 1279 147 discriminator 8
+	lui	a3,%hi(.LC1)
+	lui	a1,%hi(.LC2)
+	lui	a0,%hi(.LC3)
+	mv	a6,s3
+	li	a4,1279
+	addi	a3,a3,%lo(.LC1)
+	addi	a1,a1,%lo(.LC2)
+	addi	a0,a0,%lo(.LC3)
+	call	bl_printk
+.LVL5:
+.L3:
+	.loc 1 1279 421 is_stmt 1 discriminator 11
+	.loc 1 1279 432 discriminator 11
+	.loc 1 1280 5 discriminator 11
+	.loc 1 1280 8 is_stmt 0 discriminator 11
+	lw	a5,0(s2)
+	bne	a5,zero,.L6
+	.loc 1 1281 9 is_stmt 1 discriminator 1
+	.loc 1 1281 47 discriminator 1
+	.loc 1 1281 52 discriminator 1
+	.loc 1 1281 55 is_stmt 0 discriminator 1
+	lw	a4,%lo(_fsymc_level_hosal)(s0)
+	li	a5,4
+	bgtu	a4,a5,.L7
+	.loc 1 1281 118 discriminator 3
+	lui	a4,%hi(_fsymf_level_hosalhal_board)
+	.loc 1 1281 97 discriminator 3
+	lw	a4,%lo(_fsymf_level_hosalhal_board)(a4)
+	bgtu	a4,a5,.L7
+	.loc 1 1281 153 is_stmt 1 discriminator 5
+	.loc 1 1281 291 is_stmt 0 discriminator 5
+	call	xPortIsInsideInterrupt
+.LVL6:
+	.loc 1 1281 153 discriminator 5
+	beq	a0,zero,.L8
+	.loc 1 1281 320 discriminator 7
+	call	xTaskGetTickCountFromISR
+.LVL7:
+.L21:
+	.loc 1 1281 351 discriminator 8
+	mv	a2,a0
+	.loc 1 1281 153 discriminator 8
+	lui	a3,%hi(.LC1)
+	lui	a1,%hi(.LC4)
+	lui	a0,%hi(.LC5)
+	li	a4,1281
+	addi	a3,a3,%lo(.LC1)
+	addi	a1,a1,%lo(.LC4)
+	addi	a0,a0,%lo(.LC5)
+	call	bl_printk
+.LVL8:
+.L7:
+.L17:
+	.loc 1 1281 405 is_stmt 1 discriminator 1
+	.loc 1 1281 416 discriminator 1
+	.loc 1 1282 9 discriminator 1
+	.loc 1 1283 9 discriminator 1
+	.loc 1 1282 15 discriminator 1
+	j	.L17
+.LVL9:
+.L4:
+	.loc 1 1279 334 is_stmt 0 discriminator 8
+	call	xTaskGetTickCount
+.LVL10:
+	j	.L20
+.LVL11:
+.L8:
+	.loc 1 1281 351 discriminator 8
+	call	xTaskGetTickCount
+.LVL12:
+	j	.L21
+.L6:
+	.loc 1 1286 5 is_stmt 1
+	.loc 1 1286 11 is_stmt 0
+	addi	a1,s1,%lo(.LANCHOR0)
+	addi	a2,sp,12
+	addi	a0,s4,%lo(.LC0)
+	call	hal_boot2_partition_bus_addr_active
+.LVL13:
+	.loc 1 1287 51
+	lw	a4,%lo(_fsymc_level_hosal)(s0)
+	li	a5,2
+	.loc 1 1286 11
+	mv	s1,a0
+.LVL14:
+	.loc 1 1287 5 is_stmt 1
+	.loc 1 1287 43
+	.loc 1 1287 48
+	.loc 1 1287 51 is_stmt 0
+	bgtu	a4,a5,.L10
+	.loc 1 1287 112 discriminator 3
+	lui	a4,%hi(_fsymf_level_hosalhal_board)
+	.loc 1 1287 92 discriminator 3
+	lw	a4,%lo(_fsymf_level_hosalhal_board)(a4)
+	bgtu	a4,a5,.L10
+	.loc 1 1287 147 is_stmt 1 discriminator 5
+	.loc 1 1287 272 is_stmt 0 discriminator 5
+	call	xPortIsInsideInterrupt
+.LVL15:
+	.loc 1 1287 147 discriminator 5
+	beq	a0,zero,.L11
+	.loc 1 1287 301 discriminator 7
+	call	xTaskGetTickCountFromISR
+.LVL16:
+.L22:
+	.loc 1 1287 147 discriminator 8
+	lw	a5,0(s2)
+	.loc 1 1287 332 discriminator 8
+	mv	a2,a0
+	.loc 1 1287 147 discriminator 8
+	lui	a3,%hi(.LC1)
+	lui	a1,%hi(.LC2)
+	lui	a0,%hi(.LC6)
+	mv	a6,s1
+	li	a4,1287
+	addi	a3,a3,%lo(.LC1)
+	addi	a1,a1,%lo(.LC2)
+	addi	a0,a0,%lo(.LC6)
+	call	bl_printk
+.LVL17:
+.L10:
+	.loc 1 1287 419 is_stmt 1 discriminator 11
+	.loc 1 1287 430 discriminator 11
+	.loc 1 1288 5 discriminator 11
+	.loc 1 1288 8 is_stmt 0 discriminator 11
+	lw	a5,0(s2)
+	bne	a5,zero,.L13
+	.loc 1 1289 9 is_stmt 1 discriminator 1
+	.loc 1 1289 47 discriminator 1
+	.loc 1 1289 52 discriminator 1
+	.loc 1 1289 55 is_stmt 0 discriminator 1
+	lw	a4,%lo(_fsymc_level_hosal)(s0)
+	li	a5,4
+	bgtu	a4,a5,.L14
+	.loc 1 1289 118 discriminator 3
+	lui	a4,%hi(_fsymf_level_hosalhal_board)
+	.loc 1 1289 97 discriminator 3
+	lw	a4,%lo(_fsymf_level_hosalhal_board)(a4)
+	bgtu	a4,a5,.L14
+	.loc 1 1289 153 is_stmt 1 discriminator 5
+	.loc 1 1289 289 is_stmt 0 discriminator 5
+	call	xPortIsInsideInterrupt
+.LVL18:
+	.loc 1 1289 153 discriminator 5
+	beq	a0,zero,.L15
+	.loc 1 1289 318 discriminator 7
+	call	xTaskGetTickCountFromISR
+.LVL19:
+.L23:
+	.loc 1 1289 349 discriminator 8
+	mv	a2,a0
+	.loc 1 1289 153 discriminator 8
+	lui	a3,%hi(.LC1)
+	lui	a1,%hi(.LC4)
+	lui	a0,%hi(.LC7)
+	li	a4,1289
+	addi	a3,a3,%lo(.LC1)
+	addi	a1,a1,%lo(.LC4)
+	addi	a0,a0,%lo(.LC7)
+	call	bl_printk
+.LVL20:
+.L14:
+.L18:
+	.loc 1 1289 403 is_stmt 1 discriminator 2
+	.loc 1 1289 414 discriminator 2
+	.loc 1 1290 9 discriminator 2
+	.loc 1 1291 9 discriminator 2
+	.loc 1 1290 15 discriminator 2
+	j	.L18
+.L11:
+	.loc 1 1287 332 is_stmt 0 discriminator 8
+	call	xTaskGetTickCount
+.LVL21:
+	j	.L22
+.L15:
+	.loc 1 1289 349 discriminator 8
+	call	xTaskGetTickCount
+.LVL22:
+	j	.L23
+.L13:
+	.loc 1 1299 5 is_stmt 1
+	.loc 1 1300 1 is_stmt 0
+	lw	ra,44(sp)
+	.cfi_restore 1
+	lw	s0,40(sp)
+	.cfi_restore 8
+	lw	s1,36(sp)
+	.cfi_restore 9
+.LVL23:
+	lw	s2,32(sp)
+	.cfi_restore 18
+	lw	s3,28(sp)
+	.cfi_restore 19
+	lw	s4,24(sp)
+	.cfi_restore 20
+	li	a0,0
+	addi	sp,sp,48
+	.cfi_def_cfa_offset 0
+	jr	ra
+	.cfi_endproc
+.LFE40:
+	.size	hal_board_cfg, .-hal_board_cfg
+	.globl	_fsymp_info_dts
+	.section	.rodata.str1.4,"aMS",@progbits,1
+	.align	2
+.LC8:
+	.string	"hosal.hal_board.dts"
+	.comm	_fsymp_level_dts,4,4
+	.globl	_fsymf_info_hosalhal_board
+	.align	2
+.LC9:
+	.string	"hosal.hal_board"
+	.comm	_fsymf_level_hosalhal_board,4,4
+	.align	2
+.LC10:
+	.string	"hosal"
+	.weak	_fsymc_level_hosal
+	.section	.sbss._fsymc_level_hosal,"aw",@nobits
+	.align	2
+	.type	_fsymc_level_hosal, @object
+	.size	_fsymc_level_hosal, 4
+_fsymc_level_hosal:
+	.zero	4
+	.section	.sbss.factory_addr,"aw",@nobits
+	.align	2
+	.set	.LANCHOR0,. + 0
+	.type	factory_addr, @object
+	.size	factory_addr, 4
+factory_addr:
+	.zero	4
+	.section	.srodata.BLOG_HARD_DECLARE_DISABLE,"a"
+	.align	2
+	.type	BLOG_HARD_DECLARE_DISABLE, @object
+	.size	BLOG_HARD_DECLARE_DISABLE, 4
+BLOG_HARD_DECLARE_DISABLE:
+	.zero	4
+	.section	.static_blogcomponent_code.hosal,"a"
+	.align	2
+	.type	_fsymc_info_hosal, @object
+	.size	_fsymc_info_hosal, 8
+_fsymc_info_hosal:
+	.word	_fsymc_level_hosal
+	.word	.LC10
+	.section	.static_blogfile_code.hosalhal_board,"a"
+	.align	2
+	.type	_fsymf_info_hosalhal_board, @object
+	.size	_fsymf_info_hosalhal_board, 8
+_fsymf_info_hosalhal_board:
+	.word	_fsymf_level_hosalhal_board
+	.word	.LC9
+	.section	.static_blogpri_code.dts,"a"
+	.align	2
+	.type	_fsymp_info_dts, @object
+	.size	_fsymp_info_dts, 8
+_fsymp_info_dts:
+	.word	_fsymp_level_dts
+	.word	.LC8
+	.text
+.Letext0:
+	.file 2 "d:\\ai-wb2_series-main\\toolchain\\riscv\\msys\\lib\\gcc\\riscv64-unknown-elf\\10.2.0\\include\\stdint-gcc.h"
+	.file 3 "D:/Ai-WB2_Series-main/components/stage/blog/blog_type.h"
+	.file 4 "D:/Ai-WB2_Series-main/components/stage/blog/blog.h"
+	.file 5 "D:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_boot2.h"
+	.file 6 "D:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/portmacro.h"
+	.file 7 "D:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h"
+	.file 8 "D:/Ai-WB2_Series-main/components/utils/include/utils_log.h"
+	.section	.debug_info,"",@progbits
+.Ldebug_info0:
+	.4byte	0x3dd
+	.2byte	0x4
+	.4byte	.Ldebug_abbrev0
+	.byte	0x4
+	.byte	0x1
+	.4byte	.LASF38
+	.byte	0xc
+	.4byte	.LASF39
+	.4byte	.LASF40
+	.4byte	.Ldebug_ranges0+0
+	.4byte	0
+	.4byte	.Ldebug_line0
+	.byte	0x2
+	.byte	0x1
+	.byte	0x6
+	.4byte	.LASF0
+	.byte	0x2
+	.byte	0x2
+	.byte	0x5
+	.4byte	.LASF1
+	.byte	0x2
+	.byte	0x4
+	.byte	0x5
+	.4byte	.LASF2
+	.byte	0x2
+	.byte	0x8
+	.byte	0x5
+	.4byte	.LASF3
+	.byte	0x3
+	.4byte	.LASF6
+	.byte	0x2
+	.byte	0x2e
+	.byte	0x17
+	.4byte	0x4d
+	.byte	0x2
+	.byte	0x1
+	.byte	0x8
+	.4byte	.LASF4
+	.byte	0x2
+	.byte	0x2
+	.byte	0x7
+	.4byte	.LASF5
+	.byte	0x3
+	.4byte	.LASF7
+	.byte	0x2
+	.byte	0x34
+	.byte	0x1b
+	.4byte	0x6c
+	.byte	0x4
+	.4byte	0x5b
+	.byte	0x2
+	.byte	0x4
+	.byte	0x7
+	.4byte	.LASF8
+	.byte	0x2
+	.byte	0x8
+	.byte	0x7
+	.4byte	.LASF9
+	.byte	0x5
+	.byte	0x4
+	.byte	0x5
+	.string	"int"
+	.byte	0x2
+	.byte	0x4
+	.byte	0x7
+	.4byte	.LASF10
+	.byte	0x6
+	.byte	0x4
+	.4byte	0x8e
+	.byte	0x2
+	.byte	0x1
+	.byte	0x8
+	.4byte	.LASF11
+	.byte	0x7
+	.4byte	.LASF41
+	.byte	0x7
+	.byte	0x4
+	.4byte	0x81
+	.byte	0x3
+	.byte	0x22
+	.byte	0xe
+	.4byte	0xd2
+	.byte	0x8
+	.4byte	.LASF12
+	.byte	0
+	.byte	0x8
+	.4byte	.LASF13
+	.byte	0x1
+	.byte	0x8
+	.4byte	.LASF14
+	.byte	0x2
+	.byte	0x8
+	.4byte	.LASF15
+	.byte	0x3
+	.byte	0x8
+	.4byte	.LASF16
+	.byte	0x4
+	.byte	0x8
+	.4byte	.LASF17
+	.byte	0x5
+	.byte	0x8
+	.4byte	.LASF18
+	.byte	0x6
+	.byte	0
+	.byte	0x3
+	.4byte	.LASF19
+	.byte	0x3
+	.byte	0x2a
+	.byte	0x3
+	.4byte	0x95
+	.byte	0x9
+	.4byte	.LASF42
+	.byte	0x8
+	.byte	0x3
+	.byte	0x2c
+	.byte	0x10
+	.4byte	0x106
+	.byte	0xa
+	.4byte	.LASF20
+	.byte	0x3
+	.byte	0x2d
+	.byte	0x13
+	.4byte	0x106
+	.byte	0
+	.byte	0xa
+	.4byte	.LASF21
+	.byte	0x3
+	.byte	0x2e
+	.byte	0xb
+	.4byte	0x88
+	.byte	0x4
+	.byte	0
+	.byte	0x6
+	.byte	0x4
+	.4byte	0xd2
+	.byte	0x3
+	.4byte	.LASF22
+	.byte	0x3
+	.byte	0x2f
+	.byte	0x3
+	.4byte	0xde
+	.byte	0x4
+	.4byte	0x10c
+	.byte	0xb
+	.4byte	.LASF23
+	.byte	0x4
+	.byte	0x38
+	.byte	0x1b
+	.4byte	0x67
+	.byte	0x5
+	.byte	0x3
+	.4byte	BLOG_HARD_DECLARE_DISABLE
+	.byte	0xc
+	.4byte	.LASF25
+	.byte	0x4
+	.byte	0x45
+	.byte	0x12
+	.4byte	0xd2
+	.byte	0x5
+	.byte	0x3
+	.4byte	_fsymc_level_hosal
+	.byte	0xb
+	.4byte	.LASF24
+	.byte	0x4
+	.byte	0x46
+	.byte	0x1e
+	.4byte	0x118
+	.byte	0x5
+	.byte	0x3
+	.4byte	_fsymc_info_hosal
+	.byte	0xc
+	.4byte	.LASF26
+	.byte	0x4
+	.byte	0x53
+	.byte	0x12
+	.4byte	0xd2
+	.byte	0x5
+	.byte	0x3
+	.4byte	_fsymf_level_hosalhal_board
+	.byte	0xc
+	.4byte	.LASF27
+	.byte	0x4
+	.byte	0x54
+	.byte	0x17
+	.4byte	0x118
+	.byte	0x5
+	.byte	0x3
+	.4byte	_fsymf_info_hosalhal_board
+	.byte	0xc
+	.4byte	.LASF28
+	.byte	0x1
+	.byte	0xb
+	.byte	0xe
+	.4byte	0xd2
+	.byte	0x5
+	.byte	0x3
+	.4byte	_fsymp_level_dts
+	.byte	0xc
+	.4byte	.LASF29
+	.byte	0x1
+	.byte	0xb
+	.byte	0x32
+	.4byte	0x118
+	.byte	0x5
+	.byte	0x3
+	.4byte	_fsymp_info_dts
+	.byte	0xb
+	.4byte	.LASF30
+	.byte	0x1
+	.byte	0x14
+	.byte	0x11
+	.4byte	0x5b
+	.byte	0x5
+	.byte	0x3
+	.4byte	factory_addr
+	.byte	0xd
+	.4byte	.LASF43
+	.byte	0x1
+	.2byte	0x4f5
+	.byte	0x5
+	.4byte	0x7a
+	.4byte	.LFB40
+	.4byte	.LFE40-.LFB40
+	.byte	0x1
+	.byte	0x9c
+	.4byte	0x37f
+	.byte	0xe
+	.4byte	.LASF44
+	.byte	0x1
+	.2byte	0x4f5
+	.byte	0x1b
+	.4byte	0x41
+	.4byte	.LLST0
+	.byte	0xf
+	.string	"ret"
+	.byte	0x1
+	.2byte	0x4fa
+	.byte	0x9
+	.4byte	0x7a
+	.4byte	.LLST1
+	.byte	0x10
+	.4byte	.LASF31
+	.byte	0x1
+	.2byte	0x4fb
+	.byte	0xe
+	.4byte	0x5b
+	.byte	0x2
+	.byte	0x91
+	.byte	0x5c
+	.byte	0x11
+	.4byte	.LVL2
+	.4byte	0x396
+	.4byte	0x220
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC0
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5b
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LANCHOR0
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5c
+	.byte	0x2
+	.byte	0x91
+	.byte	0x5c
+	.byte	0
+	.byte	0x13
+	.4byte	.LVL3
+	.4byte	0x3a2
+	.byte	0x13
+	.4byte	.LVL4
+	.4byte	0x3ae
+	.byte	0x11
+	.4byte	.LVL5
+	.4byte	0x3bb
+	.4byte	0x268
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC3
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5b
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC2
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5d
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC1
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5e
+	.byte	0x3
+	.byte	0xa
+	.2byte	0x4ff
+	.byte	0x12
+	.byte	0x1
+	.byte	0x60
+	.byte	0x2
+	.byte	0x83
+	.byte	0
+	.byte	0
+	.byte	0x13
+	.4byte	.LVL6
+	.4byte	0x3a2
+	.byte	0x13
+	.4byte	.LVL7
+	.4byte	0x3ae
+	.byte	0x11
+	.4byte	.LVL8
+	.4byte	0x3bb
+	.4byte	0x2aa
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC5
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5b
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC4
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5d
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC1
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5e
+	.byte	0x3
+	.byte	0xa
+	.2byte	0x501
+	.byte	0
+	.byte	0x13
+	.4byte	.LVL10
+	.4byte	0x3c7
+	.byte	0x13
+	.4byte	.LVL12
+	.4byte	0x3c7
+	.byte	0x11
+	.4byte	.LVL13
+	.4byte	0x3d4
+	.4byte	0x2e2
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC0
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5b
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LANCHOR0
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5c
+	.byte	0x2
+	.byte	0x91
+	.byte	0x5c
+	.byte	0
+	.byte	0x13
+	.4byte	.LVL15
+	.4byte	0x3a2
+	.byte	0x13
+	.4byte	.LVL16
+	.4byte	0x3ae
+	.byte	0x11
+	.4byte	.LVL17
+	.4byte	0x3bb
+	.4byte	0x32a
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC6
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5b
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC2
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5d
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC1
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5e
+	.byte	0x3
+	.byte	0xa
+	.2byte	0x507
+	.byte	0x12
+	.byte	0x1
+	.byte	0x60
+	.byte	0x2
+	.byte	0x79
+	.byte	0
+	.byte	0
+	.byte	0x13
+	.4byte	.LVL18
+	.4byte	0x3a2
+	.byte	0x13
+	.4byte	.LVL19
+	.4byte	0x3ae
+	.byte	0x11
+	.4byte	.LVL20
+	.4byte	0x3bb
+	.4byte	0x36c
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC7
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5b
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC4
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5d
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC1
+	.byte	0x12
+	.byte	0x1
+	.byte	0x5e
+	.byte	0x3
+	.byte	0xa
+	.2byte	0x509
+	.byte	0
+	.byte	0x13
+	.4byte	.LVL21
+	.4byte	0x3c7
+	.byte	0x13
+	.4byte	.LVL22
+	.4byte	0x3c7
+	.byte	0
+	.byte	0x14
+	.4byte	.LASF45
+	.byte	0x1
+	.2byte	0x4f0
+	.byte	0xa
+	.4byte	0x5b
+	.4byte	.LFB39
+	.4byte	.LFE39-.LFB39
+	.byte	0x1
+	.byte	0x9c
+	.byte	0x15
+	.4byte	.LASF32
+	.4byte	.LASF32
+	.byte	0x5
+	.byte	0x30
+	.byte	0x5
+	.byte	0x15
+	.4byte	.LASF33
+	.4byte	.LASF33
+	.byte	0x6
+	.byte	0x98
+	.byte	0xc
+	.byte	0x16
+	.4byte	.LASF34
+	.4byte	.LASF34
+	.byte	0x7
+	.2byte	0x558
+	.byte	0xc
+	.byte	0x15
+	.4byte	.LASF35
+	.4byte	.LASF35
+	.byte	0x8
+	.byte	0x81
+	.byte	0x6
+	.byte	0x16
+	.4byte	.LASF36
+	.4byte	.LASF36
+	.byte	0x7
+	.2byte	0x547
+	.byte	0xc
+	.byte	0x15
+	.4byte	.LASF37
+	.4byte	.LASF37
+	.byte	0x5
+	.byte	0x2d
+	.byte	0x5
+	.byte	0
+	.section	.debug_abbrev,"",@progbits
+.Ldebug_abbrev0:
+	.byte	0x1
+	.byte	0x11
+	.byte	0x1
+	.byte	0x25
+	.byte	0xe
+	.byte	0x13
+	.byte	0xb
+	.byte	0x3
+	.byte	0xe
+	.byte	0x1b
+	.byte	0xe
+	.byte	0x55
+	.byte	0x17
+	.byte	0x11
+	.byte	0x1
+	.byte	0x10
+	.byte	0x17
+	.byte	0
+	.byte	0
+	.byte	0x2
+	.byte	0x24
+	.byte	0
+	.byte	0xb
+	.byte	0xb
+	.byte	0x3e
+	.byte	0xb
+	.byte	0x3
+	.byte	0xe
+	.byte	0
+	.byte	0
+	.byte	0x3
+	.byte	0x16
+	.byte	0
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x4
+	.byte	0x26
+	.byte	0
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x5
+	.byte	0x24
+	.byte	0
+	.byte	0xb
+	.byte	0xb
+	.byte	0x3e
+	.byte	0xb
+	.byte	0x3
+	.byte	0x8
+	.byte	0
+	.byte	0
+	.byte	0x6
+	.byte	0xf
+	.byte	0
+	.byte	0xb
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x7
+	.byte	0x4
+	.byte	0x1
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3e
+	.byte	0xb
+	.byte	0xb
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x8
+	.byte	0x28
+	.byte	0
+	.byte	0x3
+	.byte	0xe
+	.byte	0x1c
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0x9
+	.byte	0x13
+	.byte	0x1
+	.byte	0x3
+	.byte	0xe
+	.byte	0xb
+	.byte	0xb
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0xa
+	.byte	0xd
+	.byte	0
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x38
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0xb
+	.byte	0x34
+	.byte	0
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x2
+	.byte	0x18
+	.byte	0
+	.byte	0
+	.byte	0xc
+	.byte	0x34
+	.byte	0
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x3f
+	.byte	0x19
+	.byte	0x2
+	.byte	0x18
+	.byte	0
+	.byte	0
+	.byte	0xd
+	.byte	0x2e
+	.byte	0x1
+	.byte	0x3f
+	.byte	0x19
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x27
+	.byte	0x19
+	.byte	0x49
+	.byte	0x13
+	.byte	0x11
+	.byte	0x1
+	.byte	0x12
+	.byte	0x6
+	.byte	0x40
+	.byte	0x18
+	.byte	0x97,0x42
+	.byte	0x19
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0xe
+	.byte	0x5
+	.byte	0
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x2
+	.byte	0x17
+	.byte	0
+	.byte	0
+	.byte	0xf
+	.byte	0x34
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x2
+	.byte	0x17
+	.byte	0
+	.byte	0
+	.byte	0x10
+	.byte	0x34
+	.byte	0
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x2
+	.byte	0x18
+	.byte	0
+	.byte	0
+	.byte	0x11
+	.byte	0x89,0x82,0x1
+	.byte	0x1
+	.byte	0x11
+	.byte	0x1
+	.byte	0x31
+	.byte	0x13
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x12
+	.byte	0x8a,0x82,0x1
+	.byte	0
+	.byte	0x2
+	.byte	0x18
+	.byte	0x91,0x42
+	.byte	0x18
+	.byte	0
+	.byte	0
+	.byte	0x13
+	.byte	0x89,0x82,0x1
+	.byte	0
+	.byte	0x11
+	.byte	0x1
+	.byte	0x31
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x14
+	.byte	0x2e
+	.byte	0
+	.byte	0x3f
+	.byte	0x19
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x27
+	.byte	0x19
+	.byte	0x49
+	.byte	0x13
+	.byte	0x11
+	.byte	0x1
+	.byte	0x12
+	.byte	0x6
+	.byte	0x40
+	.byte	0x18
+	.byte	0x97,0x42
+	.byte	0x19
+	.byte	0
+	.byte	0
+	.byte	0x15
+	.byte	0x2e
+	.byte	0
+	.byte	0x3f
+	.byte	0x19
+	.byte	0x3c
+	.byte	0x19
+	.byte	0x6e
+	.byte	0xe
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0x16
+	.byte	0x2e
+	.byte	0
+	.byte	0x3f
+	.byte	0x19
+	.byte	0x3c
+	.byte	0x19
+	.byte	0x6e
+	.byte	0xe
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0
+	.section	.debug_loc,"",@progbits
+.Ldebug_loc0:
+.LLST0:
+	.4byte	.LVL0
+	.4byte	.LVL1
+	.2byte	0x1
+	.byte	0x5a
+	.4byte	.LVL1
+	.4byte	.LFE40
+	.2byte	0x4
+	.byte	0xf3
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x9f
+	.4byte	0
+	.4byte	0
+.LLST1:
+	.4byte	.LVL2
+	.4byte	.LVL3-1
+	.2byte	0x1
+	.byte	0x5a
+	.4byte	.LVL3-1
+	.4byte	.LVL5
+	.2byte	0x1
+	.byte	0x63
+	.4byte	.LVL9
+	.4byte	.LVL11
+	.2byte	0x1
+	.byte	0x63
+	.4byte	.LVL14
+	.4byte	.LVL23
+	.2byte	0x1
+	.byte	0x59
+	.4byte	0
+	.4byte	0
+	.section	.debug_aranges,"",@progbits
+	.4byte	0x24
+	.2byte	0x2
+	.4byte	.Ldebug_info0
+	.byte	0x4
+	.byte	0
+	.2byte	0
+	.2byte	0
+	.4byte	.LFB39
+	.4byte	.LFE39-.LFB39
+	.4byte	.LFB40
+	.4byte	.LFE40-.LFB40
+	.4byte	0
+	.4byte	0
+	.section	.debug_ranges,"",@progbits
+.Ldebug_ranges0:
+	.4byte	.LFB39
+	.4byte	.LFE39
+	.4byte	.LFB40
+	.4byte	.LFE40
+	.4byte	0
+	.4byte	0
+	.section	.debug_line,"",@progbits
+.Ldebug_line0:
+	.section	.debug_str,"MS",@progbits,1
+.LASF3:
+	.string	"long long int"
+.LASF19:
+	.string	"blog_level_t"
+.LASF17:
+	.string	"BLOG_LEVEL_ASSERT"
+.LASF30:
+	.string	"factory_addr"
+.LASF39:
+	.string	"D:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/hal_board.c"
+.LASF41:
+	.string	"_blog_leve"
+.LASF32:
+	.string	"hal_boot2_partition_addr_active"
+.LASF27:
+	.string	"_fsymf_info_hosalhal_board"
+.LASF22:
+	.string	"blog_info_t"
+.LASF24:
+	.string	"_fsymc_info_hosal"
+.LASF31:
+	.string	"size"
+.LASF35:
+	.string	"bl_printk"
+.LASF26:
+	.string	"_fsymf_level_hosalhal_board"
+.LASF8:
+	.string	"long unsigned int"
+.LASF5:
+	.string	"short unsigned int"
+.LASF21:
+	.string	"name"
+.LASF16:
+	.string	"BLOG_LEVEL_ERROR"
+.LASF28:
+	.string	"_fsymp_level_dts"
+.LASF15:
+	.string	"BLOG_LEVEL_WARN"
+.LASF42:
+	.string	"_blog_info"
+.LASF4:
+	.string	"unsigned char"
+.LASF10:
+	.string	"unsigned int"
+.LASF12:
+	.string	"BLOG_LEVEL_ALL"
+.LASF9:
+	.string	"long long unsigned int"
+.LASF6:
+	.string	"uint8_t"
+.LASF33:
+	.string	"xPortIsInsideInterrupt"
+.LASF43:
+	.string	"hal_board_cfg"
+.LASF23:
+	.string	"BLOG_HARD_DECLARE_DISABLE"
+.LASF14:
+	.string	"BLOG_LEVEL_INFO"
+.LASF40:
+	.string	"D:\\\\Ai-WB2_Series-main\\\\applications\\\\smarthome-v1-ble-wifi\\\\build_out\\\\hosal"
+.LASF20:
+	.string	"level"
+.LASF38:
+	.string	"GNU C99 10.2.0 -march=rv32imfc -mabi=ilp32f -march=rv32imfc -gdwarf -Os -std=gnu99 -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -fcommon -ffreestanding -fno-strict-aliasing"
+.LASF11:
+	.string	"char"
+.LASF34:
+	.string	"xTaskGetTickCountFromISR"
+.LASF44:
+	.string	"board_code"
+.LASF1:
+	.string	"short int"
+.LASF37:
+	.string	"hal_boot2_partition_bus_addr_active"
+.LASF25:
+	.string	"_fsymc_level_hosal"
+.LASF7:
+	.string	"uint32_t"
+.LASF2:
+	.string	"long int"
+.LASF0:
+	.string	"signed char"
+.LASF29:
+	.string	"_fsymp_info_dts"
+.LASF36:
+	.string	"xTaskGetTickCount"
+.LASF13:
+	.string	"BLOG_LEVEL_DEBUG"
+.LASF45:
+	.string	"hal_board_get_factory_addr"
+.LASF18:
+	.string	"BLOG_LEVEL_NEVER"
+	.ident	"GCC: (SiFive GCC-Metal 10.2.0-2020.12.8) 10.2.0"

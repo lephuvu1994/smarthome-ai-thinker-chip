@@ -1,0 +1,670 @@
+	.file	"main.c"
+	.option nopic
+	.attribute arch, "rv32i2p0_m2p0_f2p0_c2p0"
+	.attribute unaligned_access, 0
+	.attribute stack_align, 16
+	.text
+.Ltext0:
+	.cfi_sections	.debug_frame
+	.section	.rodata.blink_test.str1.4,"aMS",@progbits,1
+	.align	2
+.LC0:
+	.string	"ON"
+	.align	2
+.LC1:
+	.string	"OFF"
+	.align	2
+.LC2:
+	.string	"Turning the LED %s! \r\n"
+	.section	.text.blink_test,"ax",@progbits
+	.align	1
+	.globl	blink_test
+	.type	blink_test, @function
+blink_test:
+.LFB4:
+	.file 1 "D:/Ai-WB2_Series-main/applications/smarthome-v1-ble-wifi/smarthome-v1-ble-wifi/main.c"
+	.loc 1 11 1
+	.cfi_startproc
+.LVL0:
+	.loc 1 12 5
+	.loc 1 11 1 is_stmt 0
+	addi	sp,sp,-32
+	.cfi_def_cfa_offset 32
+	sw	s1,20(sp)
+	sw	s2,16(sp)
+	.cfi_offset 9, -12
+	.cfi_offset 18, -16
+	.loc 1 16 9
+	lui	s1,%hi(.LC0)
+	lui	s2,%hi(.LC1)
+	.loc 1 11 1
+	sw	s0,24(sp)
+	sw	s3,12(sp)
+	sw	s4,8(sp)
+	sw	ra,28(sp)
+	.cfi_offset 8, -8
+	.cfi_offset 19, -20
+	.cfi_offset 20, -24
+	.cfi_offset 1, -4
+	.loc 1 12 13
+	li	s0,1
+	.loc 1 16 9
+	li	s4,1
+	addi	s1,s1,%lo(.LC0)
+	addi	s2,s2,%lo(.LC1)
+	lui	s3,%hi(.LC2)
+.LVL1:
+.L3:
+	.loc 1 13 5 is_stmt 1
+	.loc 1 15 9
+	li	a1,0
+	li	a2,0
+	li	a0,3
+	call	bl_gpio_enable_output
+.LVL2:
+	.loc 1 16 9
+	mv	a1,s1
+	beq	s0,s4,.L2
+	mv	a1,s2
+.L2:
+.LVL3:
+	.loc 1 16 9 is_stmt 0 discriminator 4
+	addi	a0,s3,%lo(.LC2)
+	call	printf
+.LVL4:
+	.loc 1 17 9 is_stmt 1 discriminator 4
+	mv	a1,s0
+	li	a0,3
+	call	bl_gpio_output_set
+.LVL5:
+	.loc 1 18 9 discriminator 4
+	.loc 1 19 9 is_stmt 0 discriminator 4
+	li	a0,1000
+	xori	s0,s0,1
+.LVL6:
+	.loc 1 19 9 is_stmt 1 discriminator 4
+	call	vTaskDelay
+.LVL7:
+	.loc 1 13 11 discriminator 4
+	.loc 1 15 9 is_stmt 0 discriminator 4
+	j	.L3
+	.cfi_endproc
+.LFE4:
+	.size	blink_test, .-blink_test
+	.section	.rodata.main.str1.4,"aMS",@progbits,1
+	.align	2
+.LC3:
+	.string	"blink"
+	.section	.text.startup.main,"ax",@progbits
+	.align	1
+	.globl	main
+	.type	main, @function
+main:
+.LFB5:
+	.loc 1 24 1 is_stmt 1
+	.cfi_startproc
+	.loc 1 25 5
+	lui	a1,%hi(.LC3)
+	lui	a0,%hi(blink_test)
+	li	a5,0
+	li	a4,15
+	li	a3,0
+	li	a2,1024
+	addi	a1,a1,%lo(.LC3)
+	addi	a0,a0,%lo(blink_test)
+	tail	xTaskCreate
+.LVL8:
+	.cfi_endproc
+.LFE5:
+	.size	main, .-main
+	.text
+.Letext0:
+	.file 2 "d:\\ai-wb2_series-main\\toolchain\\riscv\\msys\\riscv64-unknown-elf\\include\\machine\\_default_types.h"
+	.file 3 "d:\\ai-wb2_series-main\\toolchain\\riscv\\msys\\riscv64-unknown-elf\\include\\sys\\_stdint.h"
+	.file 4 "D:/Ai-WB2_Series-main/components/platform/soc/bl602/freertos_riscv_ram/config/task.h"
+	.file 5 "D:/Ai-WB2_Series-main/components/platform/hosal/bl602_hal/bl_gpio.h"
+	.file 6 "d:\\ai-wb2_series-main\\toolchain\\riscv\\msys\\riscv64-unknown-elf\\include\\stdio.h"
+	.section	.debug_info,"",@progbits
+.Ldebug_info0:
+	.4byte	0x1a5
+	.2byte	0x4
+	.4byte	.Ldebug_abbrev0
+	.byte	0x4
+	.byte	0x1
+	.4byte	.LASF19
+	.byte	0xc
+	.4byte	.LASF20
+	.4byte	.LASF21
+	.4byte	.Ldebug_ranges0+0
+	.4byte	0
+	.4byte	.Ldebug_line0
+	.byte	0x2
+	.byte	0x1
+	.byte	0x6
+	.4byte	.LASF0
+	.byte	0x3
+	.4byte	.LASF10
+	.byte	0x2
+	.byte	0x2b
+	.byte	0x17
+	.4byte	0x38
+	.byte	0x2
+	.byte	0x1
+	.byte	0x8
+	.4byte	.LASF1
+	.byte	0x2
+	.byte	0x2
+	.byte	0x5
+	.4byte	.LASF2
+	.byte	0x2
+	.byte	0x2
+	.byte	0x7
+	.4byte	.LASF3
+	.byte	0x2
+	.byte	0x4
+	.byte	0x5
+	.4byte	.LASF4
+	.byte	0x2
+	.byte	0x4
+	.byte	0x7
+	.4byte	.LASF5
+	.byte	0x2
+	.byte	0x8
+	.byte	0x5
+	.4byte	.LASF6
+	.byte	0x2
+	.byte	0x8
+	.byte	0x7
+	.4byte	.LASF7
+	.byte	0x4
+	.byte	0x4
+	.byte	0x5
+	.string	"int"
+	.byte	0x2
+	.byte	0x4
+	.byte	0x7
+	.4byte	.LASF8
+	.byte	0x5
+	.byte	0x4
+	.byte	0x2
+	.byte	0x1
+	.byte	0x8
+	.4byte	.LASF9
+	.byte	0x3
+	.4byte	.LASF11
+	.byte	0x3
+	.byte	0x18
+	.byte	0x13
+	.4byte	0x2c
+	.byte	0x6
+	.4byte	.LASF12
+	.byte	0x1
+	.byte	0x17
+	.byte	0x6
+	.4byte	.LFB5
+	.4byte	.LFE5-.LFB5
+	.byte	0x1
+	.byte	0x9c
+	.4byte	0xd5
+	.byte	0x7
+	.4byte	.LVL8
+	.4byte	0x16a
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x5
+	.byte	0x3
+	.4byte	blink_test
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5b
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC3
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5c
+	.byte	0x3
+	.byte	0xa
+	.2byte	0x400
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5d
+	.byte	0x1
+	.byte	0x30
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5e
+	.byte	0x1
+	.byte	0x3f
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5f
+	.byte	0x1
+	.byte	0x30
+	.byte	0
+	.byte	0
+	.byte	0x6
+	.4byte	.LASF13
+	.byte	0x1
+	.byte	0xa
+	.byte	0x6
+	.4byte	.LFB4
+	.4byte	.LFE4-.LFB4
+	.byte	0x1
+	.byte	0x9c
+	.4byte	0x16a
+	.byte	0x9
+	.4byte	.LASF22
+	.byte	0x1
+	.byte	0xa
+	.byte	0x17
+	.4byte	0x77
+	.4byte	.LLST0
+	.byte	0xa
+	.4byte	.LASF23
+	.byte	0x1
+	.byte	0xc
+	.byte	0xd
+	.4byte	0x80
+	.4byte	.LLST1
+	.byte	0xb
+	.4byte	.LVL2
+	.4byte	0x177
+	.4byte	0x128
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x1
+	.byte	0x33
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5b
+	.byte	0x1
+	.byte	0x30
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5c
+	.byte	0x1
+	.byte	0x30
+	.byte	0
+	.byte	0xb
+	.4byte	.LVL4
+	.4byte	0x183
+	.4byte	0x13f
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC2
+	.byte	0
+	.byte	0xb
+	.4byte	.LVL5
+	.4byte	0x18f
+	.4byte	0x158
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x1
+	.byte	0x33
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5b
+	.byte	0x2
+	.byte	0x78
+	.byte	0
+	.byte	0
+	.byte	0xc
+	.4byte	.LVL7
+	.4byte	0x19b
+	.byte	0x8
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x3
+	.byte	0xa
+	.2byte	0x3e8
+	.byte	0
+	.byte	0
+	.byte	0xd
+	.4byte	.LASF14
+	.4byte	.LASF14
+	.byte	0x4
+	.2byte	0x14a
+	.byte	0xd
+	.byte	0xe
+	.4byte	.LASF15
+	.4byte	.LASF15
+	.byte	0x5
+	.byte	0xf
+	.byte	0x5
+	.byte	0xe
+	.4byte	.LASF16
+	.4byte	.LASF16
+	.byte	0x6
+	.byte	0xc8
+	.byte	0x5
+	.byte	0xe
+	.4byte	.LASF17
+	.4byte	.LASF17
+	.byte	0x5
+	.byte	0x11
+	.byte	0x5
+	.byte	0xd
+	.4byte	.LASF18
+	.4byte	.LASF18
+	.byte	0x4
+	.2byte	0x2f6
+	.byte	0x6
+	.byte	0
+	.section	.debug_abbrev,"",@progbits
+.Ldebug_abbrev0:
+	.byte	0x1
+	.byte	0x11
+	.byte	0x1
+	.byte	0x25
+	.byte	0xe
+	.byte	0x13
+	.byte	0xb
+	.byte	0x3
+	.byte	0xe
+	.byte	0x1b
+	.byte	0xe
+	.byte	0x55
+	.byte	0x17
+	.byte	0x11
+	.byte	0x1
+	.byte	0x10
+	.byte	0x17
+	.byte	0
+	.byte	0
+	.byte	0x2
+	.byte	0x24
+	.byte	0
+	.byte	0xb
+	.byte	0xb
+	.byte	0x3e
+	.byte	0xb
+	.byte	0x3
+	.byte	0xe
+	.byte	0
+	.byte	0
+	.byte	0x3
+	.byte	0x16
+	.byte	0
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x4
+	.byte	0x24
+	.byte	0
+	.byte	0xb
+	.byte	0xb
+	.byte	0x3e
+	.byte	0xb
+	.byte	0x3
+	.byte	0x8
+	.byte	0
+	.byte	0
+	.byte	0x5
+	.byte	0xf
+	.byte	0
+	.byte	0xb
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0x6
+	.byte	0x2e
+	.byte	0x1
+	.byte	0x3f
+	.byte	0x19
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x27
+	.byte	0x19
+	.byte	0x11
+	.byte	0x1
+	.byte	0x12
+	.byte	0x6
+	.byte	0x40
+	.byte	0x18
+	.byte	0x97,0x42
+	.byte	0x19
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x7
+	.byte	0x89,0x82,0x1
+	.byte	0x1
+	.byte	0x11
+	.byte	0x1
+	.byte	0x95,0x42
+	.byte	0x19
+	.byte	0x31
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x8
+	.byte	0x8a,0x82,0x1
+	.byte	0
+	.byte	0x2
+	.byte	0x18
+	.byte	0x91,0x42
+	.byte	0x18
+	.byte	0
+	.byte	0
+	.byte	0x9
+	.byte	0x5
+	.byte	0
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x2
+	.byte	0x17
+	.byte	0
+	.byte	0
+	.byte	0xa
+	.byte	0x34
+	.byte	0
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x2
+	.byte	0x17
+	.byte	0
+	.byte	0
+	.byte	0xb
+	.byte	0x89,0x82,0x1
+	.byte	0x1
+	.byte	0x11
+	.byte	0x1
+	.byte	0x31
+	.byte	0x13
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0xc
+	.byte	0x89,0x82,0x1
+	.byte	0x1
+	.byte	0x11
+	.byte	0x1
+	.byte	0x31
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0xd
+	.byte	0x2e
+	.byte	0
+	.byte	0x3f
+	.byte	0x19
+	.byte	0x3c
+	.byte	0x19
+	.byte	0x6e
+	.byte	0xe
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0xe
+	.byte	0x2e
+	.byte	0
+	.byte	0x3f
+	.byte	0x19
+	.byte	0x3c
+	.byte	0x19
+	.byte	0x6e
+	.byte	0xe
+	.byte	0x3
+	.byte	0xe
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0
+	.section	.debug_loc,"",@progbits
+.Ldebug_loc0:
+.LLST0:
+	.4byte	.LVL0
+	.4byte	.LVL1
+	.2byte	0x1
+	.byte	0x5a
+	.4byte	.LVL1
+	.4byte	.LFE4
+	.2byte	0x4
+	.byte	0xf3
+	.byte	0x1
+	.byte	0x5a
+	.byte	0x9f
+	.4byte	0
+	.4byte	0
+.LLST1:
+	.4byte	.LVL0
+	.4byte	.LVL1
+	.2byte	0x2
+	.byte	0x31
+	.byte	0x9f
+	.4byte	.LVL1
+	.4byte	.LVL3
+	.2byte	0x1
+	.byte	0x58
+	.4byte	.LVL6
+	.4byte	.LFE4
+	.2byte	0x1
+	.byte	0x58
+	.4byte	0
+	.4byte	0
+	.section	.debug_aranges,"",@progbits
+	.4byte	0x24
+	.2byte	0x2
+	.4byte	.Ldebug_info0
+	.byte	0x4
+	.byte	0
+	.2byte	0
+	.2byte	0
+	.4byte	.LFB4
+	.4byte	.LFE4-.LFB4
+	.4byte	.LFB5
+	.4byte	.LFE5-.LFB5
+	.4byte	0
+	.4byte	0
+	.section	.debug_ranges,"",@progbits
+.Ldebug_ranges0:
+	.4byte	.LFB4
+	.4byte	.LFE4
+	.4byte	.LFB5
+	.4byte	.LFE5
+	.4byte	0
+	.4byte	0
+	.section	.debug_line,"",@progbits
+.Ldebug_line0:
+	.section	.debug_str,"MS",@progbits,1
+.LASF6:
+	.string	"long long int"
+.LASF8:
+	.string	"unsigned int"
+.LASF1:
+	.string	"unsigned char"
+.LASF20:
+	.string	"D:/Ai-WB2_Series-main/applications/smarthome-v1-ble-wifi/smarthome-v1-ble-wifi/main.c"
+.LASF12:
+	.string	"main"
+.LASF17:
+	.string	"bl_gpio_output_set"
+.LASF5:
+	.string	"long unsigned int"
+.LASF7:
+	.string	"long long unsigned int"
+.LASF13:
+	.string	"blink_test"
+.LASF14:
+	.string	"xTaskCreate"
+.LASF11:
+	.string	"uint8_t"
+.LASF18:
+	.string	"vTaskDelay"
+.LASF10:
+	.string	"__uint8_t"
+.LASF9:
+	.string	"char"
+.LASF4:
+	.string	"long int"
+.LASF3:
+	.string	"short unsigned int"
+.LASF16:
+	.string	"printf"
+.LASF21:
+	.string	"D:\\\\Ai-WB2_Series-main\\\\applications\\\\smarthome-v1-ble-wifi\\\\build_out\\\\smarthome-v1-ble-wifi"
+.LASF23:
+	.string	"value"
+.LASF15:
+	.string	"bl_gpio_enable_output"
+.LASF2:
+	.string	"short int"
+.LASF19:
+	.string	"GNU C99 10.2.0 -march=rv32imfc -mabi=ilp32f -march=rv32imfc -gdwarf -Os -std=gnu99 -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -fcommon -ffreestanding -fno-strict-aliasing"
+.LASF0:
+	.string	"signed char"
+.LASF22:
+	.string	"param"
+	.ident	"GCC: (SiFive GCC-Metal 10.2.0-2020.12.8) 10.2.0"

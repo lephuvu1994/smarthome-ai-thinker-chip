@@ -1,0 +1,7 @@
+evb/src/boot/gcc/entry.o: \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602/evb/src/boot/gcc/entry.S \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602/evb/src/boot/gcc/encoding.h \
+ D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602/evb/src/boot/gcc/bits.h
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602/evb/src/boot/gcc/encoding.h:
+D\:/Ai-WB2_Series-main/components/platform/soc/bl602/bl602/evb/src/boot/gcc/bits.h:
+/d/Ai-WB2_Series-main/components/platform/soc/bl602/bl602/evb/src/boot/gcc/entry.S:

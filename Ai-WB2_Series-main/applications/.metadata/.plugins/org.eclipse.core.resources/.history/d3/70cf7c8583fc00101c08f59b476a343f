@@ -1,0 +1,5 @@
+# Automatically generated build file. Do not edit.
+COMPONENT_INCLUDES += $(BL60X_SDK_PATH)/components/network/lmac154 $(BL60X_SDK_PATH)/components/network/lmac154/include $(BL60X_SDK_PATH)/components/network/lmac154/include
+COMPONENT_LDFLAGS +=   -L$(BL60X_SDK_PATH)/components/network/lmac154/lib -llmac154 
+COMPONENT_LINKER_DEPS += $(BL60X_SDK_PATH)/components/network/lmac154/lib/liblmac154.a
+component-lmac154-build: 

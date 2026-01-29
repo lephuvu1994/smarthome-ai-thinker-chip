@@ -1,0 +1,19 @@
+src/netif/lowpan6_common.o: \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/netif/lowpan6_common.c \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/netif/lowpan6_common.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/netif/lowpan6_opts.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/opt.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/config/lwipopts.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/debug.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/arch.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cc.h \
+ D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cpu.h
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/netif/lowpan6_common.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/netif/lowpan6_opts.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/opt.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/config/lwipopts.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/debug.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/src/include/lwip/arch.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cc.h:
+D\:/Ai-WB2_Series-main/components/network/lwip/lwip-port/arch/cpu.h:
+/d/Ai-WB2_Series-main/components/network/lwip/src/netif/lowpan6_common.c:

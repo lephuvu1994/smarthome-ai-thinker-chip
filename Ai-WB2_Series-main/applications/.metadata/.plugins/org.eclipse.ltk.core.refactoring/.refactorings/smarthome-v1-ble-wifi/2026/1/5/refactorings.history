@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;smarthome-v1-ble-wifi/blink&apos; to &apos;smarthome-v1-ble-wifi&apos;" description="Rename resource &apos;blink&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="blink" name="smarthome-v1-ble-wifi" stamp="1769622218235" updateReferences="true"/>
+</session>

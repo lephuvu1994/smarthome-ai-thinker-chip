@@ -1,0 +1,4 @@
+src/utils_hex.o: D\:/Ai-WB2_Series-main/components/utils/src/utils_hex.c \
+ D\:/Ai-WB2_Series-main/components/utils/include/utils_hex.h
+D\:/Ai-WB2_Series-main/components/utils/include/utils_hex.h:
+/d/Ai-WB2_Series-main/components/utils/src/utils_hex.c:

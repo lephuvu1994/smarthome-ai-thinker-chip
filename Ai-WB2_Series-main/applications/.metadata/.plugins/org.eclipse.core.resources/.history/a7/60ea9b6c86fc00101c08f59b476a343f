@@ -1,0 +1,63 @@
+#
+# Makefile Project: Smarthome V1 (Fix Syntax Error)
+#
+
+PROJECT_NAME := smarthome-v1-ble-wifi
+PROJECT_PATH := $(abspath .)
+PROJECT_BOARD := evb
+export PROJECT_PATH PROJECT_BOARD
+
+-include ./proj_config.mk
+
+# --- 1. TÌM ĐƯỜNG DẪN SDK ---
+ifeq ($(origin BL60X_SDK_PATH), undefined)
+BL60X_SDK_PATH_GUESS ?= $(shell pwd)
+# Lùi 2 cấp (Kiểm tra kỹ: nếu folder dự án bạn nằm trong customer_app thì là 3 cấp ../../..)
+BL60X_SDK_PATH ?= $(BL60X_SDK_PATH_GUESS)/../../..
+endif
+
+# --- 2. COMPONENTS ---
+COMPONENTS_BLSYS   := bltime blfdt blmtd bloop loopadc looprt loopset
+COMPONENTS_VFS     := romfs
+
+# Thư viện cơ bản
+INCLUDE_COMPONENTS += freertos_riscv_ram bl602 bl602_std newlibc hosal mbedtls_lts lwip vfs yloop utils cli blog blog_testc coredump
+
+# >> WIFI (Đã bỏ wifi_hosal vì nó thường nằm trong wifi)
+INCLUDE_COMPONENTS += lmac154 wifi_manager bl60x_wifi_driver wifi
+
+# >> BLUETOOTH (Dùng blestack)
+INCLUDE_COMPONENTS += ble1m blestack
+
+# Phần cứng & Lưu trữ
+INCLUDE_COMPONENTS += easyflash4 hal_drv rfparam_adapter_tmp
+
+INCLUDE_COMPONENTS += $(COMPONENTS_NETWORK)
+INCLUDE_COMPONENTS += $(COMPONENTS_BLSYS)
+INCLUDE_COMPONENTS += $(COMPONENTS_VFS)
+INCLUDE_COMPONENTS += $(PROJECT_NAME)
+
+# --- 3. [QUAN TRỌNG] SỬA LỖI ĐƯỜNG DẪN HEADER ---
+# Sử dụng EXTRA_CPPFLAGS để ép trình biên dịch tìm file (Cách này CẦN -I)
+
+# >> BLESTACK PATHS (Để tìm <host/ble_hs.h>)
+EXTRA_CPPFLAGS += -I$(BL60X_SDK_PATH)/components/network/ble/blestack/src/host/include
+EXTRA_CPPFLAGS += -I$(BL60X_SDK_PATH)/components/network/ble/blestack/src/include
+EXTRA_CPPFLAGS += -I$(BL60X_SDK_PATH)/components/network/ble/blestack/src/services
+EXTRA_CPPFLAGS += -I$(BL60X_SDK_PATH)/components/network/ble/blestack/src/port/include
+
+# >> WIFI PATHS
+EXTRA_CPPFLAGS += -I$(BL60X_SDK_PATH)/components/network/wifi/include
+EXTRA_CPPFLAGS += -I$(BL60X_SDK_PATH)/components/network/wifi_manager/bl60x_wifi_driver/include
+EXTRA_CPPFLAGS += -I$(BL60X_SDK_PATH)/components/network/wifi_manager/bl60x_wifi_driver
+
+# >> DRIVER PATHS
+EXTRA_CPPFLAGS += -I$(BL60X_SDK_PATH)/components/hal_drv/bl602_hal
+
+# --- 4. INCLUDE DỰ PHÒNG (KHÔNG DÙNG -I Ở ĐÂY) ---
+# Biến này TỰ ĐỘNG thêm -I, nên ta chỉ điền đường dẫn thôi
+COMMON_INCLUDE_DIRS += $(BL60X_SDK_PATH)/components/network/wifi/include
+COMMON_INCLUDE_DIRS += $(BL60X_SDK_PATH)/components/network/wifi_manager/bl60x_wifi_driver/include
+COMMON_INCLUDE_DIRS += $(BL60X_SDK_PATH)/components/network/ble/ble1m/include
+
+include $(BL60X_SDK_PATH)/make_scripts_riscv/project.mk

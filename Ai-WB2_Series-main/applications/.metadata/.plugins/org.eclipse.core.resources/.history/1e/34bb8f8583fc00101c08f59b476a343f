@@ -1,0 +1,7 @@
+mbedtls/library/ecjpake.o: \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/library/ecjpake.c \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h \
+ D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls_sample_config.h:
+D\:/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/include/mbedtls/check_config.h:
+/d/Ai-WB2_Series-main/components/security/mbedtls_lts/mbedtls/library/ecjpake.c:
