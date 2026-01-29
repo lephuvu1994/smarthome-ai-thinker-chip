@@ -197,7 +197,7 @@
             id = <0>;
             compatible = "bl602_uart";
             path = "/dev/ttyS0";
-            baudrate = <115200>;
+            baudrate = <2000000>;
             pin {
                 rx = <7>;
                 tx = <16>;

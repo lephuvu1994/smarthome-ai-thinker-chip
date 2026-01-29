@@ -1,0 +1,10 @@
+1: Clone repo
+2: Config c/c++ ở properti của dự án make, build: -j flash p=$(PORT)
+3: Chạy các lênhj cho phép thực thi
+
+# Cấp quyền thực thi cho toàn bộ thư mục Toolchain Darwin
+chmod -R +x /Users/adminsoftflex/Documents/smarthome/smarthome-ai-thinker-chip/Ai-WB2_Series-main/toolchain/riscv/Darwin/
+
+# Gỡ bỏ hoàn toàn thuộc tính "Quarantine" (cách ly) của macOS cho toàn bộ thư mục
+sudo xattr -dr com.apple.quarantine /Users/adminsoftflex/Documents/smarthome/smarthome-ai-thinker-chip/Ai-WB2_Series-main/toolchain/riscv/Darwin/
+
