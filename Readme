@@ -8,3 +8,45 @@ chmod -R +x /Users/adminsoftflex/Documents/smarthome/smarthome-ai-thinker-chip/A
 # Gỡ bỏ hoàn toàn thuộc tính "Quarantine" (cách ly) của macOS cho toàn bộ thư mục
 sudo xattr -dr com.apple.quarantine /Users/adminsoftflex/Documents/smarthome/smarthome-ai-thinker-chip/Ai-WB2_Series-main/toolchain/riscv/Darwin/
 
+
+
+```2. Chức năng chính: "Wifi Provisioning via BLE"
+
+Đây là tính năng cốt lõi: Sử dụng Bluetooth để cài đặt Wifi cho thiết bị.
+
+
+
+A. Cơ chế hoạt động (Logic luồng)
+
+Khởi động: Kiểm tra trong bộ nhớ Flash xem đã có thông tin Wifi (SSID & Pass) chưa.
+
+Chế độ 1: Cấu hình (Setup Mode) - Nếu chưa có Wifi:
+
+Bật Bluetooth (BLE).
+
+Phát quảng bá (Advertising) để điện thoại tìm thấy.
+
+Chờ điện thoại gửi SSID và Mật khẩu qua Bluetooth.
+
+Lưu thông tin vào Flash -> 
+
+Tiến hành call API {baseDomain) đến cloud để 1: đăng ký thiết bị mã address, lấy token cho thiết bị, lấy domain của điều khiển thiết bị, lấy mqtt. lưu vào flash. Có thêm chức năng reset, cho mqtt domain...
+
+Sau đó Tự động khởi động lại (Reboot).
+
+Chế độ 2: Hoạt động (Normal Mode) - Nếu đã có Wifi:
+
+Tắt Bluetooth (để tiết kiệm năng lượng/tài nguyên).
+
+Bật Wifi và kết nối vào Router theo thông tin đã lưu.
+
+Kết nối đến mqtt hoạt động bình thường 
+
+Chế độ 3: Nếu mất kêts nối đến wifi, mở BLE, từ app và thiết bị, có điều khiển qua lại với nhau có qua token tránh bị hàng xóm điều khiển mất
+
+Chế độ 4: Nếu có wifi lại tự động kết nối và dùng trở lại chế độ 2
+
+
+
+Chống sao chép với mac và token + số thứ tự đã đăng ký lên server.
+
