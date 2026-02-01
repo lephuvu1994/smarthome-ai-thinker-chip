@@ -25,7 +25,7 @@
 
 #define SALVE_CMD_SERVER_TX_INDEX 2
 
-#define ble_slave_name "vule-blue-smarthome"
+#define ble_slave_name "BL_602"
 
 static struct bt_conn *conn_cur;
 ble_gatt_conn_cb_t conn_cb;
