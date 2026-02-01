@@ -65,7 +65,7 @@ CONFIG_MBEDTLS_SHA1_USE_HW:=1
 CONFIG_MBEDTLS_SHA256_USE_HW:=1
 
 #blog enable components format :=blog_testc cli vfs helper
-LOG_ENABLED_COMPONENTS:=blog_testc hosal loopset looprt bloop hal_drv
+LOG_ENABLED_COMPONENTS:=blog_testc hosal loopset looprt bloop hal_drv http_client_tcp tcp axk_common  tcp_transport http-parser axk_tls axk_mqtt
 
 #死机后打印堆栈
 CONFIG_ENABLE_FP:=1
