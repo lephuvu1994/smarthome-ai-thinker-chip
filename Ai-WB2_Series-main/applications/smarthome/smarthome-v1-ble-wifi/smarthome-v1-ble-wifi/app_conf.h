@@ -13,8 +13,8 @@
 #define LED_ON_MODE         0
 
 // --- WATCHDOG CONFIG ---
-#define WDT_TIMEOUT_SEC     20      // Chip sẽ reset nếu treo quá 10s
-#define WDT_FEED_MS         6000    // Tự động cho ăn mỗi 3s
+#define WDT_TIMEOUT_SEC     15000      // Chip sẽ reset nếu treo quá 5s
+#define WDT_FEED_MS         6000    // Tự động cho ăn mỗi 4s
 
 // --- BLE CONFIG ---
 #define BLE_DEV_NAME        "EuroSmartHome"

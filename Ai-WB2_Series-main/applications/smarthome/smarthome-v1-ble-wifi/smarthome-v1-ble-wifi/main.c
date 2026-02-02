@@ -254,7 +254,7 @@ static void proc_main_entry(void *pvParameters)
     aos_register_event_filter(EV_WIFI, wifi_event_cb, NULL);
     hal_wifi_start_firmware_task();
     aos_post_event(EV_WIFI, CODE_WIFI_ON_INIT_DONE, 0);
-
+    
     // 5. Watchdog (Commented as requested for debugging)
      app_watchdog_init();
 
