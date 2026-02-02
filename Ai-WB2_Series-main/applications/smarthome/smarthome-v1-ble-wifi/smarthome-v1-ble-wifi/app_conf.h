@@ -39,28 +39,24 @@
 // ============================================================
 // CẤU HÌNH CHÂN GPIO (Mapping theo Ai-WB2-12F)
 // ============================================================
+// INPUT (Nút bấm nối đất, kích mức 0)
+// Lưu ý: GPIO 16 (TXD) và 7 (RXD) cần xử lý nhiễu khởi động kỹ
+#define GPIO_IN_OPEN        16  // TXD
+#define GPIO_IN_STOP        7   // RXD
+#define GPIO_IN_LOCK        11  // IO11
+#define GPIO_IN_CLOSE       14  // IO14
 
-// --- INPUT (Cảm biến/Nút nhấn) ---
-// IN mở: Dùng chân TXD -> GPIO 16
-#define GPIO_IN_OPEN        16
-// IN dừng: Dùng chân RXD -> GPIO 7
-#define GPIO_IN_STOP        7
-// IN Khóa: Dùng chân IO11
-#define GPIO_IN_LOCK        11
-// IN Đóng: Dùng chân IO14
-#define GPIO_IN_CLOSE       14
-// --- OUTPUT (Relay điều khiển) ---
-// OUT dừng: Dùng chân IO1
-#define GPIO_OUT_STOP       1
-// OUT khóa: Dùng chân IO5
-#define GPIO_OUT_LOCK       5
-// OUT đóng: Dùng chân IO4
-#define GPIO_OUT_CLOSE      4
-// OUT mở: Dùng chân IO3
-#define GPIO_OUT_OPEN       3
-// --- KHÁC ---
-// LED báo trạng thái: Dùng chân IO17
-#define GPIO_LED_STATUS     17
+// OUTPUT (Relay kích mức 1)
+#define GPIO_OUT_STOP       1   // IO1
+#define GPIO_OUT_LOCK       5   // IO5
+#define GPIO_OUT_CLOSE      4   // IO4
+#define GPIO_OUT_OPEN       3   // IO3
+#define GPIO_LED_STATUS     17  // IO17
+
+// --- TIMING ---
+#define RELAY_PULSE_MS      500     // Kích relay 0.5 giây rồi nhả
+#define BTN_DEBOUNCE_MS     20      // Thời gian lọc nhiễu nút
+#define BTN_POLL_DELAY_MS   50      // Chu kỳ quét (50ms/lần)
 
 
 // ============================================================

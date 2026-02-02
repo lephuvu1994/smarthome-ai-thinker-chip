@@ -50,3 +50,12 @@ Chế độ 4: Nếu có wifi lại tự động kết nối và dùng trở l�
 
 Chống sao chép với mac và token + số thứ tự đã đăng ký lên server.
 
+
+# Flash tool
+cd Ai-WB2_Series-main/tools/flash_tool
+
+# erase flash
+./bflb_iot_tool-macos --chipname bl602 --interface uart --port /dev/tty.usbserial-110 --firmware bflb_iot_tool_usage.txt --erase
+
+# terminal screen
+screen /dev/tty.usbserial-110 115200

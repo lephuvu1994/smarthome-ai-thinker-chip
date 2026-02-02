@@ -235,7 +235,6 @@ static void wifi_event_cb(input_event_t* event, void* private_data) {
             // [LOGIC MỚI]
             if (storage_has_mqtt_config()) {
                 printf("[MAIN] Config Found. Starting MQTT...\r\n");
-                app_mqtt_init(on_mqtt_command);
                 app_mqtt_start();
             } else {
                 printf("[MAIN] No Config. Spawning HTTP Task...\r\n");
