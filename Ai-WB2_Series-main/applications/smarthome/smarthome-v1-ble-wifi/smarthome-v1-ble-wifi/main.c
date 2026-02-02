@@ -47,6 +47,8 @@ static int g_ble_active = 0;
 static int g_wifi_inited = 0;
 static wifi_conf_t conf = { .country_code = "CN" };
 static int g_ble_mode = 0; // Cờ Gatekeeper
+static int g_has_connected_once = 0;
+static int g_lock_active = 0; // Biến quản lý khoa
 
 // ============================================================================
 // BLE LOGIC
@@ -112,6 +114,22 @@ static const struct bt_data ad_config[] = {
 	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
 	BT_DATA(BT_DATA_NAME_COMPLETE, BLE_DEV_NAME, 10),
 };
+
+static void http_register_task(void *pvParameters) {
+    printf("[TASK] Starting HTTP Register Task...\r\n");
+
+    // Gọi hàm nặng ở đây
+    if (app_http_register_device()) {
+        printf("[TASK] Register Success. Rebooting System...\r\n");
+        vTaskDelay(pdMS_TO_TICKS(1000));
+        bl_sys_reset_por(); // Reset để chạy lại từ đầu với cấu hình mới
+    } else {
+        printf("[TASK] Register Failed. Will retry or stay offline.\r\n");
+    }
+
+    // Tự sát sau khi hoàn thành nhiệm vụ để giải phóng RAM
+    vTaskDelete(NULL);
+}
 
 static void ble_init_cb(int err) {
     if (!err) bt_gatt_service_register(&config_service);
@@ -184,9 +202,30 @@ static void wifi_event_cb(input_event_t* event, void* private_data) {
                 connect_wifi_now();
             }
             break;
+        case CODE_WIFI_ON_SCAN_DONE:
+                {
+                    printf("[MAIN] Scan Done. Checking Results...\r\n");
 
+                    // Lấy thông tin SSID từ Flash
+                    char ssid[33], pass[64];
+                    if (!storage_get_wifi(ssid, pass)) {
+                        enable_ble_adv();
+                        return;
+                    }
+
+                    // Hàm kiểm tra xem SSID có trong danh sách Scan không
+                    // Lưu ý: wifi_mgmr_scan_ap_all() trả về danh sách, ta giả lập logic kiểm tra ở đây
+                    // Trong SDK BL602 thực tế, nếu bạn gọi connect_wifi_now() mà SSID không tồn tại
+                    // nó sẽ tự trả về CODE_WIFI_ON_DISCONNECT sau vài giây.
+                    // Nên ta có thể gộp logic vào Disconnect để code đỡ phức tạp.
+
+                    printf("[BOOT] Target SSID: [%s] -> Attempting connection...\r\n", ssid);
+                    connect_wifi_now();
+                }
+                break;
         case CODE_WIFI_ON_GOT_IP:
             printf("\r\n[WIFI] >>> CONNECTED! <<<\r\n");
+            g_has_connected_once = 1;
             g_wifi_retry_cnt = 0;
             if (xTimerIsTimerActive(g_wifi_check_timer)) xTimerStop(g_wifi_check_timer, 0);
 
@@ -196,38 +235,51 @@ static void wifi_event_cb(input_event_t* event, void* private_data) {
             // [LOGIC MỚI]
             if (storage_has_mqtt_config()) {
                 printf("[MAIN] Config Found. Starting MQTT...\r\n");
+                app_mqtt_init(on_mqtt_command);
                 app_mqtt_start();
             } else {
-                printf("[MAIN] No Config. calling HTTP Register...\r\n");
-
-                // Gọi HTTPS (Hàm này sẽ block một lúc)
-                if (app_http_register_device()) {
-                    printf("[MAIN] Register OK. Rebooting...\r\n");
-                    bl_sys_reset_por();
-                } else {
-                    printf("[MAIN] Register Failed.\r\n");
-                }
+                printf("[MAIN] No Config. Spawning HTTP Task...\r\n");
+                // [FIX CRASH] Tạo Task riêng để chạy HTTP, không chạy trực tiếp ở đây!
+                // Stack size 4096 bytes: Rất an toàn cho JSON và HTTP
+                xTaskCreate(http_register_task, "http_task", 4096, NULL, 10, NULL);
             }
             break;
 
         case CODE_WIFI_ON_DISCONNECT:
-             if (g_ble_mode == 1) return; // Gatekeeper
-             if(g_wifi_inited) {
-                 g_wifi_retry_cnt++;
-                 printf("[WIFI] Disconnected! Retry %d/%d\r\n", g_wifi_retry_cnt, MAX_RETRY);
-                 if (g_wifi_retry_cnt < MAX_RETRY) {
-                     vTaskDelay(2000);
-                     connect_wifi_now();
-                 } else {
-                     printf("[SYS] Too many failures. KILL WIFI -> START BLE.\r\n");
-                     wifi_mgmr_sta_disconnect();
-                     enable_ble_adv();
-                     if (!xTimerIsTimerActive(g_wifi_check_timer)) {
-                         xTimerStart(g_wifi_check_timer, 0);
-                     }
-                 }
-             }
-             break;
+            if (g_ble_mode == 1) return; // Đang config thì kệ
+            if(g_wifi_inited) {
+            	printf("[WIFI] Disconnected! Status: Connected_Once=%d\r\n", g_has_connected_once);
+            	// --- LOGIC PHÂN LOẠI ---
+            	// TRƯỜNG HỢP A: Mất mạng / Router tắt (Case 3 & 4)
+                // Dấu hiệu: Đã từng kết nối thành công (g_has_connected_once == 1)
+                if (g_has_connected_once == 1) {
+                	printf("[SYS] Network Lost (Router reboot or signal weak).\r\n");
+                	printf("[SYS] Auto Reconnecting forever...\r\n");
+                	vTaskDelay(pdMS_TO_TICKS(5000)); // Đợi 5s rồi thử lại
+                	connect_wifi_now(); // Thử lại mãi mãi, không bao giờ bật BLE
+                }
+                // TRƯỜNG HỢP B: Sai Password hoặc SSID không tồn tại (Case 1 & 2)
+                // Dấu hiệu: Chưa từng kết nối được lần nào (g_has_connected_once == 0)
+                else {
+                	g_wifi_retry_cnt++;
+                    printf("[AUTH] Login Failed! Attempt %d/%d\r\n", g_wifi_retry_cnt, MAX_RETRY);
+                    if (g_wifi_retry_cnt <= MAX_RETRY) {
+                    	// Còn lượt thử -> Thử lại
+                    	vTaskDelay(pdMS_TO_TICKS(2000));
+                    	connect_wifi_now();
+                    } else {
+                    	// Hết lượt -> CHẮC CHẮN SAI PASS HOẶC SAI TÊN WIFI
+                    	printf("[SYS] Critical: Wrong Password or SSID Not Found.\r\n");
+                    	printf("[SYS] >>> ENABLE BLE CONFIG MODE <<<\r\n");
+
+                        wifi_mgmr_sta_disconnect();
+                        enable_ble_adv(); // Bật BLE
+                        led_set_mode(LED_BLINK_FAST);
+                        // Reset lại biến đếm
+                        g_wifi_retry_cnt = 0;
+                    }
+                }
+           }
     }
 }
 
@@ -258,7 +310,7 @@ static void proc_main_entry(void *pvParameters)
     // 5. Watchdog (Commented as requested for debugging)
      app_watchdog_init();
 
-    vTaskDelete(NULL);
+     vTaskDelete(NULL);
 }
 
 void main()

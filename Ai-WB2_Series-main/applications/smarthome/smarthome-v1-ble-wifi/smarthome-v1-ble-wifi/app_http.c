@@ -48,25 +48,41 @@ int app_http_register_device(void) {
     server_addr.sin_port = htons(HTTP_PORT);
     server_addr.sin_addr.s_addr = inet_addr(HTTP_SERVER_IP);
 
-    // 5. Kết nối
-    if (connect(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
-        printf("[HTTP] Error: Connect failed. Check IP/Firewall.\r\n");
-        goto exit;
-    }
-    printf("[HTTP] Connected!\r\n");
+       // 5. Kết nối
+        if (connect(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+            printf("[HTTP] Error: Connect failed. Check IP/Firewall.\r\n");
+            goto exit;
+        }
+        printf("[HTTP] Connected!\r\n");
 
-    // 6. Gửi Request
-    int len = sprintf(buf,
-        "POST %s HTTP/1.1\r\n"
-        "Host: %s\r\n"
-        "Content-Type: application/json\r\n"
-        "Content-Length: %d\r\n"
-        "Connection: close\r\n"
-        "\r\n"
-        "{\"mac\":\"%s\"}",
-        HTTP_URL, HTTP_SERVER_IP, (int)strlen(mac_str)+10, mac_str);
+        // ============================================================
+        // [LOGIC MỚI] Tạo JSON Body trước để tính Content-Length
+        // ============================================================
+        char json_body[256];
+        memset(json_body, 0, sizeof(json_body));
 
-    printf("[HTTP] Sending Request...\r\n");
+        // Format đúng kiểu JSON: {"mac_address": "...", "device_code": "..."}
+        snprintf(json_body, sizeof(json_body),
+                 "{\"mac_address\":\"%s\",\"device_code\":\"%s\"}",
+                 mac_str, DEVICE_CODE);
+
+        printf("[HTTP] Body to send: %s\r\n", json_body); // In ra để debug
+
+        // 6. Tạo HTTP Packet hoàn chỉnh (Header + Body)
+        int len = sprintf(buf,
+            "POST %s HTTP/1.1\r\n"
+            "Host: %s\r\n"
+            "Content-Type: application/json\r\n"
+            "Content-Length: %d\r\n" // Tự động điền độ dài body
+            "Connection: close\r\n"
+            "\r\n"
+            "%s", // Body nằm ở đây
+            HTTP_URL,
+            HTTP_SERVER_IP,
+            (int)strlen(json_body),
+            json_body);
+
+
     if (write(sock, buf, len) < 0) {
         printf("[HTTP] Error: Send failed\r\n");
         goto exit;
