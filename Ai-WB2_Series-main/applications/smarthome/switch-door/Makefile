@@ -2,7 +2,7 @@
 # PROJECT MAKEFILE
 #
 
-PROJECT_NAME := smarthome-v1-ble-wifi
+PROJECT_NAME := switch-door
 PROJECT_PATH := $(abspath .)
 PROJECT_BOARD := evb
 export PROJECT_PATH PROJECT_BOARD

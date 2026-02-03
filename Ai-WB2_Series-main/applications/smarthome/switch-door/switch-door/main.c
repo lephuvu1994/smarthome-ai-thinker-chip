@@ -15,21 +15,19 @@
 #include <wifi_mgmr_ext.h>
 
 // --- MODULES (NEW) ---
-#include "app_conf.h"
-#include "app_storage.h"
-#include "app_led.h"
-#include "app_watchdog.h"
-#include "app_output_relay.h"      // Driver Output
-#include "app_button.h"     // Driver Input
-#include "app_mqtt.h"       // Driver Net
-#include "app_door_controller_core.h"  // Business Logic
-// --MQTT, HTTP --
-#include "app_http.h"
-// --CJSON ---
 #include <cJSON.h>
 
-// --- BLE SDK ---
+#include "app_button.h"     // Driver Input
+#include "app_conf.h"
+#include "app_door_controller_core.h"  // Business Logic
+#include "app_http.h"
+#include "app_led.h"
+#include "app_mqtt.h"       // Driver Net
+#include "app_output_relay.h"      // Driver Output
+#include "app_storage.h"
+#include "app_watchdog.h"
 #include "ble_interface.h"
+// --- BLE SDK ---
 #include "ble_lib_api.h"
 #include "conn.h"
 #include "gatt.h"
