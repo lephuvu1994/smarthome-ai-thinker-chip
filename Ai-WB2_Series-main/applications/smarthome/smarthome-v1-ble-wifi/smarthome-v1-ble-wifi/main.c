@@ -19,6 +19,14 @@
 #include "app_storage.h"
 #include "app_led.h"
 #include "app_watchdog.h"
+#include "app_output_relay.h"      // Driver Output
+#include "app_button.h"     // Driver Input
+#include "app_mqtt.h"       // Driver Net
+#include "app_door_controller_core.h"  // Business Logic
+// --MQTT, HTTP --
+#include "app_http.h"
+// --CJSON ---
+#include <cJSON.h>
 
 // --- BLE SDK ---
 #include "ble_interface.h"
@@ -28,11 +36,6 @@
 #include "hci_driver.h"
 #include "bluetooth.h"
 
-// --MQTT, HTTP --
-#include "app_mqtt.h"
-#include "app_http.h"
-// --CJSON ---
-#include <cJSON.h>
 
 
 // --- MACROS ---
@@ -205,7 +208,6 @@ static void wifi_event_cb(input_event_t* event, void* private_data) {
         case CODE_WIFI_ON_SCAN_DONE:
                 {
                     printf("[MAIN] Scan Done. Checking Results...\r\n");
-
                     // Lấy thông tin SSID từ Flash
                     char ssid[33], pass[64];
                     if (!storage_get_wifi(ssid, pass)) {
@@ -282,6 +284,19 @@ static void wifi_event_cb(input_event_t* event, void* private_data) {
     }
 }
 
+// --- BRIDGE FUNCTIONS (Cầu nối) ---
+// Những hàm này đơn giản là chuyển tiếp dữ liệu giữa các module
+
+// 1. Khi Button có sự kiện -> Chuyển cho Core xử lý
+void on_button_event_bridge(btn_event_t event) {
+    app_door_controller_core_handle_button_event(event);
+}
+
+// 2. Khi MQTT có lệnh -> Chuyển cho Core xử lý
+void on_mqtt_cmd_bridge(const char* cmd) {
+    app_door_controller_core_execute_cmd_string(cmd);
+}
+
 // ============================================================================
 // MAIN ENTRY
 // ============================================================================
@@ -290,23 +305,36 @@ static void proc_main_entry(void *pvParameters)
     // 1. Init Modules
     storage_init();
     led_init();
+    printf("LED init success\r\n");
+    // 2. Khởi tạo Driver Output (Relay)
+    app_relay_init();
+    printf("Relay init success\r\n");
 
-    // 2. Setup Logic
+    // 3. Khởi tạo Core Logic (Bộ não)
+    app_door_controller_core_init();
+    printf("Controller init success\r\n");
+
+    // 4. Khởi tạo Button (Input) và gắn cầu nối về Core
+    // Từ giờ bấm nút -> on_button_event_bridge -> app_door_core
+    app_button_init(on_button_event_bridge);
+    printf("app_button_init success\r\n");
+
+    // 5. Setup Wifi Logic
     g_wifi_check_timer = xTimerCreate("WfChk", pdMS_TO_TICKS(CHECK_INTERVAL), pdTRUE, (void *)0, wifi_check_timer_cb);
 
-    // 3. Init BLE
+    // 6. Init BLE
     ble_controller_init(configMAX_PRIORITIES - 1);
     hci_driver_init();
     bt_enable(ble_init_cb);
 
-    // 4. Init Wifi
+    // 7. Init Wifi
     printf("[BOOT] System Init. Starting Wifi Stack...\r\n");
     tcpip_init(NULL, NULL);
     aos_register_event_filter(EV_WIFI, wifi_event_cb, NULL);
     hal_wifi_start_firmware_task();
     aos_post_event(EV_WIFI, CODE_WIFI_ON_INIT_DONE, 0);
     
-    // 5. Watchdog (Commented as requested for debugging)
+    // 8. Watchdog (Commented as requested for debugging)
      app_watchdog_init();
 
      vTaskDelete(NULL);

@@ -41,18 +41,20 @@
 // ============================================================
 // INPUT (Nút bấm nối đất, kích mức 0)
 // Lưu ý: GPIO 16 (TXD) và 7 (RXD) cần xử lý nhiễu khởi động kỹ
-#define GPIO_IN_OPEN        16  // TXD
-#define GPIO_IN_STOP        7   // RXD
-#define GPIO_IN_LOCK        11  // IO11
-#define GPIO_IN_CLOSE       14  // IO14
+// --- INPUT (Nút bấm - Kích mức 0/GND) ---
+// Sử dụng toàn bộ chân sạch nhất cho Input để nút bấm nhạy, không nhiễu
+#define GPIO_IN_OPEN        12  // IO12 (Cạnh trái)
+#define GPIO_IN_CLOSE       3   // IO3  (Cạnh phải)
+//#define GPIO_IN_STOP        17  // IO17 (Cạnh trái)
+//#define GPIO_IN_LOCK        11  // IO11 (Cạnh trái)
 
-// OUTPUT (Relay kích mức 1)
-#define GPIO_OUT_STOP       1   // IO1
-#define GPIO_OUT_LOCK       5   // IO5
-#define GPIO_OUT_CLOSE      4   // IO4
-#define GPIO_OUT_OPEN       3   // IO3
-#define GPIO_LED_STATUS     17  // IO17
+// --- OUTPUT (Relay - Kích mức 1/VCC) ---
+#define GPIO_OUT_CLOSE      4   // IO4 (Trùng LED_PIN_1 - Vừa đóng vừa sáng)
+#define GPIO_OUT_OPEN       11  // IO14 (Trùng LED_PIN_2 - Vừa mở vừa sáng)
+#define GPIO_OUT_STOP       5   // IO5 (Cạnh phải)
 
+// Đèn báo (Trùng với relay để tiết kiệm chân)
+#define GPIO_LED_STATUS     GPIO_OUT_OPEN
 // --- TIMING ---
 #define RELAY_PULSE_MS      500     // Kích relay 0.5 giây rồi nhả
 #define BTN_DEBOUNCE_MS     20      // Thời gian lọc nhiễu nút
@@ -63,10 +65,11 @@
 // 2. CẤU HÌNH MQTT
 // ============================================================
 // Topic Format: %s sẽ được thay thế bằng DEVICE_CODE
-// VD: home/garage/GARAGE_DOOR_01/cmd
-#define MQTT_TOPIC_SUB_CMD      "home/garage/%s/cmd"     // Nhận lệnh
-#define MQTT_TOPIC_PUB_STATUS   "home/garage/%s/status"  // Báo trạng thái
-
+// --- CẤU HÌNH MQTT ---
+// %s sẽ được thay thế bằng TOKEN lấy từ Storage
+// VD: device/dai-token-ngau-nhien-xyz/cmd
+#define MQTT_TOPIC_SUB_CMD      "device/%s/cmd"     
+#define MQTT_TOPIC_PUB_STATUS   "device/%s/status"
 #define MQTT_QOS            1       // QoS 1 cho tin cậy
 #define MQTT_KEEP_ALIVE     60      // Giây
 
