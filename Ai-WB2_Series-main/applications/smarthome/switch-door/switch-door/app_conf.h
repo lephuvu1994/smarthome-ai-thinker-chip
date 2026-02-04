@@ -1,10 +1,6 @@
 #ifndef APP_CONF_H
 #define APP_CONF_H
 
-// --- HARDWARE PIN ---
-#define LED_PIN_1           4
-#define LED_PIN_2           14
-
 #define DEVICE_CODE         "1001"
 
 // --- TIMING & LOGIC ---
@@ -15,8 +11,8 @@
 #define LED_ON_MODE         0
 
 // --- WATCHDOG CONFIG ---
-#define WDT_TIMEOUT_SEC     15000      // Chip sẽ reset nếu treo quá 5s
-#define WDT_FEED_MS         6000    // Tự động cho ăn mỗi 4s
+#define WDT_TIMEOUT_SEC     15000      // Chip sẽ reset nếu treo quá 15s
+#define WDT_FEED_MS         6000    // Tự động cho ăn mỗi 6s
 
 // --- BLE CONFIG ---
 #define BLE_DEV_NAME        "EuroSmartHome"
@@ -48,6 +44,8 @@
 //#define GPIO_IN_STOP        17  // IO17 (Cạnh trái)
 //#define GPIO_IN_LOCK        11  // IO11 (Cạnh trái)
 
+#define RF_PIN 17 // Chân DOUT của CMT2220LS
+
 // --- OUTPUT (Relay - Kích mức 1/VCC) ---
 #define GPIO_OUT_CLOSE      4   // IO4 (Trùng LED_PIN_1 - Vừa đóng vừa sáng)
 #define GPIO_OUT_OPEN       11  // IO14 (Trùng LED_PIN_2 - Vừa mở vừa sáng)
@@ -55,10 +53,10 @@
 
 // Đèn báo (Trùng với relay để tiết kiệm chân)
 #define GPIO_LED_STATUS     GPIO_OUT_OPEN
-// --- TIMING ---
-#define RELAY_PULSE_MS      500     // Kích relay 0.5 giây rồi nhả
-#define BTN_DEBOUNCE_MS     20      // Thời gian lọc nhiễu nút
-#define BTN_POLL_DELAY_MS   50      // Chu kỳ quét (50ms/lần)
+
+// --- HARDWARE PIN ---
+#define LED_PIN_1           4
+#define LED_PIN_2           14
 
 
 // ============================================================
@@ -81,6 +79,6 @@
 #define BTN_DEBOUNCE_MS     20      // Thời gian lọc nhiễu nút bấm
 #define BTN_POLL_DELAY_MS   50      // Chu kỳ quét nút bấm
 
-#define CHECK_INTERVAL      60000 // 60s check wifi
+#define CHECK_INTERVAL      60000 // 60s check wifi ( Auto connect wifi)
 
 #endif

@@ -26,6 +26,9 @@
 #include "app_output_relay.h"      // Driver Output
 #include "app_storage.h"
 #include "app_watchdog.h"
+#include "app_events.h" // Include file sự kiện mới tạo
+#include "app_rf.h"
+
 #include "ble_interface.h"
 // --- BLE SDK ---
 #include "ble_lib_api.h"
@@ -161,19 +164,6 @@ void disable_ble_adv() {
     g_ble_mode = 0;
 }
 
-// --- BRIDGE FUNCTIONS (Cầu nối) ---
-// Những hàm này đơn giản là chuyển tiếp dữ liệu giữa các module
-
-// 1. Khi Button có sự kiện -> Chuyển cho Core xử lý
-void on_button_event_bridge(btn_event_t event) {
-    app_door_controller_core_handle_button_event(event);
-}
-
-// 2. Khi MQTT có lệnh -> Chuyển cho Core xử lý
-void on_mqtt_cmd_bridge(const char* cmd) {
-    app_door_controller_core_execute_cmd_string(cmd);
-}
-
 // ============================================================================
 // WIFI LOGIC
 // ============================================================================
@@ -298,7 +288,6 @@ static void wifi_event_cb(input_event_t* event, void* private_data) {
     }
 }
 
-
 // ============================================================================
 // MAIN ENTRY
 // ============================================================================
@@ -321,22 +310,25 @@ static void proc_main_entry(void *pvParameters)
     app_button_init(on_button_event_bridge);
     printf("app_button_init success\r\n");
 
-    // 5. Setup Wifi Logic
+    // 5. Tao task cho phần xử lý RF
+    app_rf_start_task(2048, 10, on_rf_event_bridge);
+    printf("app_rf_start_task");
+    // 6. Setup Wifi Logic
     g_wifi_check_timer = xTimerCreate("WfChk", pdMS_TO_TICKS(CHECK_INTERVAL), pdTRUE, (void *)0, wifi_check_timer_cb);
 
-    // 6. Init BLE
+    // 7. Init BLE
     ble_controller_init(configMAX_PRIORITIES - 1);
     hci_driver_init();
     bt_enable(ble_init_cb);
 
-    // 7. Init Wifi
+    // 8. Init Wifi
     printf("[BOOT] System Init. Starting Wifi Stack...\r\n");
     tcpip_init(NULL, NULL);
     aos_register_event_filter(EV_WIFI, wifi_event_cb, NULL);
     hal_wifi_start_firmware_task();
     aos_post_event(EV_WIFI, CODE_WIFI_ON_INIT_DONE, 0);
     
-    // 8. Watchdog (Commented as requested for debugging)
+    // 9. Watchdog
      app_watchdog_init();
 
      vTaskDelete(NULL);
