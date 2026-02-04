@@ -69,36 +69,38 @@ static ssize_t ble_write_cb(struct bt_conn *conn, const struct bt_gatt_attr *att
         printf("[BLE] JSON Parse Error!\r\n");
         return len;
     }
-    // 3. Khai báo và lấy các biến (FIX LỖI UNDECLARED TẠI ĐÂY)
-        cJSON *ssid_item   = cJSON_GetObjectItem(root, "ssid");
-        cJSON *pass_item   = cJSON_GetObjectItem(root, "password"); // Key là "password"
-        cJSON *broker_item = cJSON_GetObjectItem(root, "broker");
-        cJSON *token_item  = cJSON_GetObjectItem(root, "token");
+    // 3. Khai báo và lấy các biến (Đã sửa lỗi trùng tên biến)
+            cJSON *ssid_item     = cJSON_GetObjectItem(root, "ssid");
+            cJSON *pass_item     = cJSON_GetObjectItem(root, "password");
+            cJSON *broker_item   = cJSON_GetObjectItem(root, "MQTTBroker");
+            cJSON *user_mqtt_item = cJSON_GetObjectItem(root, "MQTTusername"); // Đổi tên biến
+            cJSON *pass_mqtt_item = cJSON_GetObjectItem(root, "MQTTpassword"); // Đổi tên biến
+            cJSON *token_item    = cJSON_GetObjectItem(root, "MQTTtoken");
+            // 4. Xử lý Logic MQTT
+                    // Kiểm tra xem ít nhất phải có Broker và Token (hoặc tùy điều kiện dự án của bạn)
+                    if ((broker_item && broker_item->type == cJSON_String) &&
+                        (token_item && token_item->type == cJSON_String)) {
 
-        // 4. Xử lý Logic MQTT
-        // [FIX] Kiểm tra kiểu dữ liệu thủ công (SDK cũ không có cJSON_IsString)
-        if ((broker_item && broker_item->type == cJSON_String) &&
-            (token_item  && token_item->type == cJSON_String)) {
+                        printf("[BLE] Found MQTT Config via BLE\r\n");
 
-            printf("[BLE] Found MQTT Config via BLE\r\n");
-            // Lưu vào Flash
-            storage_save_mqtt_info(broker_item->valuestring,
-                                   "user_default",
-                                   "pass_default",
-                                   token_item->valuestring);
-        }
+                        // Lấy giá trị chuỗi, nếu không có username/pass thì để chuỗi rỗng ""
+                        char *mqtt_user = (user_mqtt_item && user_mqtt_item->type == cJSON_String) ? user_mqtt_item->valuestring : "";
+                        char *mqtt_pass = (pass_mqtt_item && pass_mqtt_item->type == cJSON_String) ? pass_mqtt_item->valuestring : "";
 
-        // 5. Xử lý Logic Wifi
-        // [FIX] Kiểm tra kiểu dữ liệu thủ công
-        if ((ssid_item && ssid_item->type == cJSON_String) &&
-            (pass_item && pass_item->type == cJSON_String)) {
+                        // Lưu vào Flash với đầy đủ thông tin đã parse được
+                        storage_save_mqtt_info(broker_item->valuestring,
+                                               mqtt_user,
+                                               mqtt_pass,
+                                               token_item->valuestring);
+                    }
 
-            printf("[BLE] Found Wifi Config: %s\r\n", ssid_item->valuestring);
+                    // 5. Xử lý Logic Wifi
+                    if ((ssid_item && ssid_item->type == cJSON_String) &&
+                        (pass_item && pass_item->type == cJSON_String)) {
 
-            // [FIX] Dùng valuestring, không dùng biến ssid chưa khai báo
-            storage_save_wifi_reboot(ssid_item->valuestring, pass_item->valuestring);
-        }
-
+                        printf("[BLE] Found Wifi Config: %s\r\n", ssid_item->valuestring);
+                        storage_save_wifi_reboot(ssid_item->valuestring, pass_item->valuestring);
+                    }
         // 6. Giải phóng RAM
         cJSON_Delete(root);
 
@@ -157,6 +159,19 @@ void disable_ble_adv() {
     printf("\r\n[MODE] >>> BLE STOPPED <<<\r\n");
     g_ble_active = 0;
     g_ble_mode = 0;
+}
+
+// --- BRIDGE FUNCTIONS (Cầu nối) ---
+// Những hàm này đơn giản là chuyển tiếp dữ liệu giữa các module
+
+// 1. Khi Button có sự kiện -> Chuyển cho Core xử lý
+void on_button_event_bridge(btn_event_t event) {
+    app_door_controller_core_handle_button_event(event);
+}
+
+// 2. Khi MQTT có lệnh -> Chuyển cho Core xử lý
+void on_mqtt_cmd_bridge(const char* cmd) {
+    app_door_controller_core_execute_cmd_string(cmd);
 }
 
 // ============================================================================
@@ -236,6 +251,7 @@ static void wifi_event_cb(input_event_t* event, void* private_data) {
             if (storage_has_mqtt_config()) {
                 printf("[MAIN] Config Found. Starting MQTT...\r\n");
                 app_mqtt_start();
+                app_mqtt_init(on_mqtt_cmd_bridge);
             } else {
                 printf("[MAIN] No Config. Spawning HTTP Task...\r\n");
                 // [FIX CRASH] Tạo Task riêng để chạy HTTP, không chạy trực tiếp ở đây!
@@ -282,18 +298,6 @@ static void wifi_event_cb(input_event_t* event, void* private_data) {
     }
 }
 
-// --- BRIDGE FUNCTIONS (Cầu nối) ---
-// Những hàm này đơn giản là chuyển tiếp dữ liệu giữa các module
-
-// 1. Khi Button có sự kiện -> Chuyển cho Core xử lý
-void on_button_event_bridge(btn_event_t event) {
-    app_door_controller_core_handle_button_event(event);
-}
-
-// 2. Khi MQTT có lệnh -> Chuyển cho Core xử lý
-void on_mqtt_cmd_bridge(const char* cmd) {
-    app_door_controller_core_execute_cmd_string(cmd);
-}
 
 // ============================================================================
 // MAIN ENTRY
