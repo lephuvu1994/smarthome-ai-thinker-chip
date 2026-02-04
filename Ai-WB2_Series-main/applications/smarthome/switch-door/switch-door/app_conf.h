@@ -78,6 +78,7 @@
 #define PULSE_DURATION_MS      500     // Thời gian giữ Relay (ms)
 #define BTN_DEBOUNCE_MS     20      // Thời gian lọc nhiễu nút bấm
 #define BTN_POLL_DELAY_MS   50      // Chu kỳ quét nút bấm
+#define RELAY_PULSE_MS    20000     // Chu kỳ quét RF
 
 #define CHECK_INTERVAL      60000 // 60s check wifi ( Auto connect wifi)
 

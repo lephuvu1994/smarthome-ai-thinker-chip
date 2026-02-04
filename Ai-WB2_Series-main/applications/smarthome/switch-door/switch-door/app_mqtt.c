@@ -35,35 +35,40 @@ void app_mqtt_pub_status(const char* status) {
 
 // --- XỬ LÝ DATA ---
 static void handle_mqtt_data(const char *topic, const char *data, int len) {
-    if (len <= 0) return;
+    if (len <= 0 || len > 255) return; 
 
-    // 1. Tạo buffer tạm và thêm \0
-    char *payload = pvPortMalloc(len + 1);
-    if (!payload) return;
+    // 1. Tạo buffer tĩnh để xử lý (An toàn & Nhanh)
+    char safe_payload[256]; 
+    
+    // 2. Copy dữ liệu vào buffer và chốt đuôi \0
+    memcpy(safe_payload, data, len);
+    safe_payload[len] = '\0'; 
 
-    memcpy(payload, data, len);
-    payload[len] = '\0'; // Đây là "chốt chặn" để printf không in ra rác
+    // 3. In Log
+    // Lưu ý: printf topic trực tiếp có thể bị lỗi nếu topic không có \0. 
+    // Tạm thời chỉ in payload cho an toàn.
+    printf("[MQTT] Payload Clean: %s\r\n", safe_payload);
 
-    // 2. IN LOG SAU KHI ĐÃ CÓ PAYLOAD SẠCH
-    // Thay vì in 'data', hãy in 'payload'
-    printf("[MQTT] Topic: %s\r\n", topic);
-    printf("[MQTT] Payload: %s\r\n", payload);
-
-    // 3. Parse JSON
-    cJSON *root = cJSON_Parse(payload);
+    // 4. Parse JSON
+    cJSON *root = cJSON_Parse(safe_payload);
     if (root) {
         cJSON *cmd_item = cJSON_GetObjectItem(root, "cmd");
-        if (cmd_item && cmd_item->type == cJSON_String) {
-            printf("[MQTT] Lenh thuc thi: %s\r\n", cmd_item->valuestring);
+        
+        // --- [SỬA LỖI TẠI ĐÂY] ---
+        // Thay cJSON_IsString(cmd_item) bằng (cmd_item->type == cJSON_String)
+        if (cmd_item && (cmd_item->type == cJSON_String) && (cmd_item->valuestring != NULL)) {
+            
+            printf("[CORE] Executing: %s\r\n", cmd_item->valuestring);
+            
+            // Gọi callback xử lý
             if (g_mqtt_cb != NULL) {
                 g_mqtt_cb(cmd_item->valuestring);
             }
         }
         cJSON_Delete(root);
+    } else {
+        printf("[WARN] JSON Parse Failed\r\n");
     }
-
-    // 4. Giải phóng bộ nhớ
-    vPortFree(payload);
 }
 
 // --- EVENT HANDLER ---
