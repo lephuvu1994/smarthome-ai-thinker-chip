@@ -7,6 +7,7 @@
 #include "app_mqtt.h"
 #include "app_storage.h"
 #include "app_events.h" // Để gửi tin về Queue
+#include "app_conf.h"
 
 // --- CHỨNG CHỈ CA (DigiCert Global Root G2 - Dùng cho EMQX) ---
 const char *emqx_ca_cert = \
@@ -86,43 +87,61 @@ void app_mqtt_start(void)
         return;
     }
 
-    char broker[128], user[64], pass[64], token[64];
+    char mqtt_broker[128], mqtt_user[64], mqtt_pass[64], mqtt_token_device[64];
     
     // 1. Lấy thông tin từ Flash
-    if (!storage_get_mqtt_info(broker, user, pass, token)) {
+    if (!storage_get_mqtt_info(mqtt_broker, mqtt_user, mqtt_pass, mqtt_token_device)) {
         blog_error("[MQTT] No config found in Flash!");
         return;
     }
 
     // 2. Tạo URI chuẩn (Fix lỗi mqtt/mqtts)
     char uri[150];
-    if (strstr(broker, "://") != NULL) {
-         snprintf(uri, sizeof(uri), "%s", broker);
+    if (strstr(mqtt_broker, "://") != NULL) {
+         snprintf(uri, sizeof(uri), "%s", mqtt_broker);
     } else {
          // Mặc định dùng SSL port 8883 nếu người dùng quên nhập
-         snprintf(uri, sizeof(uri), "mqtts://%s:8883", broker);
+         snprintf(uri, sizeof(uri), "mqtts://%s:8883", mqtt_broker);
     }
 
     // 3. Tạo Topic theo Token (Ví dụ)
-    snprintf(g_sub_topic, sizeof(g_sub_topic), "cmd/%s", token);
-    snprintf(g_pub_topic, sizeof(g_pub_topic), "status/%s", token);
+    snprintf(g_sub_topic, sizeof(g_sub_topic), "%s/%s/%s/set", 
+             MY_COMPANY_CODE,   // BKTech
+             MY_DEVICE_CODE,    // 1001);
+             mqtt_token_device); // congtaccuacuon
 
-    // 4. Cấu hình Client
+    // 2. TOPIC PUB (BÁO TRẠNG THÁI) -> Phải là "/status"
+    // Cửa chạy xong bắn: {"status":"OPENED"} vào đây
+    snprintf(g_pub_topic, sizeof(g_pub_topic), "%s/%s/%s/status", 
+             MY_COMPANY_CODE, 
+             MY_DEVICE_CODE,
+             mqtt_token_device);
     axk_mqtt_client_config_t mqtt_cfg = {
-        .uri = "mqtts://n1e72d70.ala.asia-southeast1.emqxsl.com:8883",
-        .cert_pem=emqx_ca_cert,
-        .client_cert_pem=  NULL,
-        .client_key_pem = NULL,
+        .uri = uri,
         .event_handle = mqtt_event_cb,
-        .client_id = "device/test",  
+        .client_id = mqtt_token_device,  
         .keepalive = 60,
+        .cert_pem = NULL,       // Mặc định NULL
+        .client_cert_pem = NULL, // Mặc định NULL
+        .client_key_pem = NULL,  // Mặc định NULL
     };
-     // SỬ DỤNG USER/PASS ĐÃ LẤY TỪ FLASH:
-     if (strlen(user) > 0) {
-        mqtt_cfg.username = "admin_mqtt";
-        printf("[MQTT] Use Username: %s\r\n", user);
+
+    // 2. Kiểm tra Logic SSL: Nếu URI chứa "mqtts://"
+    if (strstr(uri, "mqtts://") != NULL) {
+        printf("[MQTT] Phat hien giao thuc MQTTS (SSL) -> Dang nap chung chi...\r\n");
+        
+        // Gán chứng chỉ CA (Bắt buộc với SSL để xác thực Server)
+        mqtt_cfg.cert_pem = emqx_ca_cert;
+        
+    } else {
+        printf("[MQTT] Phat hien giao thuc MQTT thuong (Plain) -> Khong dung SSL.\r\n");
     }
-        mqtt_cfg.password = "password_mqtt";
+     // SỬ DỤNG USER/PASS ĐÃ LẤY TỪ FLASH:
+     if (strlen(mqtt_user) > 0) {
+        mqtt_cfg.username = mqtt_user;
+        printf("[MQTT] Use Username: %s\r\n", mqtt_user);
+    }
+        mqtt_cfg.password = mqtt_pass;
         printf("[MQTT] Password set (hidden)\r\n");
     
     // 5. Khởi tạo và Chạy

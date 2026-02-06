@@ -17,7 +17,9 @@ typedef enum {
     APP_EVENT_MQTT_DATA_RX,         // Nhận lệnh từ Server (OPEN/CLOSE...)
     
     // Sự kiện khác
-    APP_EVENT_BLE_CONFIG_DONE       // Cấu hình xong
+    APP_EVENT_BLE_CONFIG_DONE,       // Cấu hình xong,
+    APP_EVENT_WIFI_CONFIG_START,   // Bật BLE
+    APP_EVENT_WIFI_CONFIG_TIMEOUT
 } app_event_type_t;
 
 // Cấu trúc bản tin trong Queue

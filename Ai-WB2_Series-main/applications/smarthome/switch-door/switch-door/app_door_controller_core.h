@@ -42,4 +42,6 @@ void app_door_controller_core_execute_cmd_string(const char* cmd);
  */
 void app_door_controller_core_handle_button_event(btn_event_t event);
 
+void app_door_core_handle_rf_raw(uint32_t rf_code);
+
 #endif // __APP_DOOR_CONTROLLER_CORE_H__
