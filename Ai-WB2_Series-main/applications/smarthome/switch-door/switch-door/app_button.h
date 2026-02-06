@@ -6,7 +6,10 @@ typedef enum {
     BTN_EVENT_OPEN,
     BTN_EVENT_CLOSE,
     BTN_EVENT_STOP,
-    BTN_EVENT_LOCK_PRESS
+    BTN_EVENT_LOCK_PRESS,
+    BTN_EVENT_LEARN_TRAVEL_TRIGGER, // Hoc hanhf trình
+    BTN_EVENT_LEARN_RF_TRIGGER, // Hoc RF,
+    BTN_EVENT_WIFI_RESET_TRIGGER
 } btn_event_t;
 
 // Định nghĩa hàm Callback

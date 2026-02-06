@@ -11,22 +11,26 @@
 #include <bl_sys.h>
 #include <blog.h>
 #include <lwip/tcpip.h>
+#include <lwip/apps/sntp.h> 
 #include <hal_wifi.h>
 #include <wifi_mgmr_ext.h>
 
-// --- MODULES (NEW) ---
+// --- MODULES ---
 #include <cJSON.h>
-
-#include "app_button.h"     // Driver Input
+#include "app_events.h"    
+#include "app_mqtt.h"
 #include "app_conf.h"
-#include "app_door_controller_core.h"  // Business Logic
-#include "app_http.h"
+#include "app_door_controller_core.h"
+#include "app_button.h"
 #include "app_led.h"
-#include "app_mqtt.h"       // Driver Net
-#include "app_output_relay.h"      // Driver Output
+#include "app_output_relay.h"
 #include "app_storage.h"
 #include "app_watchdog.h"
-#include "ble_interface.h"
+#include "app_rf.h"
+#include "app_http.h"
+#include "app_buzzer.h" // <--- [1] THÊM MODULE BUZZER
+#include "app_events.h" 
+
 // --- BLE SDK ---
 #include "ble_lib_api.h"
 #include "conn.h"
@@ -34,77 +38,270 @@
 #include "hci_driver.h"
 #include "bluetooth.h"
 
+// --- GLOBAL VARS ---
+QueueHandle_t g_app_queue = NULL; 
+static int g_wifi_retry_cnt = 0;
+static int g_ble_active = 0;
+static int g_wifi_inited = 0;
+static int g_has_connected_once = 0;
+static wifi_conf_t conf = { .country_code = "CN" };
 
-
-// --- MACROS ---
+// --- MACROS BLE ---
 #define UUID_EXPAND(...)    BT_UUID_128_ENCODE(__VA_ARGS__)
 #define UUID_SVC      BT_UUID_DECLARE_128(UUID_EXPAND(UUID_SVC_DEF))
 #define UUID_CHR_RX   BT_UUID_DECLARE_128(UUID_EXPAND(UUID_RX_DEF))
 
-// --- GLOBAL VARS ---
-static TimerHandle_t g_wifi_check_timer = NULL;
-static int g_wifi_retry_cnt = 0;
-static int g_ble_active = 0;
-static int g_wifi_inited = 0;
-static wifi_conf_t conf = { .country_code = "CN" };
-static int g_ble_mode = 0; // Cờ Gatekeeper
-static int g_has_connected_once = 0;
-static int g_lock_active = 0; // Biến quản lý khoa
+// Forward Declarations
+void enable_ble_adv(void);
+void disable_ble_adv(void);
 
 // ============================================================================
-// BLE LOGIC
+// [APP TASK] BỘ NÃO TRUNG TÂM
+// ============================================================================
+static void app_process_task(void *pvParameters) {
+    app_msg_t msg;
+    char wifi_ssid[33], wifi_pass[64];
+
+    while (1) {
+        if (xQueueReceive(g_app_queue, &msg, portMAX_DELAY) == pdTRUE) {
+            
+            switch (msg.type) {
+                // -------------------------------------------------
+                // CASE 1: WIFI CONNECTED
+                // -------------------------------------------------
+                case APP_EVENT_WIFI_CONNECTED:
+                    printf("\r\n[APP] >>> EVENT: WIFI CONNECTED <<<\r\n");
+                    g_has_connected_once = 1;
+                    g_wifi_retry_cnt = 0;
+                    
+                    disable_ble_adv();
+                    led_set_mode(LED_ON_MODE);
+                    
+                    // Kích hoạt SNTP
+                    printf("[TIME] Syncing SNTP...\r\n");
+                    sntp_setoperatingmode(SNTP_OPMODE_POLL);
+                    sntp_setservername(0, "pool.ntp.org");
+                    sntp_init();
+                    
+                    vTaskDelay(pdMS_TO_TICKS(2000));
+
+                    if (storage_has_mqtt_config()) {
+                        printf("[APP] MQTT Config found. Starting MQTT...\r\n");
+                        app_mqtt_start(); 
+                    } else {
+                        printf("[APP] No MQTT Config. Starting HTTP Task...\r\n");
+                        xTaskCreate((TaskFunction_t)app_http_register_device, "http", 3072, NULL, 10, NULL);
+                    }
+                    break;
+
+                // -------------------------------------------------
+                // CASE 2: WIFI LOST
+                // -------------------------------------------------
+                case APP_EVENT_WIFI_DISCONNECTED:
+                    printf("[APP] Wifi Lost.\r\n");
+                    led_set_mode(LED_BLINK_FAST_MODE);
+                    
+                    if (g_has_connected_once) {
+                        // Router tắt -> Retry mãi mãi
+                        printf("[APP] Retrying connection in 5s...\r\n");
+                        vTaskDelay(pdMS_TO_TICKS(5000));
+                        if(storage_get_wifi(wifi_ssid, wifi_pass)) {
+                             wifi_mgmr_sta_connect(wifi_mgmr_sta_enable(), wifi_ssid, wifi_pass, NULL, NULL, 0, 0);
+                        }
+                    } else {
+                        // Chưa từng kết nối được -> Sai pass?
+                        g_wifi_retry_cnt++;
+                        if (g_wifi_retry_cnt <= 5) { 
+                             printf("[APP] Retry %d/5...\r\n", g_wifi_retry_cnt);
+                             vTaskDelay(pdMS_TO_TICKS(2000));
+                             if(storage_get_wifi(wifi_ssid, wifi_pass)) {
+                                  wifi_mgmr_sta_connect(wifi_mgmr_sta_enable(), wifi_ssid, wifi_pass, NULL, NULL, 0, 0);
+                             }
+                        } else {
+                             // Hết lượt -> Bật BLE Config
+                             app_send_event(APP_EVENT_WIFI_FATAL_ERROR, NULL);
+                        }
+                    }
+                    break;
+
+                // -------------------------------------------------
+                // CASE 3: FATAL ERROR / NO CONFIG -> BẬT BLE
+                // -------------------------------------------------
+                case APP_EVENT_WIFI_FATAL_ERROR:
+                    // [3] SỬA LOG CHO THÂN THIỆN HƠN
+                    printf("[APP] Setup Mode Active (No Wifi or Connect Failed) -> Enabling BLE.\r\n");
+                    
+                    wifi_mgmr_sta_disconnect();
+                    enable_ble_adv(); 
+                    led_set_mode(LED_BLINK_FAST_MODE);
+                    g_wifi_retry_cnt = 0;
+                    
+                    // Có thể kêu tít tít báo hiệu vào chế độ cài đặt
+                    app_buzzer_beep(BUZZER_TIME_SHORT);
+                    break;
+
+                // -------------------------------------------------
+                // CASE 4: NHẬN LỆNH TỪ MQTT
+                // -------------------------------------------------
+                case APP_EVENT_MQTT_DATA_RX:
+                    printf("[APP] MQTT Payload: %s\r\n", msg.data);
+                    
+                    cJSON *root = cJSON_Parse(msg.data);
+                    if (root) {
+                        // ============================================================
+                        // 1. XỬ LÝ ĐIỀU KHIỂN CỬA (Key: "state")
+                        // Payload: {"state": "OPEN"} | {"state": "CLOSE"} | {"state": "STOP"}
+                        // Hỗ trợ thêm: {"state": "LOCK"} | {"state": "UNLOCK"} (Tiện ích)
+                        // ============================================================
+                        cJSON *state_item = cJSON_GetObjectItem(root, "state");
+                        
+                        if (state_item && state_item->type == cJSON_String && state_item->valuestring) {
+                            char *val = state_item->valuestring;
+                            
+                            // Các lệnh hợp lệ gửi vào Core
+                            if (strcmp(val, "OPEN") == 0 || 
+                                strcmp(val, "CLOSE") == 0 || 
+                                strcmp(val, "STOP") == 0 ||
+                                strcmp(val, "LOCK") == 0 || 
+                                strcmp(val, "UNLOCK") == 0) {
+                                
+                                app_door_controller_core_execute_cmd_string(val);
+                            } 
+                            else {
+                                printf("[APP] Unknown state: %s\r\n", val);
+                            }
+                        }
+
+                        // ============================================================
+                        // 2. XỬ LÝ KHÓA TRẺ EM (Key chuẩn Z2M: "child_lock")
+                        // Payload: {"child_lock": "LOCKED"} | {"child_lock": "UNLOCKED"}
+                        // ============================================================
+                        cJSON *lock_item = cJSON_GetObjectItem(root, "child_lock");
+                        
+                        if (lock_item && lock_item->type == cJSON_String && lock_item->valuestring) {
+                            if (strcmp(lock_item->valuestring, "LOCKED") == 0) {
+                                app_door_controller_core_execute_cmd_string("LOCK");
+                            } 
+                            else if (strcmp(lock_item->valuestring, "UNLOCKED") == 0) {
+                                app_door_controller_core_execute_cmd_string("UNLOCK");
+                            }
+                        }
+                
+                        // ============================================================
+                        // 3. XỬ LÝ CHẾ ĐỘ HỌC (Key: "calibration")
+                        // Payload: {"calibration": "TRAVEL"} -> Học hành trình
+                        // Payload: {"calibration": "RF"}     -> Học Remote
+                        // ============================================================
+                        cJSON *calib_item = cJSON_GetObjectItem(root, "calibration");
+                        
+                        if (calib_item && calib_item->type == cJSON_String && calib_item->valuestring) {
+                            char *mode = calib_item->valuestring;
+
+                            // A. Học hành trình (Thời gian đóng mở)
+                            if (strcmp(mode, "ON") == 0 || strcmp(mode, "TRAVEL") == 0) {
+                                app_door_controller_core_execute_cmd_string("LEARN_MODE_ON");
+                            }
+                            // B. Học tay khiển RF
+                            else if (strcmp(mode, "RF") == 0) {
+                                app_door_controller_core_execute_cmd_string("RF_LEARN_MODE");
+                            }
+                        }
+                
+                        cJSON_Delete(root); // Quan trọng: Giải phóng RAM
+                    } 
+                    else {
+                        printf("[APP] JSON Parse Error\r\n");
+                    }
+                    break;
+                case APP_EVENT_WIFI_CONFIG_START:
+                    printf("[MAIN] Enter Wifi Config Mode (BLE ON).\r\n");
+                    // Ngắt Wifi tạm thời (nếu muốn) hoặc cứ để chạy song song
+                    // wifi_mgmr_sta_disconnect(); 
+                    
+                    enable_ble_adv(); // Bật BLE
+                    led_set_mode(LED_BLINK_FAST_MODE);
+                    break;
+
+                case APP_EVENT_WIFI_CONFIG_TIMEOUT:
+                    printf("[MAIN] Wifi Config Timeout -> BLE OFF.\r\n");
+                    disable_ble_adv(); // Tắt BLE
+                    
+                    // Khôi phục trạng thái LED
+                    if (g_has_connected_once) {
+                        led_set_mode(LED_ON_MODE);
+                    } else {
+                        // Nếu chưa từng kết nối được thì lại thử kết nối lại
+                        app_send_event(APP_EVENT_WIFI_DISCONNECTED, NULL);
+                    }
+                    break;
+                default:
+                     break;
+            }
+        }
+    }
+}
+
+// ============================================================================
+// CÁC HÀM CẦU NỐI (BRIDGE)
+// ============================================================================
+
+// Cầu nối Nút bấm -> Core Logic
+static void on_button_event_bridge(btn_event_t event) {
+    // Code này ĐÃ TỐT. 
+    // Vì app_button.c đã được sửa để bắn ra BTN_EVENT_LEARN_TRAVEL_TRIGGER
+    // Và app_door_controller_core.c đã được sửa để hứng sự kiện đó.
+    // Nên ở đây chỉ cần chuyển tiếp là xong.
+    app_door_controller_core_handle_button_event(event);
+}
+
+// [HÀM MỚI] Cầu nối RF Raw -> Core Logic
+// Hàm này chỉ có nhiệm vụ chuyển phát nhanh mã số vào Core
+static void on_rf_code_received(uint32_t code, int pulse_width) {
+    // 1. Log ra để debug xem remote có phát đúng không
+    printf("[RF-BRIDGE] Raw Code: %06X - Pulse: %d\r\n", code, pulse_width);
+
+    // 2. Đẩy thẳng mã thô vào Core
+    // Core sẽ tự kiểm tra:
+    // - Nếu đang học: Lưu mã này lại.
+    // - Nếu đang chạy: So sánh mã này với mã đã lưu để mở/đóng cửa.
+    app_door_core_handle_rf_raw(code);
+}
+
+// ============================================================================
+// BLE IMPLEMENTATION (Giữ nguyên)
 // ============================================================================
 static ssize_t ble_write_cb(struct bt_conn *conn, const struct bt_gatt_attr *attr, const void *buf, u16_t len, u16_t offset, u8_t flags) {
-    // 1. Copy dữ liệu từ BLE Buffer vào biến tạm (để đảm bảo có null-terminator)
-    static char data[256]; // Tăng lên 256 cho thoải mái JSON
-    if(len > 255) len = 255;
+    static char data[512]; 
+    if(len > 511) len = 511;
     memcpy(data, buf, len);
     data[len] = '\0';
 
-    printf("[BLE] Received: %s\r\n", data);
-
-    // 2. Parse JSON
+    printf("[BLE] Payload: %s\r\n", data);
     cJSON *root = cJSON_Parse(data);
-    if (root == NULL) {
-        printf("[BLE] JSON Parse Error!\r\n");
-        return len;
+    if (!root) return len;
+
+    cJSON *wifi_ssid = cJSON_GetObjectItem(root, "wifi_ssid");
+    cJSON *wifi_pass = cJSON_GetObjectItem(root, "wifi_pass");
+    cJSON *mqtt_broker = cJSON_GetObjectItem(root, "mqtt_broker");
+    cJSON *mqtt_username = cJSON_GetObjectItem(root, "mqtt_username");
+    cJSON *mqtt_pass = cJSON_GetObjectItem(root, "mqtt_pass");
+    cJSON *mqtt_token_device = cJSON_GetObjectItem(root, "mqtt_token_device");
+
+    if (mqtt_broker && mqtt_token_device) {
+        storage_save_mqtt_info(mqtt_broker->valuestring, 
+                               mqtt_username ? mqtt_username->valuestring : "", 
+                               mqtt_pass ? mqtt_pass->valuestring : "", 
+                               mqtt_token_device->valuestring);
     }
-    // 3. Khai báo và lấy các biến (Đã sửa lỗi trùng tên biến)
-            cJSON *ssid_item     = cJSON_GetObjectItem(root, "ssid");
-            cJSON *pass_item     = cJSON_GetObjectItem(root, "password");
-            cJSON *broker_item   = cJSON_GetObjectItem(root, "MQTTBroker");
-            cJSON *user_mqtt_item = cJSON_GetObjectItem(root, "MQTTusername"); // Đổi tên biến
-            cJSON *pass_mqtt_item = cJSON_GetObjectItem(root, "MQTTpassword"); // Đổi tên biến
-            cJSON *token_item    = cJSON_GetObjectItem(root, "MQTTtoken");
-            // 4. Xử lý Logic MQTT
-                    // Kiểm tra xem ít nhất phải có Broker và Token (hoặc tùy điều kiện dự án của bạn)
-                    if ((broker_item && broker_item->type == cJSON_String) &&
-                        (token_item && token_item->type == cJSON_String)) {
+    if (wifi_ssid && wifi_pass) {
+        printf("[BLE] Saving Wifi & Rebooting...\r\n");
+        app_buzzer_beep(BUZZER_TIME_LONG); // Kêu dài báo hiệu nhận cấu hình
+        vTaskDelay(pdMS_TO_TICKS(500));
+        storage_save_wifi_reboot(wifi_ssid->valuestring, wifi_pass->valuestring);
+    }
 
-                        printf("[BLE] Found MQTT Config via BLE\r\n");
-
-                        // Lấy giá trị chuỗi, nếu không có username/pass thì để chuỗi rỗng ""
-                        char *mqtt_user = (user_mqtt_item && user_mqtt_item->type == cJSON_String) ? user_mqtt_item->valuestring : "";
-                        char *mqtt_pass = (pass_mqtt_item && pass_mqtt_item->type == cJSON_String) ? pass_mqtt_item->valuestring : "";
-
-                        // Lưu vào Flash với đầy đủ thông tin đã parse được
-                        storage_save_mqtt_info(broker_item->valuestring,
-                                               mqtt_user,
-                                               mqtt_pass,
-                                               token_item->valuestring);
-                    }
-
-                    // 5. Xử lý Logic Wifi
-                    if ((ssid_item && ssid_item->type == cJSON_String) &&
-                        (pass_item && pass_item->type == cJSON_String)) {
-
-                        printf("[BLE] Found Wifi Config: %s\r\n", ssid_item->valuestring);
-                        storage_save_wifi_reboot(ssid_item->valuestring, pass_item->valuestring);
-                    }
-        // 6. Giải phóng RAM
-        cJSON_Delete(root);
-
-        return len;
+    cJSON_Delete(root);
+    return len;
 }
 
 static struct bt_gatt_attr config_attrs[]= {
@@ -112,27 +309,10 @@ static struct bt_gatt_attr config_attrs[]= {
     BT_GATT_CHARACTERISTIC(UUID_CHR_RX, BT_GATT_CHRC_WRITE | BT_GATT_CHRC_WRITE_WITHOUT_RESP, BT_GATT_PERM_WRITE, NULL, ble_write_cb, NULL),
 };
 static struct bt_gatt_service config_service = BT_GATT_SERVICE(config_attrs);
-
 static const struct bt_data ad_config[] = {
-	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
-	BT_DATA(BT_DATA_NAME_COMPLETE, BLE_DEV_NAME, 10),
+    BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
+    BT_DATA(BT_DATA_NAME_COMPLETE, BLE_DEV_NAME, 12), 
 };
-
-static void http_register_task(void *pvParameters) {
-    printf("[TASK] Starting HTTP Register Task...\r\n");
-
-    // Gọi hàm nặng ở đây
-    if (app_http_register_device()) {
-        printf("[TASK] Register Success. Rebooting System...\r\n");
-        vTaskDelay(pdMS_TO_TICKS(1000));
-        bl_sys_reset_por(); // Reset để chạy lại từ đầu với cấu hình mới
-    } else {
-        printf("[TASK] Register Failed. Will retry or stay offline.\r\n");
-    }
-
-    // Tự sát sau khi hoàn thành nhiệm vụ để giải phóng RAM
-    vTaskDelete(NULL);
-}
 
 static void ble_init_cb(int err) {
     if (!err) bt_gatt_service_register(&config_service);
@@ -140,212 +320,96 @@ static void ble_init_cb(int err) {
 
 void enable_ble_adv() {
     if (g_ble_active) return;
-    g_ble_mode = 1;
-
-    wifi_mgmr_sta_disconnect();
-
-    int ret = bt_le_adv_start(BT_LE_ADV_CONN, ad_config, ARRAY_SIZE(ad_config), NULL, 0);
-    if (ret == 0) {
-        printf("\r\n[MODE] >>> BLE ACTIVE <<<\r\n");
-        // [MODULE] Gọi LED
-        led_set_mode(LED_BLINK_SLOW);
-        g_ble_active = 1;
-    }
+    bt_le_adv_start(BT_LE_ADV_CONN, ad_config, ARRAY_SIZE(ad_config), NULL, 0);
+    g_ble_active = 1;
+    printf("[BLE] Advertising Started.\r\n");
 }
-
 void disable_ble_adv() {
     if (!g_ble_active) return;
     bt_le_adv_stop();
-    printf("\r\n[MODE] >>> BLE STOPPED <<<\r\n");
     g_ble_active = 0;
-    g_ble_mode = 0;
-}
-
-// --- BRIDGE FUNCTIONS (Cầu nối) ---
-// Những hàm này đơn giản là chuyển tiếp dữ liệu giữa các module
-
-// 1. Khi Button có sự kiện -> Chuyển cho Core xử lý
-void on_button_event_bridge(btn_event_t event) {
-    app_door_controller_core_handle_button_event(event);
-}
-
-// 2. Khi MQTT có lệnh -> Chuyển cho Core xử lý
-void on_mqtt_cmd_bridge(const char* cmd) {
-    app_door_controller_core_execute_cmd_string(cmd);
+    printf("[BLE] Advertising Stopped.\r\n");
 }
 
 // ============================================================================
-// WIFI LOGIC
+// WIFI CALLBACK 
 // ============================================================================
-void connect_wifi_now() {
-    char ssid[33], pass[64];
-    // [MODULE] Lấy wifi từ Storage
-    if (storage_get_wifi(ssid, pass)) {
-        printf("[WIFI] Connecting to [%s]...\r\n", ssid);
-        led_set_mode(LED_BLINK_FAST);
-        wifi_interface_t wifi_interface = wifi_mgmr_sta_enable();
-        wifi_mgmr_sta_connect(wifi_interface, ssid, pass, NULL, NULL, 0, 0);
-    } else {
-        printf("[ERR] SSID Empty!\r\n");
-    }
-}
-
-static void wifi_check_timer_cb(TimerHandle_t xTimer) {
-    printf("\r\n[TIMER] 60s Elapsed. Retry Wifi...\r\n");
-    disable_ble_adv();
-    vTaskDelay(500);
-    g_wifi_retry_cnt = 0;
-    connect_wifi_now();
-}
-
 static void wifi_event_cb(input_event_t* event, void* private_data) {
+    char wifi_ssid[33], wifi_pass[64];
     switch (event->code) {
         case CODE_WIFI_ON_INIT_DONE:
-            printf("[MAIN] Wifi Init Done. Start Manager...\r\n");
             wifi_mgmr_start_background(&conf);
             g_wifi_inited = 1;
             break;
 
         case CODE_WIFI_ON_MGMR_DONE:
-            printf("[MAIN] Wifi Manager Ready.\r\n");
-            char ssid[33], pass[64];
-            // [MODULE] Check storage
-            if (!storage_get_wifi(ssid, pass)) {
-                printf("[BOOT] No Wifi config -> Start BLE.\r\n");
-                enable_ble_adv();
+            if (!storage_get_wifi(wifi_ssid, wifi_pass)) {
+                // Không có wifi -> Vào mode cài đặt (Không phải lỗi nghiêm trọng)
+                printf("[BOOT] No Wifi Config -> Enter Setup Mode.\r\n");
+                app_send_event(APP_EVENT_WIFI_FATAL_ERROR, NULL);
             } else {
-                printf("[BOOT] Found Wifi -> Connecting...\r\n");
-                connect_wifi_now();
+                printf("[BOOT] Connecting Wifi: %s\r\n", wifi_ssid);
+                wifi_mgmr_sta_connect(wifi_mgmr_sta_enable(), wifi_ssid, wifi_pass, NULL, NULL, 0, 0);
             }
             break;
-        case CODE_WIFI_ON_SCAN_DONE:
-                {
-                    printf("[MAIN] Scan Done. Checking Results...\r\n");
-                    // Lấy thông tin SSID từ Flash
-                    char ssid[33], pass[64];
-                    if (!storage_get_wifi(ssid, pass)) {
-                        enable_ble_adv();
-                        return;
-                    }
 
-                    // Hàm kiểm tra xem SSID có trong danh sách Scan không
-                    // Lưu ý: wifi_mgmr_scan_ap_all() trả về danh sách, ta giả lập logic kiểm tra ở đây
-                    // Trong SDK BL602 thực tế, nếu bạn gọi connect_wifi_now() mà SSID không tồn tại
-                    // nó sẽ tự trả về CODE_WIFI_ON_DISCONNECT sau vài giây.
-                    // Nên ta có thể gộp logic vào Disconnect để code đỡ phức tạp.
-
-                    printf("[BOOT] Target SSID: [%s] -> Attempting connection...\r\n", ssid);
-                    connect_wifi_now();
-                }
-                break;
         case CODE_WIFI_ON_GOT_IP:
-            printf("\r\n[WIFI] >>> CONNECTED! <<<\r\n");
-            g_has_connected_once = 1;
-            g_wifi_retry_cnt = 0;
-            if (xTimerIsTimerActive(g_wifi_check_timer)) xTimerStop(g_wifi_check_timer, 0);
-
-            disable_ble_adv(); // Tắt BLE để nhường RAM
-            led_set_mode(LED_ON_MODE);
-
-            // [LOGIC MỚI]
-            if (storage_has_mqtt_config()) {
-                printf("[MAIN] Config Found. Starting MQTT...\r\n");
-                app_mqtt_start();
-                app_mqtt_init(on_mqtt_cmd_bridge);
-            } else {
-                printf("[MAIN] No Config. Spawning HTTP Task...\r\n");
-                // [FIX CRASH] Tạo Task riêng để chạy HTTP, không chạy trực tiếp ở đây!
-                // Stack size 4096 bytes: Rất an toàn cho JSON và HTTP
-                xTaskCreate(http_register_task, "http_task", 4096, NULL, 10, NULL);
-            }
+            app_send_event(APP_EVENT_WIFI_CONNECTED, NULL);
             break;
 
         case CODE_WIFI_ON_DISCONNECT:
-            if (g_ble_mode == 1) return; // Đang config thì kệ
             if(g_wifi_inited) {
-            	printf("[WIFI] Disconnected! Status: Connected_Once=%d\r\n", g_has_connected_once);
-            	// --- LOGIC PHÂN LOẠI ---
-            	// TRƯỜNG HỢP A: Mất mạng / Router tắt (Case 3 & 4)
-                // Dấu hiệu: Đã từng kết nối thành công (g_has_connected_once == 1)
-                if (g_has_connected_once == 1) {
-                	printf("[SYS] Network Lost (Router reboot or signal weak).\r\n");
-                	printf("[SYS] Auto Reconnecting forever...\r\n");
-                	vTaskDelay(pdMS_TO_TICKS(5000)); // Đợi 5s rồi thử lại
-                	connect_wifi_now(); // Thử lại mãi mãi, không bao giờ bật BLE
-                }
-                // TRƯỜNG HỢP B: Sai Password hoặc SSID không tồn tại (Case 1 & 2)
-                // Dấu hiệu: Chưa từng kết nối được lần nào (g_has_connected_once == 0)
-                else {
-                	g_wifi_retry_cnt++;
-                    printf("[AUTH] Login Failed! Attempt %d/%d\r\n", g_wifi_retry_cnt, MAX_RETRY);
-                    if (g_wifi_retry_cnt <= MAX_RETRY) {
-                    	// Còn lượt thử -> Thử lại
-                    	vTaskDelay(pdMS_TO_TICKS(2000));
-                    	connect_wifi_now();
-                    } else {
-                    	// Hết lượt -> CHẮC CHẮN SAI PASS HOẶC SAI TÊN WIFI
-                    	printf("[SYS] Critical: Wrong Password or SSID Not Found.\r\n");
-                    	printf("[SYS] >>> ENABLE BLE CONFIG MODE <<<\r\n");
-
-                        wifi_mgmr_sta_disconnect();
-                        enable_ble_adv(); // Bật BLE
-                        led_set_mode(LED_BLINK_FAST);
-                        // Reset lại biến đếm
-                        g_wifi_retry_cnt = 0;
-                    }
-                }
-           }
+                app_send_event(APP_EVENT_WIFI_DISCONNECTED, NULL);
+            }
+            break;
     }
 }
-
 
 // ============================================================================
 // MAIN ENTRY
 // ============================================================================
 static void proc_main_entry(void *pvParameters)
 {
-    // 1. Init Modules
-    storage_init();
+    // 1. Init Modules cơ bản
+    storage_init(); 
     led_init();
-    printf("LED init success\r\n");
-    // 2. Khởi tạo Driver Output (Relay)
     app_relay_init();
-    printf("Relay init success\r\n");
-
-    // 3. Khởi tạo Core Logic (Bộ não)
+    app_buzzer_init(); // <--- [2] KHỞI TẠO CÒI Ở ĐÂY
     app_door_controller_core_init();
-    printf("Controller init success\r\n");
-
-    // 4. Khởi tạo Button (Input) và gắn cầu nối về Core
-    // Từ giờ bấm nút -> on_button_event_bridge -> app_door_core
+    
+    // Gắn callback nút bấm
     app_button_init(on_button_event_bridge);
-    printf("app_button_init success\r\n");
 
-    // 5. Setup Wifi Logic
-    g_wifi_check_timer = xTimerCreate("WfChk", pdMS_TO_TICKS(CHECK_INTERVAL), pdTRUE, (void *)0, wifi_check_timer_cb);
+    // 2. KHỞI TẠO QUEUE
+    g_app_queue = xQueueCreate(15, sizeof(app_msg_t));
+    if (g_app_queue == NULL) printf("[ERR] Queue create failed!\r\n");
 
-    // 6. Init BLE
+    // 3. TẠO TASK TRUNG TÂM
+    xTaskCreate(app_process_task, "app_core", 3072, NULL, 12, NULL);
+
+    // 4. KHỞI CHẠY RF
+    app_rf_start_task(1024, 10, on_rf_code_received);
+
+    // 5. INIT BLE
     ble_controller_init(configMAX_PRIORITIES - 1);
     hci_driver_init();
     bt_enable(ble_init_cb);
 
-    // 7. Init Wifi
-    printf("[BOOT] System Init. Starting Wifi Stack...\r\n");
+    // 6. INIT WIFI
+    printf("[BOOT] Starting Wifi Stack...\r\n");
     tcpip_init(NULL, NULL);
     aos_register_event_filter(EV_WIFI, wifi_event_cb, NULL);
     hal_wifi_start_firmware_task();
     aos_post_event(EV_WIFI, CODE_WIFI_ON_INIT_DONE, 0);
     
-    // 8. Watchdog (Commented as requested for debugging)
-     app_watchdog_init();
+    // 7. Watchdog
+    app_watchdog_init();
 
-     vTaskDelete(NULL);
+    vTaskDelete(NULL);
 }
 
 void main()
 {
     bl_sys_init();
-    puts("[OS] Booting V30 (Refactored Storage/LED)...\r\n");
-    // [FIX] Stack Size 5120
-    xTaskCreate(proc_main_entry, "main", 5120, NULL, 15, NULL);
+    xTaskCreate(proc_main_entry, "main", 1024, NULL, 15, NULL);
 }

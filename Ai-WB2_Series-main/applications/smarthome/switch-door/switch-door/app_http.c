@@ -64,7 +64,7 @@ int app_http_register_device(void) {
         // Format đúng kiểu JSON: {"mac_address": "...", "device_code": "..."}
         snprintf(json_body, sizeof(json_body),
                  "{\"mac_address\":\"%s\",\"device_code\":\"%s\"}",
-                 mac_str, DEVICE_CODE);
+                 mac_str, MY_DEVICE_CODE);
 
         printf("[HTTP] Body to send: %s\r\n", json_body); // In ra để debug
 
