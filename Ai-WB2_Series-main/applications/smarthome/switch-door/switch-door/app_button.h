@@ -6,7 +6,8 @@ typedef enum {
     BTN_EVENT_OPEN,
     BTN_EVENT_CLOSE,
     BTN_EVENT_STOP,
-    BTN_EVENT_LOCK_PRESS
+    BTN_EVENT_LOCK_PRESS,
+    BTN_EVENT_LEARN_MODE_TRIGGER, // <--- Sự kiện mới: Kích hoạt học lệnh
 } btn_event_t;
 
 // Định nghĩa hàm Callback

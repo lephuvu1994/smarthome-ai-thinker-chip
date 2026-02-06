@@ -1,150 +1,139 @@
 #include <stdio.h>
-#include <stdint.h>
 #include <string.h>
 #include <FreeRTOS.h>
 #include <task.h>
-
-// --- THƯ VIỆN SDK ---
-#include <mqtt_client.h> 
+#include <mqtt_client.h>
 #include "blog.h"
-#include <cJSON.h>
-
-// --- MODULES ---
-#include "app_conf.h"
-#include "app_storage.h"
 #include "app_mqtt.h"
+#include "app_storage.h"
+#include "app_events.h" // Để gửi tin về Queue
+
+// --- CHỨNG CHỈ CA (DigiCert Global Root G2 - Dùng cho EMQX) ---
+const char *emqx_ca_cert = \
+"-----BEGIN CERTIFICATE-----\n" \
+"MIIDjjCCAnagAwIBAgIQAzrx5qcRqaC7KGSxHQn65TANBgkqhkiG9w0BAQsFADBh\n" \
+"MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3\n" \
+"d3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBH\n" \
+"MjAeFw0xMzA4MDExMjAwMDBaFw0zODAxMTUxMjAwMDBaMGExCzAJBgNVBAYTAlVT\n" \
+"MRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j\n" \
+"b20xIDAeBgNVBAMTF0RpZ2lDZXJ0IEdsb2JhbCBSb290IEcyMIIBIjANBgkqhkiG\n" \
+"9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuzfNNNx7a8myaJCtSnX/RrohCgiN9RlUyfuI\n" \
+"2/Ou8jqJkTx65qsGGmvPrC3oXgkkRLpimn7Wo6h+4FR1IAWsULecYxpsMNzaHxmx\n" \
+"1x7e/dfgy5SDN67sH0NO3Xss0r0upS/kqbitOtSZpLYl6ZtrAGCSYP9PIUkY92eQ\n" \
+"q2EGnI/yuum06ZIya7XzV+hdG82MHauVBJVJ8zUtluNJbd134/tJS7SsVQepj5Wz\n" \
+"tCO7TG1F8PapspUwtP1MVYwnSlcUfIKdzXOS0xZKBgyMUNGPHgm+F6HmIcr9g+UQ\n" \
+"vIOlCsRnKPZzFBQ9RnbDhxSJITRNrw9FDKZJobq7nMWxM4MphQIDAQABo0IwQDAP\n" \
+"BgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBhjAdBgNVHQ4EFgQUTiJUIBiV\n" \
+"5uNu5g/6+rkS7QYXjzkwDQYJKoZIhvcNAQELBQADggEBAGBnKJRvDkhj6zHd6mcY\n" \
+"1Yl9PMWLSn/pvtsrF9+wX3N3KjITOYFnQoQj8kVnNeyIv/iPsGEMNKSuIEyExtv4\n" \
+"NeF22d+mQrvHRAiGfzZ0JFrabA0UWTW98kndth/Jsw1HKj2ZL7tcu7XUIOGZX1NG\n" \
+"Fdtom/DzMNU+MeKNhJ7jitralj41E6Vf8PlwUHBHQRFXGU7Aj64GxJUTFy8bJZ91\n" \
+"8rGOmaFvE7FBcf6IKshPECBV1/MUReXgRPTqh5Uykw7+U0b6LJ3/iyK5S9kJRaTe\n" \
+"pLiaWN0bfVKfjllDiIGknibVb63dDcY3fe0Dkhvld1927jyNxF1WW6LZZm6zNTfl\n" \
+"MrY=\n" \
+"-----END CERTIFICATE-----\n";
 
 static axk_mqtt_client_handle_t mqtt_client = NULL;
-static mqtt_callback_t g_mqtt_cb = NULL;
+static char g_sub_topic[64];
+static char g_pub_topic[64];
 
-// Các buffer lưu thông tin
-static char g_topic_sub[128];
-static char g_topic_pub[128];
-static char g_token[64] = {0}; // Token dùng cho Topic
-
-void app_mqtt_init(mqtt_callback_t cb) {
-    g_mqtt_cb = cb;
-}
-
-void app_mqtt_pub_status(const char* status) {
-    if (mqtt_client == NULL) return;
-    char payload[128];
-    snprintf(payload, sizeof(payload), "{\"status\":\"%s\"}", status);
-    axk_mqtt_client_publish(mqtt_client, g_topic_pub, payload, 0, MQTT_QOS, 0);
-}
-
-// --- XỬ LÝ DATA ---
-static void handle_mqtt_data(const char *topic, const char *data, int len) {
-    if (len <= 0 || len > 255) return; 
-
-    // 1. Tạo buffer tĩnh để xử lý (An toàn & Nhanh)
-    char safe_payload[256]; 
-    
-    // 2. Copy dữ liệu vào buffer và chốt đuôi \0
-    memcpy(safe_payload, data, len);
-    safe_payload[len] = '\0'; 
-
-    // 3. In Log
-    // Lưu ý: printf topic trực tiếp có thể bị lỗi nếu topic không có \0. 
-    // Tạm thời chỉ in payload cho an toàn.
-    printf("[MQTT] Payload Clean: %s\r\n", safe_payload);
-
-    // 4. Parse JSON
-    cJSON *root = cJSON_Parse(safe_payload);
-    if (root) {
-        cJSON *cmd_item = cJSON_GetObjectItem(root, "cmd");
-        
-        // --- [SỬA LỖI TẠI ĐÂY] ---
-        // Thay cJSON_IsString(cmd_item) bằng (cmd_item->type == cJSON_String)
-        if (cmd_item && (cmd_item->type == cJSON_String) && (cmd_item->valuestring != NULL)) {
-            
-            printf("[CORE] Executing: %s\r\n", cmd_item->valuestring);
-            
-            // Gọi callback xử lý
-            if (g_mqtt_cb != NULL) {
-                g_mqtt_cb(cmd_item->valuestring);
-            }
-        }
-        cJSON_Delete(root);
-    } else {
-        printf("[WARN] JSON Parse Failed\r\n");
-    }
-}
-
-// --- EVENT HANDLER ---
-static axk_err_t mqtt_event_handler(axk_mqtt_event_handle_t event) {
+// Callback xử lý sự kiện MQTT (Chạy trong Task ngầm của thư viện)
+// Nguyên tắc: KHÔNG xử lý nặng, KHÔNG điều khiển phần cứng trực tiếp.
+static axk_err_t mqtt_event_cb(axk_mqtt_event_handle_t event)
+{
     switch (event->event_id) {
         case MQTT_EVENT_CONNECTED:
-            printf("[MQTT] Connected!\r\n");
-            
-            // Subscribe vào Topic chứa Token
-            int msg_id = axk_mqtt_client_subscribe(event->client, g_topic_sub, MQTT_QOS);
-            printf("[MQTT] Subscribed: %s (QoS=%d)\r\n", g_topic_sub, MQTT_QOS);
-            
-            app_mqtt_pub_status("ONLINE");
+            printf("[MQTT] Connected to Broker!");
+            // Subscribe topic điều khiển ngay khi kết nối
+            // Ví dụ topic: "cmd/<deviceID>"
+            axk_mqtt_client_subscribe(event->client, g_sub_topic, 1);
+            printf("[MQTT] Subscribed to: %s", g_sub_topic);
             break;
 
         case MQTT_EVENT_DISCONNECTED:
-            printf("[MQTT] Disconnected!\r\n");
+            printf("[MQTT] Disconnected. Library will auto-reconnect...");
             break;
 
         case MQTT_EVENT_DATA:
-            handle_mqtt_data(event->topic, event->data, event->data_len);
+            printf("[MQTT] Data Received!");
+            // Copy data nhận được vào buffer tạm thời
+            char tmp_buf[32] = {0};
+            int len = event->data_len;
+            if (len > 31) len = 31; // Cắt bớt nếu dài quá
+            
+            memcpy(tmp_buf, event->data, len);
+            tmp_buf[len] = '\0';
+
+            // Gửi sự kiện về App Task xử lý
+            app_send_event(APP_EVENT_MQTT_DATA_RX, tmp_buf);
+            break;
+
+        case MQTT_EVENT_ERROR:
+            printf("[MQTT] Event Error (TLS/TCP Check)");
             break;
             
-        case MQTT_EVENT_ERROR:
-            printf("[MQTT] Error!\r\n");
+        default:
             break;
-        default: break;
     }
     return AXK_OK;
 }
 
-// --- START FUNCTION ---
-void app_mqtt_start(void) {
-    // Khai báo bộ đệm để chứa dữ liệu lấy từ Flash
-    char broker[64], user[64], pass[64];
-    
-    // 1. Lấy thông tin từ Storage (Hàm này sẽ đọc NVS/Flash)
-    if (!storage_get_mqtt_info(broker, user, pass, g_token)) {
-        printf("[MQTT] No Config in Storage!\r\n");
+// Hàm khởi động MQTT (Được gọi từ Main khi đã có Wifi + SNTP)
+void app_mqtt_start(void)
+{
+    if (mqtt_client != NULL) {
+        blog_warn("[MQTT] Already started.");
         return;
     }
 
-    // 2. Tạo Topic dựa trên Token vừa lấy được
-    // Ví dụ: device/TOKEN/command
-    snprintf(g_topic_sub, sizeof(g_topic_sub), "device/%s/cmd", g_token);
-    snprintf(g_topic_pub, sizeof(g_topic_pub), "device/%s/status", g_token);
-
-    // 3. Xử lý URI (Địa chỉ Server)
-    char uri[128];
-    if (strstr(broker, "mqtt://") == NULL) {
-         snprintf(uri, sizeof(uri), "mqtt://%s:1883", broker);
-    } else {
-         strncpy(uri, broker, sizeof(uri));
+    char broker[128], user[64], pass[64], token[64];
+    
+    // 1. Lấy thông tin từ Flash
+    if (!storage_get_mqtt_info(broker, user, pass, token)) {
+        blog_error("[MQTT] No config found in Flash!");
+        return;
     }
 
-    // 4. Khởi tạo cấu hình MQTT
+    // 2. Tạo URI chuẩn (Fix lỗi mqtt/mqtts)
+    char uri[150];
+    if (strstr(broker, "://") != NULL) {
+         snprintf(uri, sizeof(uri), "%s", broker);
+    } else {
+         // Mặc định dùng SSL port 8883 nếu người dùng quên nhập
+         snprintf(uri, sizeof(uri), "mqtts://%s:8883", broker);
+    }
+
+    // 3. Tạo Topic theo Token (Ví dụ)
+    snprintf(g_sub_topic, sizeof(g_sub_topic), "cmd/%s", token);
+    snprintf(g_pub_topic, sizeof(g_pub_topic), "status/%s", token);
+
+    // 4. Cấu hình Client
     axk_mqtt_client_config_t mqtt_cfg = {
-        .uri = uri,
-        .event_handle = mqtt_event_handler,
-        .client_id = g_token,       // Thường dùng token làm ClientID duy nhất
+        .uri = "mqtts://n1e72d70.ala.asia-southeast1.emqxsl.com:8883",
+        .cert_pem=emqx_ca_cert,
+        .client_cert_pem=  NULL,
+        .client_key_pem = NULL,
+        .event_handle = mqtt_event_cb,
+        .client_id = "device/test",  
         .keepalive = 60,
     };
-    
-    // SỬ DỤNG USER/PASS ĐÃ LẤY TỪ FLASH:
-    if (strlen(user) > 0) {
-        mqtt_cfg.username = user;
+     // SỬ DỤNG USER/PASS ĐÃ LẤY TỪ FLASH:
+     if (strlen(user) > 0) {
+        mqtt_cfg.username = "admin_mqtt";
         printf("[MQTT] Use Username: %s\r\n", user);
     }
-    if (strlen(pass) > 0) {
-        mqtt_cfg.password = pass;
+        mqtt_cfg.password = "password_mqtt";
         printf("[MQTT] Password set (hidden)\r\n");
-    }
-
-    // 5. Khởi động Client
+    
+    // 5. Khởi tạo và Chạy
     mqtt_client = axk_mqtt_client_init(&mqtt_cfg);
+    axk_mqtt_client_start(mqtt_client);
+}
+
+// Hàm public trạng thái cửa (Gọi từ App Task)
+void app_mqtt_pub_status(const char* status) {
     if (mqtt_client) {
-        axk_mqtt_client_start(mqtt_client);
+        // QoS 1 để đảm bảo tin đến được server
+        axk_mqtt_client_publish(mqtt_client, g_pub_topic, status, 0, 1, 0);
     }
 }

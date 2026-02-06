@@ -6,8 +6,8 @@
 // --- TIMING & LOGIC ---
 #define MAX_RETRY           5
 #define CHECK_INTERVAL      60000
-#define LED_BLINK_SLOW      1000
-#define LED_BLINK_FAST      200
+#define LED_BLINK_SLOW_MODE      1000
+#define LED_BLINK_FAST_MODE      200
 #define LED_ON_MODE         0
 
 // --- WATCHDOG CONFIG ---
@@ -39,25 +39,26 @@
 // Lưu ý: GPIO 16 (TXD) và 7 (RXD) cần xử lý nhiễu khởi động kỹ
 // --- INPUT (Nút bấm - Kích mức 0/GND) ---
 // Sử dụng toàn bộ chân sạch nhất cho Input để nút bấm nhạy, không nhiễu
-#define GPIO_IN_OPEN        12  // IO12 (Cạnh trái)
-#define GPIO_IN_CLOSE       3   // IO3  (Cạnh phải)
-//#define GPIO_IN_STOP        17  // IO17 (Cạnh trái)
-//#define GPIO_IN_LOCK        11  // IO11 (Cạnh trái)
-
-#define RF_PIN 17 // Chân DOUT của CMT2220LS
+#define GPIO_IN_OPEN        4  // IO12 (Cạnh trái)
+#define GPIO_IN_CLOSE       8   // IO3  (Cạnh phải)
+#define GPIO_IN_STOP        5  // IO17 (Cạnh trái)
+// #define GPIO_IN_SETUP_LEARN_RF        11  // IO17 (Cạnh trái)
+#define GPIO_IN_RF_PIN 11 // Chân DOUT của CMT2220LS
 
 // --- OUTPUT (Relay - Kích mức 1/VCC) ---
-#define GPIO_OUT_CLOSE      4   // IO4 (Trùng LED_PIN_1 - Vừa đóng vừa sáng)
-#define GPIO_OUT_OPEN       11  // IO14 (Trùng LED_PIN_2 - Vừa mở vừa sáng)
-#define GPIO_OUT_STOP       5   // IO5 (Cạnh phải)
-
+#define GPIO_OUT_CLOSE      14   // IO4 (Trùng LED_PIN_1 - Vừa đóng vừa sáng)
+#define GPIO_OUT_OPEN       17  // IO14 (Trùng LED_PIN_2 - Vừa mở vừa sáng)
+#define GPIO_OUT_STOP       3   // IO5 (Cạnh phải)
+#define GPIO_OUT_BUZZER    12   // IO13 (Cạnh phải)
 // Đèn báo (Trùng với relay để tiết kiệm chân)
-#define GPIO_LED_STATUS     GPIO_OUT_OPEN
+#define GPIO_LED_STATUS     GPIO_OUT_BUZZER
 
-// --- HARDWARE PIN ---
-#define LED_PIN_1           4
-#define LED_PIN_2           14
+// --- CẤU HÌNH THỜI GIAN CỦA NÚT LỆNH ĐIỀU KHIỂN HỌC LỆNH KÉO DÀI 10s ---
+#define BTN_LONG_PRESS_MS   10000
+#define LEARN_MODE_TIMEOUT_MS   180000 // 3 phút
 
+#define BUZZER_TIME_SHORT     100  // Kêu tít 1 cái (0.1s) - Dùng cho lệnh Open/Close
+#define BUZZER_TIME_LONG      1000 // Kêu tít dài (1s) - Dùng khi vào chế độ học hoặc thành công
 
 // ============================================================
 // 2. CẤU HÌNH MQTT
@@ -81,5 +82,39 @@
 #define RELAY_PULSE_MS    20000     // Chu kỳ quét RF
 
 #define CHECK_INTERVAL      60000 // 60s check wifi ( Auto connect wifi)
+
+
+// --- CẤU HÌNH CỦA NÚT LỆNH ĐIỀU KHIỂN ---
+#define DEFAULT_TRAVEL_TIME_MS  20000  // Mặc định 20 giây (khi chưa học)
+#define MIN_LEARN_TIME_MS       1000   // Tối thiểu 1 giây mới tính là học
+#define MAX_SAFE_TIME_MS        120000 // Giới hạn an toàn 2 phút
+
+
+// --- CẤU HÌNH CỦA MQTTS ---
+// --- CẤU HÌNH CỦA MQTTS ---
+// Chứng chỉ CA: DigiCert Global Root G2 (Trích xuất từ file emqxsl-ca.crt)
+#define CA_CERT "-----BEGIN CERTIFICATE-----\n" \
+"MIIDjjCCAnagAwIBAgIQAzrx5qcRqaC7KGSxHQn65TANBgkqhkiG9w0BAQsFADBh\n" \
+"MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3\n" \
+"d3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBH\n" \
+"MjAeFw0xMzA4MDExMjAwMDBaFw0zODAxMTUxMjAwMDBaMGExCzAJBgNVBAYTAlVT\n" \
+"MRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j\n" \
+"b20xIDAeBgNVBAMTF0RpZ2lDZXJ0IEdsb2JhbCBSb290IEcyMIIBIjANBgkqhkiG\n" \
+"9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuzfNNNx7a8myaJCtSnX/RrohCgiN9RlUyfuI\n" \
+"2/Ou8jqJkTx65qsGGmvPrC3oXgkkRLpimn7Wo6h+4FR1IAWsULecYxpsMNzaHxmx\n" \
+"1x7e/dfgy5SDN67sH0NO3Xss0r0upS/kqbitOtSZpLYl6ZtrAGCSYP9PIUkY92eQ\n" \
+"q2EGnI/yuum06ZIya7XzV+hdG82MHauVBJVJ8zUtluNJbd134/tJS7SsVQepj5Wz\n" \
+"tCO7TG1F8PapspUwtP1MVYwnSlcUfIKdzXOS0xZKBgyMUNGPHgm+F6HmIcr9g+UQ\n" \
+"vIOlCsRnKPZzFBQ9RnbDhxSJITRNrw9FDKZJobq7nMWxM4MphQIDAQABo0IwQDAP\n" \
+"BgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBhjAdBgNVHQ4EFgQUTiJUIBiV\n" \
+"5uNu5g/6+rkS7QYXjzkwDQYJKoZIhvcNAQELBQADggEBAGBnKJRvDkhj6zHd6mcY\n" \
+"1Yl9PMWLSn/pvtsrF9+wX3N3KjITOYFnQoQj8kVnNeyIv/iPsGEMNKSuIEyExtv4\n" \
+"NeF22d+mQrvHRAiGfzZ0JFrabA0UWTW98kndth/Jsw1HKj2ZL7tcu7XUIOGZX1NG\n" \
+"Fdtom/DzMNU+MeKNhJ7jitralj41E6Vf8PlwUHBHQRFXGU7Aj64GxJUTFy8bJZ91\n" \
+"8rGOmaFvE7FBcf6IKshPECBV1/MUReXgRPTqh5Uykw7+U0b6LJ3/iyK5S9kJRaTe\n" \
+"pLiaWN0bfVKfjllDiIGknibVb63dDcY3fe0Dkhvld1927jyNxF1WW6LZZm6zNTfl\n" \
+"MrY=\n" \
+"-----END CERTIFICATE-----\n";
+
 
 #endif

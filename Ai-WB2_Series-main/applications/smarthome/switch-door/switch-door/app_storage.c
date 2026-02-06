@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -123,4 +124,39 @@ int storage_get_mqtt_info(char* broker_out, char* user_out, char* pass_out, char
     if (val && token_out) strcpy(token_out, val);
 
     return 1; // Lấy thành công
+}
+
+// Hàm lấy thời gian
+void storage_save_travel_time(uint32_t time_ms)
+{
+    char str_buf[16] = {0};
+
+    // 1. Chuyển số thành chuỗi (EasyFlash lưu string)
+    snprintf(str_buf, sizeof(str_buf), "%lu", time_ms);
+
+    // 2. Ghi vào biến môi trường (Environment Variable)
+    ef_set_env(KEY_TRAVEL_TIME, str_buf);
+
+    // 3. Lưu xuống Flash ngay lập tức
+    ef_save_env();
+
+    printf("[STORAGE] Saved Travel Time: %s ms\r\n", str_buf);
+}
+
+int storage_get_travel_time(uint32_t *out_time_ms)
+{
+    // 1. Đọc giá trị từ Flash bằng Key
+    char *value = ef_get_env(KEY_TRAVEL_TIME);
+
+    // 2. Kiểm tra xem có dữ liệu không
+    if (value == NULL) {
+        printf("[STORAGE] No saved travel time found.\r\n");
+        return 0; // Trả về 0 (False) để Core dùng giá trị mặc định
+    }
+
+    // 3. Nếu có, chuyển chuỗi thành số và gán vào con trỏ
+    *out_time_ms = (uint32_t)atoi(value);
+    
+    printf("[STORAGE] Loaded Travel Time: %lu ms\r\n", *out_time_ms);
+    return 1; // Trả về 1 (True)
 }

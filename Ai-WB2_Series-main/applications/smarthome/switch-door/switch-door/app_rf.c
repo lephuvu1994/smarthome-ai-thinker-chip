@@ -42,15 +42,40 @@ static void rf_isr(void *arg) {
     RCSwitch_HandleInterrupt(&mySwitch);
 }
 
-// Load code từ Flash
-static void load_codes() {
-    size_t len;
-    ef_get_env_blob("rf_open", &code_open, 4, &len);
-    ef_get_env_blob("rf_close", &code_close, 4, &len);
-    ef_get_env_blob("rf_stop", &code_stop, 4, &len);
-    ef_get_env_blob("rf_lock", &code_lock, 4, &len);
+// Hàm phụ trợ để load an toàn (Tránh lặp lại code)
+static void safe_load_one_code(const char* key, uint32_t *out_val) {
+    size_t len = 0;
+    
+    // BƯỚC 1: Reset giá trị về 0 trước
+    // Để lỡ không tìm thấy key trong Flash, nó sẽ là 0 chứ không phải số rác
+    *out_val = 0; 
+
+    // BƯỚC 2: Đọc từ Flash
+    // sizeof(uint32_t) luôn là 4 bytes. 
+    // EasyFlash sẽ tự kiểm tra, nếu key không có nó sẽ không ghi gì vào out_val
+    ef_get_env_blob(key, out_val, sizeof(uint32_t), &len);
+
+    // BƯỚC 3: Kiểm tra lại độ dài đọc được (Optional)
+    if (len != sizeof(uint32_t)) {
+        // Nếu đọc thiếu byte (file bị lỗi) hoặc không đọc được -> Coi như chưa có
+        *out_val = 0;
+        printf("[RF] Key '%s' not found or invalid. Set to 0.\r\n", key);
+    } else {
+        printf("[RF] Loaded '%s': %lu\r\n", key, *out_val);
+    }
 }
 
+// Load toàn bộ code từ Flash
+static void load_codes() {
+    printf("[RF] Start loading codes...\r\n");
+    
+    safe_load_one_code("rf_open",  &code_open);
+    safe_load_one_code("rf_close", &code_close);
+    safe_load_one_code("rf_stop",  &code_stop);
+    safe_load_one_code("rf_lock",  &code_lock);
+    
+    printf("[RF] Load done.\r\n");
+}
 static void save_code(const char* key, uint32_t *var, uint32_t val) {
     *var = val;
     ef_set_env_blob(key, &val, 4);
@@ -61,21 +86,24 @@ static void save_code(const char* key, uint32_t *var, uint32_t val) {
 
 void app_rf_init(rf_event_cb_t callback) {
     g_rf_callback = callback;
+    // 1. Cấu hình chân GPIO là Input
+    printf("app_rf_init1\n");
 
     RCSwitch_Init(&mySwitch);
+    printf("app_rf_init2\n");
     load_codes();
 
     // 1. Cấu hình chân GPIO là Input
-    bl_gpio_enable_input(RF_PIN, 0, 0);
+    bl_gpio_enable_input(GPIO_IN_RF_PIN, 0, 0);
 
     // 2. Clear các cờ ngắt cũ (Dùng số 1 thay vì macro nếu thiếu)
-    bl_gpio_int_clear(RF_PIN, 1);
+    bl_gpio_int_clear(GPIO_IN_RF_PIN, 1);
 
     // 3. Cho phép ngắt (Unmask) - LÀM Ở ĐÂY THAY VÌ TRONG STRUCT
-    bl_gpio_intmask(RF_PIN, 0); // 0 = Unmask (Enable Interrupt)
+    bl_gpio_intmask(GPIO_IN_RF_PIN, 0); // 0 = Unmask (Enable Interrupt)
 
     // 4. Đăng ký ngắt vào hệ thống
-    rf_gpio_ctx.gpioPin = RF_PIN;
+    rf_gpio_ctx.gpioPin = GPIO_IN_RF_PIN;
 
     // Lưu ý: Nếu SDK báo lỗi GPIO_INT_CONTROL_ASYNC, hãy thử đổi thành GLB_GPIO_INT_CONTROL_ASYNC_EDGE
     rf_gpio_ctx.intCtrlMod = GPIO_INT_CONTROL_ASYNC;
