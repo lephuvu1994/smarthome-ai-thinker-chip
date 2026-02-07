@@ -18,8 +18,11 @@ typedef enum {
     
     // Sự kiện khác
     APP_EVENT_BLE_CONFIG_DONE,       // Cấu hình xong,
-    APP_EVENT_WIFI_CONFIG_START,   // Bật BLE
-    APP_EVENT_WIFI_CONFIG_TIMEOUT
+    APP_EVENT_WIFI_CONFIG_START,     // Bật BLE, led nháy nhanh
+    APP_EVENT_WIFI_CONFIG_TIMEOUT,
+    // [THÊM MỚI 2 DÒNG NÀY]
+    APP_EVENT_BLE_CONTROL_START,    // Bật BLE để điều khiển (Wifi vẫn chạy)
+    APP_EVENT_BLE_CONTROL_STOP,     // Tắt BLE
 } app_event_type_t;
 
 // Cấu trúc bản tin trong Queue

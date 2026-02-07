@@ -2,7 +2,7 @@
 # PROJECT MAKEFILE
 #
 
-PROJECT_NAME := switch-door
+PROJECT_NAME := switch_door
 PROJECT_PATH := $(abspath .)
 PROJECT_BOARD := evb
 export PROJECT_PATH PROJECT_BOARD

@@ -246,3 +246,40 @@ int storage_get_rf_codes(uint32_t *codes) {
 
     return (found_count > 0); // Trả về 1 nếu có dữ liệu
 }
+
+
+void storage_save_door_settings(int open, int close, int def_open, int def_close, int mode, int start, int end) {
+    char buf[16];
+
+    sprintf(buf, "%d", open);      ef_set_env("cfg_open", buf);
+    sprintf(buf, "%d", close);     ef_set_env("cfg_close", buf);
+    sprintf(buf, "%d", def_open);  ef_set_env("cfg_def_open", buf);
+    sprintf(buf, "%d", def_close); ef_set_env("cfg_def_close", buf);
+    
+    sprintf(buf, "%d", mode);      ef_set_env("cfg_mode", buf);
+    sprintf(buf, "%d", start);     ef_set_env("cfg_start", buf);
+    sprintf(buf, "%d", end);       ef_set_env("cfg_end", buf);
+
+    ef_save_env();
+    printf("[STORAGE] Door Settings Saved.\r\n");
+}
+
+// [MỚI] ĐỌC CẤU HÌNH CỬA
+void storage_get_door_settings(int *open, int *close, int *def_open, int *def_close, int *mode, int *start, int *end) {
+    char *val;
+
+    // Gán giá trị mặc định trước phòng khi chưa có trong Flash
+    *open = 1; *close = 1; 
+    *def_open = 1; *def_close = 1;
+    *mode = 0; 
+    *start = 24; *end = 5;
+
+    if ((val = ef_get_env("cfg_open")))      *open = atoi(val);
+    if ((val = ef_get_env("cfg_close")))     *close = atoi(val);
+    if ((val = ef_get_env("cfg_def_open")))  *def_open = atoi(val);
+    if ((val = ef_get_env("cfg_def_close"))) *def_close = atoi(val);
+    
+    if ((val = ef_get_env("cfg_mode")))      *mode = atoi(val);
+    if ((val = ef_get_env("cfg_start")))     *start = atoi(val);
+    if ((val = ef_get_env("cfg_end")))       *end = atoi(val);
+}

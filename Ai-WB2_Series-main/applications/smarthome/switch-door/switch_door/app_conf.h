@@ -16,11 +16,7 @@
 #define WDT_FEED_MS         6000    // Tự động cho ăn mỗi 6s
 
 // --- BLE CONFIG ---
-#define BLE_DEV_NAME        "EuroSmartHome"
-// UUID Service
-#define UUID_SVC_DEF        0x55535343, 0xfe7d, 0x4ae5, 0x8fa9, 0x9fafd205e455
-// UUID RX Characteristic
-#define UUID_RX_DEF         0x49535343, 0x1e4d, 0x4bd9, 0xba61, 0x23c647249616
+#define BLE_DEV_NAME        "BKTech"
 
 // 1. Cấu hình cho HTTP thường (app_http.c)
 #define HTTP_SERVER_IP      "192.168.0.100" // IP Server local
@@ -39,20 +35,17 @@
 // INPUT (Nút bấm nối đất, kích mức 0)
 // Lưu ý: GPIO 16 (TXD) và 7 (RXD) cần xử lý nhiễu khởi động kỹ
 // --- INPUT (Nút bấm - Kích mức 0/GND) ---
-// Sử dụng toàn bộ chân sạch nhất cho Input để nút bấm nhạy, không nhiễu
-#define GPIO_IN_OPEN        4  // IO12 (Cạnh trái)
-#define GPIO_IN_CLOSE       8   // IO3  (Cạnh phải)
-#define GPIO_IN_STOP        5  // IO17 (Cạnh trái)
-#define GPIO_IN_SETUP_LEARN_RF        11  // IO17 (Cạnh trái)
-#define GPIO_IN_RF_PIN GPIO_IN_STOP // Chân DOUT của CMT2220LS
+#define GPIO_IN_OPEN           4   
+#define GPIO_IN_CLOSE          5   
+#define GPIO_IN_STOP           GPIO_IN_OPEN  
+#define GPIO_IN_SETUP_LEARN_RF GPIO_IN_OPEN  
+#define GPIO_IN_RF_PIN         11  
 
-// --- OUTPUT (Relay - Kích mức 1/VCC) ---
-#define GPIO_OUT_CLOSE      14   // IO4 (Trùng LED_PIN_1 - Vừa đóng vừa sáng)
-#define GPIO_OUT_OPEN       17  // IO14 (Trùng LED_PIN_2 - Vừa mở vừa sáng)
-#define GPIO_OUT_STOP       3   // IO5 (Cạnh phải)
-#define GPIO_OUT_BUZZER    12   // IO13 (Cạnh phải)
-// Đèn báo (Trùng với relay để tiết kiệm chân)
-#define GPIO_LED_STATUS     GPIO_OUT_BUZZER
+#define GPIO_OUT_CLOSE         3  
+#define GPIO_OUT_OPEN          17  
+#define GPIO_OUT_STOP          14   
+#define GPIO_OUT_BUZZER        7 // Tạm dùng chung chân Open để test log trước
+#define GPIO_LED_STATUS        16
 
 // --- CẤU HÌNH THỜI GIAN CỦA NÚT LỆNH ĐIỀU KHIỂN HỌC LỆNH KÉO DÀI 10s ---
 #define BTN_LONG_PRESS_MS   10000
@@ -68,8 +61,8 @@
 // --- CẤU HÌNH MQTT ---
 // %s sẽ được thay thế bằng TOKEN lấy từ Storage
 // VD: device/dai-token-ngau-nhien-xyz/cmd
-#define MQTT_TOPIC_SUB_CMD      "device/%s/cmd"     
-#define MQTT_TOPIC_PUB_STATUS   "device/%s/status"
+#define MQTT_TOPIC_SUB_CMD      "%s/%s/%s/set"     
+#define MQTT_TOPIC_PUB_STATUS   "%s/%s/%s/status"
 #define MQTT_QOS            1       // QoS 1 cho tin cậy
 #define MQTT_KEEP_ALIVE     60      // Giây
 

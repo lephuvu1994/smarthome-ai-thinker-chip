@@ -16,6 +16,10 @@ void app_mqtt_start(void);
 // ---> DÒNG NÀY ĐANG BỊ THIẾU, BẠN CẦN THÊM VÀO <---
 void app_mqtt_pub_status(const char* status);
 
+int app_mqtt_is_connected(void);
+typedef void (*mqtt_connect_cb_t)(void);
+void app_mqtt_on_connect(mqtt_connect_cb_t cb);
+
 #ifdef __cplusplus
 }
 #endif

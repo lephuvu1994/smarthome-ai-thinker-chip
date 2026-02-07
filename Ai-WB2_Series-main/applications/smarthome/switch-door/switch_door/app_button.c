@@ -2,8 +2,10 @@
 #include <task.h>
 #include <stdio.h>
 #include <bl_gpio.h>
+#include <blog.h>       // Thêm thư viện blog
 #include "app_conf.h"   // Chứa các define pin và thời gian (BTN_LONG_PRESS_MS)
 #include "app_button.h" // Chứa enum sự kiện
+
 
 // ============================================================================
 // BIẾN TOÀN CỤC
@@ -25,137 +27,133 @@ static int g_combo_handled = 0;
 // Biến lưu trạng thái trước đó để bắt sườn xung (Edge Detection)
 static int last_open_val = 1;
 static int last_close_val = 1;
-// Nút Stop cũng cần lưu trạng thái cũ để bắt sườn xuống chính xác nếu cần
-// (nhưng logic giữ 10s dùng level check là chủ yếu)
+
+static uint32_t g_boot_tick = 0;
+
+// Cờ Startup Guard (Mặc định 0 - Chưa an toàn)
+static int g_stop_eligible = 0;
+static int g_rf_eligible = 0;
+static int g_open_eligible = 0;
+static int g_close_eligible = 0;
 
 // ============================================================================
 // TASK QUÉT NÚT BẤM
 // ============================================================================
 static void button_task(void *pvParameters) {
-    printf("[BTN] Button Task Started.\r\n");
+    blog_info("Button Task Started.");
+    g_boot_tick = xTaskGetTickCount();
 
     while (1) {
         uint32_t now = xTaskGetTickCount();
+        
+        // --- 1. CHỐNG NHIỄU 5S ĐẦU KHI KHỞI ĐỘNG ---
+        if ((now - g_boot_tick) * portTICK_PERIOD_MS < 5000) {
+            vTaskDelay(pdMS_TO_TICKS(100));
+            continue;
+        }
 
-        // 1. ĐỌC TẤT CẢ CÁC INPUT CÙNG LÚC
-        // ---------------------------------------------------------
+        // Đọc giá trị các chân GPIO (Mức 0 là nhấn, Mức 1 là nhả)
         int s_stop  = bl_gpio_input_get_value(GPIO_IN_STOP);
         int s_open  = bl_gpio_input_get_value(GPIO_IN_OPEN);
         int s_close = bl_gpio_input_get_value(GPIO_IN_CLOSE);
         int s_rf    = bl_gpio_input_get_value(GPIO_IN_SETUP_LEARN_RF);
 
+        // --- 2. STARTUP GUARD: KIỂM TRA CHÂN NHẢ (MỨC 1) ---
+        // Chỉ cho phép hoạt động nếu chân đã từng ở mức 1 sau khi hết 5s chống nhiễu
+        if (s_stop == 1)  g_stop_eligible = 1;
+        if (s_rf == 1)    g_rf_eligible = 1;
+        if (s_open == 1)  g_open_eligible = 1;
+        if (s_close == 1) g_close_eligible = 1;
+
         // =========================================================
-        // 2. XỬ LÝ COMBO: STOP + (OPEN HOẶC CLOSE) -> RESET WIFI
-        //    (Ưu tiên cao nhất để override nút đơn lẻ)
+        // 3. XỬ LÝ COMBO: STOP + (OPEN HOẶC CLOSE) -> RESET WIFI
         // =========================================================
-        // Logic: STOP đang nhấn VÀ (OPEN đang nhấn HOẶC CLOSE đang nhấn)
-        if (s_stop == 0 && (s_open == 0 || s_close == 0)) {
+        if (s_stop == 0 && (s_open == 0 || s_close == 0) && g_stop_eligible) {
             
             if (g_combo_pressed_tick == 0) {
-                // Bắt đầu đếm giờ Combo
                 g_combo_pressed_tick = now;
                 g_combo_handled = 0;
-                
-                // [QUAN TRỌNG] Đánh dấu nút STOP đơn lẻ là "đã xử lý"
-                // Để tránh việc nó kích hoạt tính năng "Học hành trình" của riêng nó
                 g_stop_handled = 1; 
             }
             else {
-                // Đang giữ Combo -> Kiểm tra 10s
                 if (!g_combo_handled && (now - g_combo_pressed_tick) * portTICK_PERIOD_MS >= BTN_LONG_PRESS_MS) {
-                    printf("[BTN] COMBO Held > 10s -> TRIGGER WIFI RESET\r\n");
-                    
+                    blog_warn("COMBO Held > 10s -> TRIGGER WIFI RESET");
                     if (g_cb) g_cb(BTN_EVENT_WIFI_RESET_TRIGGER);
-                    
-                    g_combo_handled = 1; // Đánh dấu đã xử lý
+                    g_combo_handled = 1; 
                 }
             }
         }
         else {
-            // Không phải Combo (hoặc đã nhả ra)
             g_combo_pressed_tick = 0;
             g_combo_handled = 0;
 
             // =====================================================
-            // 3. XỬ LÝ NÚT STOP ĐƠN LẺ (Chỉ khi không phải Combo)
+            // 4. XỬ LÝ NÚT STOP ĐƠN LẺ (Học hành trình)
             // =====================================================
-            if (s_stop == 0) { // Đang NHẤN
+            if (s_stop == 0 && g_stop_eligible) { 
                 if (g_stop_pressed_tick == 0) {
                     g_stop_pressed_tick = now;
-                    // Reset cờ handled chỉ khi chắc chắn không phải là dư âm của combo
-                    // (Nếu vừa nhả combo ra, g_stop_handled vẫn = 1 để chặn lệnh stop rác)
                     if (g_combo_pressed_tick == 0) g_stop_handled = 0; 
                 } 
                 else {
-                    // Đang giữ -> Check 10s -> Học hành trình
                     if (!g_stop_handled && (now - g_stop_pressed_tick) * portTICK_PERIOD_MS >= BTN_LONG_PRESS_MS) {
-                        printf("[BTN] STOP Held > 10s -> Trigger TRAVEL LEARN\r\n");
+                        blog_info("STOP Held > 10s -> Trigger TRAVEL LEARN");
                         if (g_cb) g_cb(BTN_EVENT_LEARN_TRAVEL_TRIGGER);
                         g_stop_handled = 1; 
                     }
                 }
             } 
-            else { // Đang NHẢ
-                // Nếu trước đó có nhấn và CHƯA xử lý (chưa đủ 10s và ko phải combo)
-                if (g_stop_pressed_tick != 0 && !g_stop_handled) {
+            else { 
+                if (g_stop_pressed_tick != 0 && !g_stop_handled && g_stop_eligible) {
                     uint32_t press_duration = (now - g_stop_pressed_tick) * portTICK_PERIOD_MS;
-                    
-                    // Chống nhiễu nhẹ
                     if (press_duration > BTN_DEBOUNCE_MS) {
-                         printf("[BTN] Event: STOP (Short press)\r\n");
+                         blog_info("Event: STOP (Short press)");
                          if (g_cb) g_cb(BTN_EVENT_STOP);
                     }
                 }
                 g_stop_pressed_tick = 0;
-                // Khi nhả hẳn STOP thì mới cho phép lần nhấn tiếp theo được xử lý lại
                 g_stop_handled = 0; 
             }
 
             // =====================================================
-            // 4. XỬ LÝ NÚT OPEN (Sườn xuống)
+            // 5. XỬ LÝ NÚT OPEN / CLOSE (Sườn xuống)
             // =====================================================
-            // Thêm điều kiện: Không đang trong trạng thái tính giờ Combo
-            if (s_open == 0 && last_open_val == 1 && g_combo_pressed_tick == 0) {
-                printf("[BTN] Event: OPEN\r\n");
+            // Nút OPEN
+            if (s_open == 0 && last_open_val == 1 && g_combo_pressed_tick == 0 && g_open_eligible) {
+                blog_info("Event: OPEN");
                 if (g_cb) g_cb(BTN_EVENT_OPEN);
             }
             last_open_val = s_open;
 
-            // =====================================================
-            // 5. XỬ LÝ NÚT CLOSE (Sườn xuống)
-            // =====================================================
-            if (s_close == 0 && last_close_val == 1 && g_combo_pressed_tick == 0) {
-                printf("[BTN] Event: CLOSE\r\n");
+            // Nút CLOSE
+            if (s_close == 0 && last_close_val == 1 && g_combo_pressed_tick == 0 && g_close_eligible) {
+                blog_info("Event: CLOSE");
                 if (g_cb) g_cb(BTN_EVENT_CLOSE);
             }
             last_close_val = s_close;
         }
 
         // =========================================================
-        // 6. XỬ LÝ NÚT RF SETUP (Độc lập hoàn toàn)
+        // 6. XỬ LÝ NÚT RF SETUP (Học Remote)
         // =========================================================
-        if (s_rf == 0) { // Đang NHẤN
+        if (s_rf == 0 && g_rf_eligible) { 
             if (g_rf_pressed_tick == 0) {
                 g_rf_pressed_tick = now;
                 g_rf_handled = 0;
             } 
             else {
-                // Kiểm tra giữ 10s
                 if (!g_rf_handled && (now - g_rf_pressed_tick) * portTICK_PERIOD_MS >= BTN_LONG_PRESS_MS) {
-                    printf("[BTN] RF BTN Held > 10s -> Trigger RF LEARN\r\n");
+                    blog_info("RF BTN Held > 10s -> Trigger RF LEARN");
                     if (g_cb) g_cb(BTN_EVENT_LEARN_RF_TRIGGER);
                     g_rf_handled = 1;
                 }
             }
         } 
-        else { // Đang NHẢ
+        else { 
             g_rf_pressed_tick = 0;
             g_rf_handled = 0;
         }
 
-        // ---------------------------------------------------------
-        // 7. Sleep
-        // ---------------------------------------------------------
         vTaskDelay(pdMS_TO_TICKS(BTN_POLL_DELAY_MS));
     }
 }
@@ -165,10 +163,8 @@ static void button_task(void *pvParameters) {
 // ============================================================================
 void app_button_init(button_callback_t cb) {
     g_cb = cb;
-
-    printf("[BTN] Init GPIO Inputs...\r\n");
     
-    // Cấu hình Input Pull-up (Mức 1 khi không nhấn, Mức 0 khi nhấn)
+    // Cấu hình Input Pull-up
     bl_gpio_enable_input(GPIO_IN_OPEN, 1, 0);
     bl_gpio_enable_input(GPIO_IN_CLOSE, 1, 0);
     bl_gpio_enable_input(GPIO_IN_STOP, 1, 0);
@@ -176,5 +172,5 @@ void app_button_init(button_callback_t cb) {
 
     // Tạo Task
     xTaskCreate(button_task, "btn_task", 2048, NULL, 10, NULL);
-    printf("[BTN] Init Success.\r\n");
+    blog_info("Init Success.");
 }

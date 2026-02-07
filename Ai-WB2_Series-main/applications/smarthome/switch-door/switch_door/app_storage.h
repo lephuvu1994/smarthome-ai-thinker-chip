@@ -69,4 +69,8 @@ void storage_save_rf_codes(uint32_t *codes);
  */
 int storage_get_rf_codes(uint32_t *codes);
 
+// [MỚI] CẤU HÌNH CỬA (CLICK & TIME)
+void storage_save_door_settings(int open, int close, int def_open, int def_close, int mode, int start, int end);
+void storage_get_door_settings(int *open, int *close, int *def_open, int *def_close, int *mode, int *start, int *end);
+
 #endif

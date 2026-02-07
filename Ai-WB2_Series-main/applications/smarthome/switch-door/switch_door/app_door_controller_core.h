@@ -2,7 +2,16 @@
 #define __APP_DOOR_CONTROLLER_CORE_H__
 
 #include <stdint.h>
-#include "app_button.h" // Để biết kiểu dữ liệu btn_event_t
+
+#include "../switch_door/app_button.h" // Để biết kiểu dữ liệu btn_event_t
+
+typedef enum {
+   DOOR_STATE_STOPPED = 0,
+   DOOR_STATE_OPENING,
+   DOOR_STATE_CLOSING,
+   DOOR_STATE_OPENED,
+   DOOR_STATE_CLOSED
+} door_state_t;
 
 // ==============================================================================
 // DANH SÁCH LỆNH (COMMAND LIST)
@@ -43,5 +52,10 @@ void app_door_controller_core_execute_cmd_string(const char* cmd);
 void app_door_controller_core_handle_button_event(btn_event_t event);
 
 void app_door_core_handle_rf_raw(uint32_t rf_code);
+
+/**
+ * @brief Xử lý tin nhắn từ MQTT cho setup số lần bấm
+ */
+void app_door_core_update_settings(int open, int close, int def_open, int def_close, int mode, int start, int end);
 
 #endif // __APP_DOOR_CONTROLLER_CORE_H__
